@@ -10,6 +10,7 @@
 
 @interface CCIClassicFolder : NSControl
 
+@property (nonatomic, copy) NSURL *representingDirectory;
 @property (nonatomic, strong) NSTextField *folderLabel;
 
 - (void)selectFolder;

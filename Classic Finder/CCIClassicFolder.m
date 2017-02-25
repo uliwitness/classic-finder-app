@@ -68,6 +68,13 @@
     }
 }
 
+- (void)mouseUp:(NSEvent *)event
+{
+    if (event.clickCount == 2) {
+        NSLog(@"open a new window with the following path: %@", self.representingDirectory.absoluteString);
+    }
+}
+
 - (void)normalFolderTitleTextColor
 {
     self.folderLabel.backgroundColor = [NSColor whiteColor];
