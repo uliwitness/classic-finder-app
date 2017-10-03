@@ -15,6 +15,6 @@
 
 +(CFRWindowManager *)sharedInstance;
 
-- (CCIClassicFinderWindow *)createWindowForPath:(NSURL *)path;
+- (NSWindowController *)createWindowForPath:(NSURL *)path;
 
 @end
