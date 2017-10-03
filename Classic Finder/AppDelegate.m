@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CCIClassicFinderWindow.h"
+#import "CFRWindowManager.h"
 
 @interface AppDelegate ()
 
@@ -21,18 +22,8 @@
 {
     self = [super init];
     
-    if (self) {
-
-        NSUInteger windowStyleMask = NSWindowStyleMaskBorderless;
-        NSRect initalContentRect = NSMakeRect(300.0, 300.0, 500.0, 300.0);
-        
-        CCIClassicFinderWindow *initialFW = [[CCIClassicFinderWindow alloc] initWithContentRect:initalContentRect
-                                                                                      styleMask:windowStyleMask
-                                                                                        backing:NSBackingStoreBuffered
-                                                                                          defer:YES];
-        
-        [self setWindow:initialFW];
-        [self.window makeKeyAndOrderFront:self];
+    if (self)
+    {
         
     }
     
@@ -42,7 +33,10 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     
-    [self.window makeKeyAndOrderFront:self];
+    NSWindowController * finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:[NSURL URLWithString:@"~"]];
+    [finderWindow showWindow:self];
+    
+    //[self.window makeKeyAndOrderFront:self];
 }
 
 

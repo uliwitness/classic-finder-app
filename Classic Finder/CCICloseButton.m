@@ -7,6 +7,8 @@
 //
 
 #import "CCICloseButton.h"
+#import "CCIClassicFinderWindow.h"
+#import "CFRWindowManager.h"
 
 @interface CCICloseButton ()
 
@@ -73,15 +75,13 @@
 {
     self.isClicked = YES;
     [self setNeedsDisplay:YES];
-    
-    
 }
 
 - (void)mouseUp:(NSEvent *)event
 {
     self.isClicked = NO;
     [self setNeedsDisplay:YES];
-    
+
     [event.window close];
 }
 

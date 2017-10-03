@@ -12,6 +12,7 @@
 #import "CCIClassicFinderDetailBar.h"
 #import "CCIClassicScrollView.h"
 #import "CCIClassicFolder.h"
+#import "CFRWindowManager.h"
 
 @interface CCIClassicFinderWindow ()
 
@@ -32,6 +33,7 @@
                           styleMask:(NSWindowStyleMask)style
                             backing:(NSBackingStoreType)bufferingType
                               defer:(BOOL)flag
+                    atDirectoryPath: (NSString *)directoryPath
 {
     self = [super initWithContentRect:contentRect
                             styleMask:style
@@ -39,7 +41,8 @@
                                 defer:flag];
     
     if (self) {
-        self.windowDirectory = [NSURL URLWithString:@"/Users/bszyman/Downloads"];
+        self.directoryPath = directoryPath;
+        self.windowDirectory = [NSURL URLWithString:[self.directoryPath stringByStandardizingPath]];
         self.windowDirectoryName = [self.windowDirectory lastPathComponent];
         
         self.fileList = [self getDirectoryListing];
@@ -106,15 +109,13 @@
             
             CCIClassicFolder *folderIcon = [[CCIClassicFolder alloc] initWithFrame:folderFrame];
             folderIcon.folderLabel.stringValue = directoryTitle;
+            folderIcon.representingDirectory = directoryItem;
             
             [scrollViewContentView addSubview:folderIcon];
             iconCol += 1;
         }
         
-        
-        
         [self.scrollView addSubview:scrollViewContentView];
-        
     }
     
     return self;

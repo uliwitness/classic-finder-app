@@ -8,6 +8,9 @@
 
 #import "CCIClassicFolder.h"
 #import "CCIClassicFolderIcon.h"
+#import "CFRWindowManager.h"
+#import "AppDelegate.h"
+#import "CCIClassicFinderWindow.h"
 
 @interface CCIClassicFolder ()
 
@@ -71,7 +74,8 @@
 - (void)mouseUp:(NSEvent *)event
 {
     if (event.clickCount == 2) {
-        NSLog(@"open a new window with the following path: %@", self.representingDirectory.absoluteString);
+        NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:self.representingDirectory];
+        [finderWindow showWindow:self];
     }
 }
 

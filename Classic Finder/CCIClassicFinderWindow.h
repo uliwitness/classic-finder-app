@@ -12,4 +12,10 @@
 
 @property (nonatomic, copy) NSString *directoryPath;
 
+- (instancetype)initWithContentRect:(NSRect)contentRect
+                          styleMask:(NSWindowStyleMask)style
+                            backing:(NSBackingStoreType)bufferingType
+                              defer:(BOOL)flag
+                    atDirectoryPath: (NSString *)directoryPath;
+
 @end
