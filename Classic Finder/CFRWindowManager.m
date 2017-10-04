@@ -38,8 +38,21 @@
 
 - (NSWindowController *)createWindowForPath:(NSURL *)path
 {
+    NSRect screenSize = [[NSScreen mainScreen] frame];
+    CGFloat xPos = (screenSize.size.width / 2.0) - 250.0;
+    CGFloat yPos = (screenSize.size.height / 2.0) - 150.0;
+    
+    NSWindowController *newFinderWindow = [self createWindowForPath:path
+                                                   atSpecifiedPoint:NSMakePoint(xPos, yPos)];
+    
+    return newFinderWindow;
+}
+
+- (NSWindowController *)createWindowForPath:(NSURL *)path
+                              atSpecifiedPoint:(NSPoint)point
+{
     NSUInteger windowStyleMask = NSWindowStyleMaskBorderless;
-    NSRect initalContentRect = NSMakeRect(300.0, 300.0, 500.0, 300.0);
+    NSRect initalContentRect = NSMakeRect(point.x, point.y, 500.0, 300.0);
     
     // https://stackoverflow.com/a/33229421/5096725
     

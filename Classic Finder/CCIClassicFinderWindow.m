@@ -11,6 +11,7 @@
 #import "CCITitleBar.h"
 #import "CCIClassicFinderDetailBar.h"
 #import "CCIClassicScrollView.h"
+#import "CCIClassicScrollContentView.h"
 #import "CCIClassicFolder.h"
 #import "CFRWindowManager.h"
 
@@ -86,7 +87,7 @@
         NSUInteger iconRow = 0;
         NSUInteger iconCol = 0;
         
-        NSView *scrollViewContentView = [[NSView alloc] initWithFrame:NSMakeRect(0.0, 0.0, 300.0, 300.0)];
+        CCIClassicScrollContentView *scrollViewContentView = [[CCIClassicScrollContentView alloc] initWithFrame:NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height)];
         
         for (NSUInteger x = 0; x < self.fileList.count; x++) {
             NSURL *directoryItem = [self.fileList objectAtIndex:x];

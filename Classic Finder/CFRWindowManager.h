@@ -16,5 +16,7 @@
 +(CFRWindowManager *)sharedInstance;
 
 - (NSWindowController *)createWindowForPath:(NSURL *)path;
+- (NSWindowController *)createWindowForPath:(NSURL *)path
+                           atSpecifiedPoint:(NSPoint)point;
 
 @end

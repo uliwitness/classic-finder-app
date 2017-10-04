@@ -74,7 +74,13 @@
 - (void)mouseUp:(NSEvent *)event
 {
     if (event.clickCount == 2) {
-        NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:self.representingDirectory];
+        NSRect windowFrame = event.window.frame;
+        CGFloat xPos = windowFrame.origin.x + 30.0;
+        CGFloat yPos = windowFrame.origin.y - 30.0;
+        NSPoint newWindowPosition = NSMakePoint(xPos, yPos);
+        
+        NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:self.representingDirectory
+                                                                               atSpecifiedPoint:newWindowPosition];
         [finderWindow showWindow:self];
     }
 }
