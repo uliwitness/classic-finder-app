@@ -27,7 +27,7 @@
     {
         self.fileSelected = NO;
         
-        NSRect fileIconFrame = NSMakeRect(14.5, 2.0, 31.0, 25.0);
+        NSRect fileIconFrame = NSMakeRect(18.5, 2.0, 31.0, 31.0);
         self.iconImage = [[CCIClassicFileIcon alloc] initWithFrame:fileIconFrame];
         
         [self addSubview:self.iconImage];
