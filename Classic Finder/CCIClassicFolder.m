@@ -73,7 +73,8 @@
 
 - (void)mouseUp:(NSEvent *)event
 {
-    if (event.clickCount == 2) {
+    if (event.clickCount == 2)
+    {
         NSRect windowFrame = event.window.frame;
         CGFloat xPos = windowFrame.origin.x + 30.0;
         CGFloat yPos = windowFrame.origin.y - 30.0;

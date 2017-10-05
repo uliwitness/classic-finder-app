@@ -13,6 +13,7 @@
 #import "CCIClassicScrollView.h"
 #import "CCIClassicScrollContentView.h"
 #import "CCIClassicFolder.h"
+#import "CCIClassicFile.h"
 #import "CFRWindowManager.h"
 
 @interface CCIClassicFinderWindow ()
@@ -91,28 +92,63 @@
         
         for (NSUInteger x = 0; x < self.fileList.count; x++) {
             NSURL *directoryItem = [self.fileList objectAtIndex:x];
-            NSString *directoryTitle = [directoryItem lastPathComponent];
             
-            CGFloat iconLeftPosition = (10.0 + (iconCol * 60.0));
-            CGFloat frameWidthWithBorder = (self.frame.size.width - 55.0);
-            if (iconLeftPosition > frameWidthWithBorder) {
-                iconRow += 1;
-                iconCol = 0;
-                iconLeftPosition = (10.0 + (iconCol * 60.0));
+            NSNumber *isDirectory;
+            [directoryItem getResourceValue:&isDirectory
+                                     forKey:NSURLIsDirectoryKey
+                                      error:nil];
+            
+            if ([isDirectory boolValue])
+            {
+                NSString *directoryTitle = [directoryItem lastPathComponent];
+                
+                CGFloat iconLeftPosition = (10.0 + (iconCol * 60.0));
+                CGFloat frameWidthWithBorder = (self.frame.size.width - 55.0);
+                if (iconLeftPosition > frameWidthWithBorder) {
+                    iconRow += 1;
+                    iconCol = 0;
+                    iconLeftPosition = (10.0 + (iconCol * 60.0));
+                }
+                
+                CGFloat iconTopPosition = 15.0 + (iconRow * 60.0);
+                
+                CGRect folderFrame = NSMakeRect(iconLeftPosition,
+                                                iconTopPosition,
+                                                55.0,
+                                                60.0);
+                
+                CCIClassicFolder *folderIcon = [[CCIClassicFolder alloc] initWithFrame:folderFrame];
+                folderIcon.folderLabel.stringValue = directoryTitle;
+                folderIcon.representingDirectory = directoryItem;
+                
+                [scrollViewContentView addSubview:folderIcon];
+            } else {
+                NSString *fileTitle = [directoryItem lastPathComponent];
+                
+                CGFloat iconLeftPosition = (10.0 + (iconCol * 60.0));
+                CGFloat frameWidthWithBorder = (self.frame.size.width - 55.0);
+                if (iconLeftPosition > frameWidthWithBorder) {
+                    iconRow += 1;
+                    iconCol = 0;
+                    iconLeftPosition = (10.0 + (iconCol * 60.0));
+                }
+                
+                CGFloat iconTopPosition = 15.0 + (iconRow * 60.0);
+                
+                CGRect folderFrame = NSMakeRect(iconLeftPosition,
+                                                iconTopPosition,
+                                                55.0,
+                                                60.0);
+                
+                CCIClassicFile *fileIcon = [[CCIClassicFile alloc] initWithFrame:folderFrame];
+                fileIcon.fileLabel.stringValue = fileTitle;
+                fileIcon.representedFile = directoryItem;
+                
+                [scrollViewContentView addSubview:fileIcon];
+                
             }
             
-            CGFloat iconTopPosition = 15.0 + (iconRow * 60.0);
             
-            CGRect folderFrame = NSMakeRect(iconLeftPosition,
-                                            iconTopPosition,
-                                            55.0,
-                                            60.0);
-            
-            CCIClassicFolder *folderIcon = [[CCIClassicFolder alloc] initWithFrame:folderFrame];
-            folderIcon.folderLabel.stringValue = directoryTitle;
-            folderIcon.representingDirectory = directoryItem;
-            
-            [scrollViewContentView addSubview:folderIcon];
             iconCol += 1;
         }
         
