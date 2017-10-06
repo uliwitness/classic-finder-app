@@ -8,6 +8,7 @@
 
 #import "CCIClassicFile.h"
 #import "CCIClassicFileIcon.h"
+#import "CFRFileSystemOperations.h"
 
 @interface CCIClassicFile()
 
@@ -71,13 +72,7 @@
 {
     if (event.clickCount == 2)
     {
-        NSTask *openTask = [[NSTask alloc] init];
-        NSArray *args = @[self.representedFile.absoluteString];
-        
-        [openTask setLaunchPath:@"/usr/bin/open"];
-        [openTask setArguments:args];
-        
-        [openTask launch];
+        [CFRFileSystemOperations openFileAtURL:self.representedFile];
     }
 }
 

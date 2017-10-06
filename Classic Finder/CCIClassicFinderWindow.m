@@ -15,6 +15,7 @@
 #import "CCIClassicFolder.h"
 #import "CCIClassicFile.h"
 #import "CFRWindowManager.h"
+#import "CFRFileSystemOperations.h"
 
 @interface CCIClassicFinderWindow ()
 
@@ -47,7 +48,7 @@
         self.windowDirectory = [NSURL URLWithString:[self.directoryPath stringByStandardizingPath]];
         self.windowDirectoryName = [self.windowDirectory lastPathComponent];
         
-        self.fileList = [self getDirectoryListing];
+        self.fileList = [CFRFileSystemOperations getListingForDirectory:self.windowDirectory];
         self.folderObjets = [[NSMutableArray alloc] init];
         
         self.contentView = [[CCIClassicContentView alloc] initWithFrame:self.frame];
@@ -156,26 +157,6 @@
     }
     
     return self;
-}
-
-- (NSArray *)getDirectoryListing
-{
-    NSArray *fileList;
-    NSArray *keys = @[NSURLNameKey, NSURLPathKey];
-    NSError *err = nil;
-    
-    fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.windowDirectory
-                                             includingPropertiesForKeys:keys
-                                                                options:(NSDirectoryEnumerationSkipsPackageDescendants |
-                                                                         NSDirectoryEnumerationSkipsHiddenFiles |
-                                                                         NSDirectoryEnumerationSkipsSubdirectoryDescendants)
-                                                                  error:&err];
-    
-    if (err != nil) {
-        NSLog(@"%@", err);
-    }
-    
-    return fileList;
 }
 
 - (BOOL)canBecomeKeyWindow

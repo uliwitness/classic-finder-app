@@ -89,4 +89,14 @@
     [self.activeWindows removeObjectForKey:finderWindow.representedURL.absoluteString];
 }
 
+- (void)windowDidBecomeMain:(NSNotification *)notification
+{
+    
+}
+
+- (void)windowDidResignMain:(NSNotification *)notification
+{
+    
+}
+
 @end
