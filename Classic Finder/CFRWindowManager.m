@@ -12,7 +12,7 @@
 
 @interface CFRWindowManager ()
 
-@property (nonatomic, strong) NSMutableArray *activeWindows;
+@property (nonatomic, strong) NSMutableDictionary *activeWindows;
 
 @end
 
@@ -30,7 +30,7 @@
     dispatch_once(&pred, ^{
         sharedInstance = [CFRWindowManager alloc];
         sharedInstance = [sharedInstance init];
-        sharedInstance.activeWindows = [[NSMutableArray alloc] init];
+        sharedInstance.activeWindows = [[NSMutableDictionary alloc] initWithCapacity:30];
     });
     
     return sharedInstance;
@@ -51,31 +51,42 @@
 - (NSWindowController *)createWindowForPath:(NSURL *)path
                               atSpecifiedPoint:(NSPoint)point
 {
-    NSUInteger windowStyleMask = NSWindowStyleMaskBorderless;
-    NSRect initalContentRect = NSMakeRect(point.x, point.y, 500.0, 300.0);
+    NSWindowController *finderWindowController;
     
-    // https://stackoverflow.com/a/33229421/5096725
-    
-    CCIClassicFinderWindow *finderWindow = [[CCIClassicFinderWindow alloc] initWithContentRect:initalContentRect
-                                                                                  styleMask:windowStyleMask
-                                                                                    backing:NSBackingStoreBuffered
-                                                                                      defer:YES
-                                                                            atDirectoryPath: [path absoluteString]];
-    finderWindow.delegate = self;
-    finderWindow.representedURL = path;
-    [finderWindow makeKeyAndOrderFront:self];
-    
-    NSWindowController *finderWindowController = [[NSWindowController alloc] initWithWindow:finderWindow];
-    
-    [self.activeWindows addObject:finderWindowController];
-    
+    if ([self.activeWindows objectForKey:path.absoluteString] != nil)
+    {
+        finderWindowController = [self.activeWindows objectForKey:path.absoluteString];
+    } else
+    {
+        NSUInteger windowStyleMask = NSWindowStyleMaskBorderless;
+        NSRect initalContentRect = NSMakeRect(point.x, point.y, 500.0, 300.0);
+        
+        // https://stackoverflow.com/a/33229421/5096725
+        
+        CCIClassicFinderWindow *finderWindow = [[CCIClassicFinderWindow alloc] initWithContentRect:initalContentRect
+                                                                                         styleMask:windowStyleMask
+                                                                                           backing:NSBackingStoreBuffered
+                                                                                             defer:YES
+                                                                                   atDirectoryPath: [path absoluteString]];
+        finderWindow.delegate = self;
+        finderWindow.representedURL = path;
+        [finderWindow makeKeyAndOrderFront:self];
+        
+        finderWindowController = [[NSWindowController alloc] initWithWindow:finderWindow];
+        
+        [self.activeWindows setObject:finderWindowController
+                               forKey:path.absoluteString];
+        
+        
+    }
+
     return finderWindowController;
 }
 
 - (void)windowWillClose:(NSNotification *)notification
 {
     CCIClassicFinderWindow *finderWindow = notification.object;
-    [self.activeWindows removeObject:finderWindow.windowController];
+    [self.activeWindows removeObjectForKey:finderWindow.representedURL.absoluteString];
 }
 
 @end
