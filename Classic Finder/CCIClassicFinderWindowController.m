@@ -67,11 +67,15 @@
 - (void)windowDidBecomeMain:(NSNotification *)notification
 {
     NSLog(@"windowDidBecomeMain = %@", self.representedDirectory.absoluteString);
+    CCIClassicFinderWindow *finderWindow = (CCIClassicFinderWindow *)self.window;
+    [finderWindow setWindowActive];
 }
 
 - (void)windowDidResignMain:(NSNotification *)notification
 {
     NSLog(@"windowDidResignMain = %@", self.representedDirectory.absoluteString);
+    CCIClassicFinderWindow *finderWindow = (CCIClassicFinderWindow *)self.window;
+    [finderWindow setWindowInactive];
 }
 
 @end

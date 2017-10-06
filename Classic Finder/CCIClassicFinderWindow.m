@@ -17,7 +17,9 @@
 #import "CFRWindowManager.h"
 #import "CFRFileSystemOperations.h"
 
-@interface CCIClassicFinderWindow ()
+@interface CCIClassicFinderWindow () {
+    BOOL windowIsActive;
+}
 
 @property (nonatomic, strong) CCITitleBar *titlebar;
 @property (nonatomic, strong) CCIClassicFinderDetailBar *detailBar;
@@ -41,6 +43,7 @@
     
     if (self)
     {
+        windowIsActive = YES;
         self.windowTitle = windowTitle;
         self.fileList = fileList;
         
@@ -151,6 +154,20 @@
     }
     
     return self;
+}
+
+- (void)setWindowActive
+{
+    windowIsActive = YES;
+    
+    [self.titlebar setWindowIsActive:windowIsActive];
+}
+
+- (void)setWindowInactive
+{
+    windowIsActive = NO;
+    
+    [self.titlebar setWindowIsActive:windowIsActive];
 }
 
 - (BOOL)canBecomeKeyWindow

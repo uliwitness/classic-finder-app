@@ -19,5 +19,7 @@
                               defer:(BOOL)flag
                     withWindowTitle:(NSString *)windowTitle
                         andFileList:(NSArray *)fileList;
+- (void)setWindowActive;
+- (void)setWindowInactive;
 
 @end
