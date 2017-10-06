@@ -192,7 +192,7 @@
     for (NSUInteger x = 0; x < 6; x++) {
         NSBezierPath *line = [[NSBezierPath alloc] init];
         [line moveToPoint:NSMakePoint(0.0, textureLineStartPos)];
-        [line lineToPoint:NSMakePoint(self.frame.size.width - 3.5, textureLineStartPos)];
+        [line lineToPoint:NSMakePoint(self.frame.size.width - 5.0, textureLineStartPos)];
         [line stroke];
         
         textureLineStartPos += 2.0;
