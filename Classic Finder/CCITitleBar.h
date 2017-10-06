@@ -14,4 +14,6 @@
 @property BOOL showCloseButton;
 @property BOOL showMaximizeButton;
 
+- (void)setWindowIsActive:(BOOL)windowIsActive;
+
 @end

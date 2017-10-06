@@ -10,7 +10,9 @@
 #import "CCICloseButton.h"
 #import "CCIMaximizeButton.h"
 
-@interface CCITitleBar ()
+@interface CCITitleBar () {
+    BOOL windowIsActive;
+}
 
 @property (nonatomic, strong) CCICloseButton *closeButton;
 @property (nonatomic, strong) CCIMaximizeButton *maximizeButton;
@@ -28,6 +30,7 @@
     if (self) {
         self.showCloseButton = YES;
         self.showMaximizeButton = YES;
+        self.windowIsActive = YES;
         
         [self addCloseButtonToTitlebar];
         [self addMaximizeButtonToTitlebar];
@@ -36,12 +39,37 @@
     return self;
 }
 
+- (BOOL)windowIsActive
+{
+    return windowIsActive;
+}
+
+- (void)setWindowIsActive:(BOOL)pWindowIsActive
+{
+    windowIsActive = pWindowIsActive;
+    
+    if (self.windowIsActive) {
+        self.closeButton.hidden = NO;
+        self.maximizeButton.hidden = NO;
+    } else {
+        self.closeButton.hidden = YES;
+        self.maximizeButton.hidden = YES;
+    }
+    
+    [self setNeedsDisplay:YES];
+}
+
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    [self drawOutlinesAndShadows];
-    [self drawTextureLines];
-    [self drawTitleText];
+    if (self.windowIsActive) {
+        [self drawOutlinesAndShadows];
+        [self drawTextureLines];
+        [self drawTitleText];
+    } else {
+        [self drawInactiveOutlines];
+        [self drawTitleText];
+    }
 }
 
 - (void)addCloseButtonToTitlebar
@@ -95,6 +123,7 @@
     
     NSRectFill(NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height));
     
+    
     [[NSColor blackColor] setStroke];
     
     NSBezierPath *titlebarOutline = [[NSBezierPath alloc] init];
@@ -127,6 +156,26 @@
     [titlebarShadow lineToPoint:NSMakePoint(self.frame.size.width - 1.5, 17.5)];
     [titlebarShadow stroke];
 
+}
+
+- (void)drawInactiveOutlines
+{
+    // White Background
+    [[NSColor colorWithCalibratedWhite:1.0
+                                 alpha:1.0] setFill];
+    
+    NSRectFill(NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height));
+    
+    // Black Box Border
+    [[NSColor blackColor] setStroke];
+    
+    NSBezierPath *titlebarOutline = [[NSBezierPath alloc] init];
+    [titlebarOutline moveToPoint:NSMakePoint(0.5, 0.5)];
+    [titlebarOutline lineToPoint:NSMakePoint(0.5, 18.5)];
+    [titlebarOutline lineToPoint:NSMakePoint(self.frame.size.width - 0.5, 18.5)];
+    [titlebarOutline lineToPoint:NSMakePoint(self.frame.size.width - 0.5, 0.5)];
+    [titlebarOutline lineToPoint: NSMakePoint(0.5, 0.5)];
+    [titlebarOutline stroke];
 }
 
 - (void)drawTextureLines
@@ -169,8 +218,13 @@
     NSSize titleTextSize = [self.titleText sizeWithAttributes:fontAttributes];
     CGFloat textWidth = titleTextSize.width + 12.0;
     
-    [[NSColor colorWithCalibratedWhite:0.92 alpha:1.0] setFill];
-    NSRectFill(NSMakeRect(((self.frame.size.width - textWidth) / 2.0), 2.0, textWidth, 15.0));
+    if (self.windowIsActive) {
+        [[NSColor colorWithCalibratedWhite:0.92 alpha:1.0] setFill];
+        NSRectFill(NSMakeRect(((self.frame.size.width - textWidth) / 2.0), 2.0, textWidth, 15.0));
+    } else {
+        [[NSColor colorWithCalibratedWhite:1.0 alpha:1.0] setFill];
+        NSRectFill(NSMakeRect(((self.frame.size.width - textWidth) / 2.0), 2.0, textWidth, 15.0));
+    }
     
     [[NSColor blackColor] setFill];
     
