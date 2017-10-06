@@ -9,6 +9,7 @@
 #import "CFRWindowManager.h"
 #import "CCIClassicFinderWindow.h"
 #import "AppDelegate.h"
+#import "CCIClassicFinderWindowController.h"
 
 @interface CFRWindowManager ()
 
@@ -58,23 +59,14 @@
         finderWindowController = [self.activeWindows objectForKey:path.absoluteString];
     } else
     {
-        NSUInteger windowStyleMask = NSWindowStyleMaskBorderless;
-        NSRect initalContentRect = NSMakeRect(point.x, point.y, 500.0, 300.0);
         
-        // https://stackoverflow.com/a/33229421/5096725
+        //finderWindowController = [[NSWindowController alloc] initWithWindow:finderWindow];
         
-        CCIClassicFinderWindow *finderWindow = [[CCIClassicFinderWindow alloc] initWithContentRect:initalContentRect
-                                                                                         styleMask:windowStyleMask
-                                                                                           backing:NSBackingStoreBuffered
-                                                                                             defer:YES
-                                                                                   atDirectoryPath: [path absoluteString]];
-        finderWindow.delegate = self;
-        finderWindow.representedURL = path;
-        [finderWindow makeKeyAndOrderFront:self];
+        CCIClassicFinderWindowController *wc = [[CCIClassicFinderWindowController alloc] initForDirectory:path
+                                                                                                  atPoint:point];
+        [wc.window makeKeyAndOrderFront:self];
         
-        finderWindowController = [[NSWindowController alloc] initWithWindow:finderWindow];
-        
-        [self.activeWindows setObject:finderWindowController
+        [self.activeWindows setObject:wc
                                forKey:path.absoluteString];
         
         
@@ -86,17 +78,8 @@
 - (void)windowWillClose:(NSNotification *)notification
 {
     CCIClassicFinderWindow *finderWindow = notification.object;
-    [self.activeWindows removeObjectForKey:finderWindow.representedURL.absoluteString];
-}
-
-- (void)windowDidBecomeMain:(NSNotification *)notification
-{
-    
-}
-
-- (void)windowDidResignMain:(NSNotification *)notification
-{
-    
+    CCIClassicFinderWindowController *finderWindowController = finderWindow.windowController;
+    [self.activeWindows removeObjectForKey:finderWindowController.representedDirectory.absoluteString];
 }
 
 @end

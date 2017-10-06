@@ -31,7 +31,10 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     
-    NSWindowController * finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:[NSURL URLWithString:@"~"]];
+    NSString *userDirectoryPathExpanded = [@"~" stringByStandardizingPath];;
+    NSURL *userDirectoryPath = [NSURL URLWithString:userDirectoryPathExpanded];
+    
+    NSWindowController * finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:userDirectoryPath];
     [finderWindow showWindow:self];
     
     //[self.window makeKeyAndOrderFront:self];

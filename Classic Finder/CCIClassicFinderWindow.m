@@ -19,11 +19,6 @@
 
 @interface CCIClassicFinderWindow ()
 
-@property (nonatomic, copy) NSURL *windowDirectory;
-@property (nonatomic, copy) NSString *windowDirectoryName;
-@property (nonatomic, copy) NSArray *fileList;
-@property (nonatomic, strong) NSMutableArray *folderObjets;
-
 @property (nonatomic, strong) CCITitleBar *titlebar;
 @property (nonatomic, strong) CCIClassicFinderDetailBar *detailBar;
 @property (nonatomic, strong) CCIClassicScrollView *scrollView;
@@ -36,20 +31,18 @@
                           styleMask:(NSWindowStyleMask)style
                             backing:(NSBackingStoreType)bufferingType
                               defer:(BOOL)flag
-                    atDirectoryPath: (NSString *)directoryPath
+                    withWindowTitle:(NSString *)windowTitle
+                        andFileList:(NSArray *)fileList
 {
     self = [super initWithContentRect:contentRect
                             styleMask:style
                               backing:bufferingType
                                 defer:flag];
     
-    if (self) {
-        self.directoryPath = directoryPath;
-        self.windowDirectory = [NSURL URLWithString:[self.directoryPath stringByStandardizingPath]];
-        self.windowDirectoryName = [self.windowDirectory lastPathComponent];
-        
-        self.fileList = [CFRFileSystemOperations getListingForDirectory:self.windowDirectory];
-        self.folderObjets = [[NSMutableArray alloc] init];
+    if (self)
+    {
+        self.windowTitle = windowTitle;
+        self.fileList = fileList;
         
         self.contentView = [[CCIClassicContentView alloc] initWithFrame:self.frame];
         
@@ -60,7 +53,8 @@
                                           19.0);
         
         self.titlebar = [[CCITitleBar alloc] initWithFrame:titlebarFrame];
-        self.titlebar.titleText = self.windowDirectoryName;
+        self.titlebar.titleText = self.windowTitle;
+        self.titlebar.windowIsActive = YES;
         
         [self.contentView addSubview:self.titlebar];
         

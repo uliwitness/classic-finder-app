@@ -10,12 +10,14 @@
 
 @interface CCIClassicFinderWindow : NSWindow
 
-@property (nonatomic, copy) NSString *directoryPath;
+@property (nonatomic, copy) NSString* windowTitle;
+@property (nonatomic, copy) NSArray* fileList;
 
 - (instancetype)initWithContentRect:(NSRect)contentRect
                           styleMask:(NSWindowStyleMask)style
                             backing:(NSBackingStoreType)bufferingType
                               defer:(BOOL)flag
-                    atDirectoryPath: (NSString *)directoryPath;
+                    withWindowTitle:(NSString *)windowTitle
+                        andFileList:(NSArray *)fileList;
 
 @end
