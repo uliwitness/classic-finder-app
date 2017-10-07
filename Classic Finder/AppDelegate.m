@@ -31,7 +31,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     
-    NSString *userDirectoryPathExpanded = [@"~" stringByStandardizingPath];;
+    NSString *userDirectoryPathExpanded = [@"/" stringByStandardizingPath];;
     NSURL *userDirectoryPath = [NSURL URLWithString:userDirectoryPathExpanded];
     
     NSWindowController * finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:userDirectoryPath];

@@ -14,6 +14,7 @@
 @interface CFRWindowManager ()
 
 @property (nonatomic, strong) NSMutableDictionary *activeWindows;
+@property (nonatomic, strong) CCIClassicFinderWindowController *activeWindow;
 
 @end
 
@@ -59,17 +60,12 @@
         finderWindowController = [self.activeWindows objectForKey:path.absoluteString];
     } else
     {
-        
-        //finderWindowController = [[NSWindowController alloc] initWithWindow:finderWindow];
-        
         CCIClassicFinderWindowController *wc = [[CCIClassicFinderWindowController alloc] initForDirectory:path
                                                                                                   atPoint:point];
         [wc.window makeKeyAndOrderFront:self];
         
         [self.activeWindows setObject:wc
                                forKey:path.absoluteString];
-        
-        
     }
 
     return finderWindowController;
@@ -79,7 +75,17 @@
 {
     CCIClassicFinderWindow *finderWindow = notification.object;
     CCIClassicFinderWindowController *finderWindowController = finderWindow.windowController;
-    [self.activeWindows removeObjectForKey:finderWindowController.representedDirectory.absoluteString];
+    NSString *pathString = finderWindowController.representedDirectory.absoluteString;
+    
+    [self.activeWindows removeObjectForKey:pathString];
+}
+
+- (void)windowDidBecomeMain:(NSNotification *)notification
+{
+    CCIClassicFinderWindow *finderWindow = notification.object;
+    CCIClassicFinderWindowController *finderWindowController = finderWindow.windowController;
+    
+    self.activeWindow = finderWindowController;
 }
 
 @end
