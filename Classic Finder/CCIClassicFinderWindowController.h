@@ -8,11 +8,17 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class CCIClassicFile;
+@class CCIClassicFolder;
+
 @interface CCIClassicFinderWindowController : NSWindowController
 
 @property (nonatomic, copy) NSURL *representedDirectory;
 
 - (instancetype)initForDirectory:(NSURL *)directory
                          atPoint:(NSPoint)point;
+
+- (void)selectedNewFile:(CCIClassicFile *)file;
+- (void)selectedNewFolder:(CCIClassicFolder *)folder;
 
 @end

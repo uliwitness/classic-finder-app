@@ -9,6 +9,7 @@
 #import "CCIClassicFile.h"
 #import "CCIClassicFileIcon.h"
 #import "CFRFileSystemOperations.h"
+#import "CCIClassicFinderWindowController.h"
 
 @interface CCIClassicFile()
 
@@ -61,11 +62,8 @@
 
 - (void)mouseDown:(NSEvent *)event
 {
-    if (self.fileSelected) {
-        [self deselectFile];
-    } else {
-        [self selectFile];
-    }
+    CCIClassicFinderWindowController *wc = event.window.windowController;
+    [wc selectedNewFile:self];
 }
 
 - (void)mouseUp:(NSEvent *)event
@@ -88,7 +86,7 @@
     self.fileLabel.textColor = [NSColor whiteColor];
 }
 
-- (void)selectFile
+- (void)selectItem
 {
     self.fileSelected = YES;
     [self reverseFileTitleTextColor];
@@ -96,7 +94,7 @@
     [self setNeedsDisplay:YES];
 }
 
-- (void)deselectFile
+- (void)deselectItem
 {
     self.fileSelected = NO;
     [self normalFileTitleTextColor];

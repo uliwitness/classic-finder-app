@@ -7,13 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "CCIFinderIconProtocol.h"
 
-@interface CCIClassicFolder : NSControl
+@interface CCIClassicFolder : NSControl <CCIFinderIconProtocol>
 
 @property (nonatomic, copy) NSURL *representingDirectory;
 @property (nonatomic, strong) NSTextField *folderLabel;
 
-- (void)selectFolder;
-- (void)unselectFolder;
+- (void)selectItem;
+- (void)deselectItem;
 
 @end

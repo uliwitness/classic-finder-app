@@ -11,6 +11,7 @@
 #import "CFRWindowManager.h"
 #import "AppDelegate.h"
 #import "CCIClassicFinderWindow.h"
+#import "CCIClassicFinderWindowController.h"
 
 @interface CCIClassicFolder ()
 
@@ -64,11 +65,8 @@
 
 - (void)mouseDown:(NSEvent *)event
 {
-    if (self.folderSelected) {
-        [self unselectFolder];
-    } else {
-        [self selectFolder];
-    }
+    CCIClassicFinderWindowController *wc = event.window.windowController;
+    [wc selectedNewFolder:self];
 }
 
 - (void)mouseUp:(NSEvent *)event
@@ -98,7 +96,7 @@
     self.folderLabel.textColor = [NSColor whiteColor];
 }
 
-- (void)selectFolder
+- (void)selectItem
 {
     self.folderSelected = YES;
     [self reverseFolderTitleTextColor];
@@ -106,7 +104,7 @@
     [self setNeedsDisplay:YES];
 }
 
-- (void)unselectFolder
+- (void)deselectItem
 {
     self.folderSelected = NO;
     [self normalFolderTitleTextColor];

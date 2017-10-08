@@ -10,11 +10,15 @@
 #import "CCIClassicFinderWindow.h"
 #import "CFRFileSystemOperations.h"
 #import "CFRWindowManager.h"
+#import "CCIFinderIconProtocol.h"
+#import "CCIClassicFile.h"
+#import "CCIClassicFolder.h"
 
 @interface CCIClassicFinderWindowController ()
 
 @property (nonatomic, copy) NSString *windowDirectoryName;
 @property (nonatomic, copy) NSArray *fileList;
+@property (nonatomic, strong) NSMutableArray *selectedFiles;
 
 @end
 
@@ -29,6 +33,7 @@
         self.representedDirectory = directory;  
         self.windowDirectoryName = [self.representedDirectory lastPathComponent];
         self.fileList = [CFRFileSystemOperations getListingForDirectory:self.representedDirectory];
+        self.selectedFiles = [[NSMutableArray alloc] initWithCapacity:50];
         
         NSUInteger windowStyleMask = NSWindowStyleMaskBorderless;
         NSRect initalContentRect = NSMakeRect(point.x, point.y, 500.0, 300.0);
@@ -74,6 +79,34 @@
 {
     CCIClassicFinderWindow *finderWindow = (CCIClassicFinderWindow *)self.window;
     [finderWindow setWindowInactive];
+}
+
+- (void)selectedNewFile:(CCIClassicFile *)file
+{
+    //[self.selectedFiles performSelector:@selector(deselectItem)];
+    
+    for (CCIClassicFile *file in self.selectedFiles) {
+        [file deselectItem];
+    }
+    
+    [self.selectedFiles removeAllObjects];
+    
+    [file selectItem];
+    [self.selectedFiles addObject:file];
+}
+
+- (void)selectedNewFolder:(CCIClassicFolder *)folder
+{
+    //[self.selectedFiles performSelector:@selector(deselectItem)];
+    
+    for (CCIClassicFolder *folder in self.selectedFiles) {
+        [folder deselectItem];
+    }
+    
+    [self.selectedFiles removeAllObjects];
+    
+    [folder selectItem];
+    [self.selectedFiles addObject:folder];
 }
 
 @end
