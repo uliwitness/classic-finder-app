@@ -50,10 +50,10 @@
     return newFinderWindow;
 }
 
-- (NSWindowController *)createWindowForPath:(NSURL *)path
+- (CCIClassicFinderWindowController *)createWindowForPath:(NSURL *)path
                               atSpecifiedPoint:(NSPoint)point
 {
-    NSWindowController *finderWindowController;
+    CCIClassicFinderWindowController *finderWindowController;
     
     if ([self.activeWindows objectForKey:path.absoluteString] != nil)
     {
@@ -61,8 +61,10 @@
     } else
     {
         CCIClassicFinderWindowController *wc = [[CCIClassicFinderWindowController alloc] initForDirectory:path
-                                                                                                  atPoint:point];
+                                                                                              atPoint:point];
         [wc.window makeKeyAndOrderFront:self];
+
+        finderWindowController = wc;
         
         [self.activeWindows setObject:wc
                                forKey:path.absoluteString];

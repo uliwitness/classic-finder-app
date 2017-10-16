@@ -39,4 +39,19 @@
     return YES;
 }
 
+- (BOOL)acceptsFirstResponder
+{
+    return YES;
+}
+
+- (BOOL)resignFirstResponder
+{
+    return YES;
+}
+
+- (void)keyDown:(NSEvent *)event
+{
+    NSLog(@"%@", [event characters]);
+}
+
 @end

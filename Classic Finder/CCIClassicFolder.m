@@ -80,6 +80,7 @@
         
         NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:self.representingDirectory
                                                                                atSpecifiedPoint:newWindowPosition];
+        
         [finderWindow showWindow:self];
     }
 }

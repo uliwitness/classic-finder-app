@@ -34,10 +34,10 @@
     NSString *userDirectoryPathExpanded = [@"/" stringByStandardizingPath];;
     NSURL *userDirectoryPath = [NSURL URLWithString:userDirectoryPathExpanded];
     
-    NSWindowController * finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:userDirectoryPath];
+    NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:userDirectoryPath];
     [finderWindow showWindow:self];
     
-    //[self.window makeKeyAndOrderFront:self];
+    self.window = finderWindow.window;
 }
 
 

@@ -150,6 +150,7 @@
             iconCol += 1;
         }
         
+        [self setInitialFirstResponder:self.scrollView];
         [self.scrollView addSubview:scrollViewContentView];
     }
     
@@ -178,6 +179,26 @@
 - (BOOL)canBecomeMainWindow
 {
     return YES;
+}
+
+- (BOOL)acceptsFirstResponder
+{
+    return YES;
+}
+
+- (BOOL)resignFirstResponder
+{
+    return YES;
+}
+
+- (void)keyDown:(NSEvent *)event
+{
+    NSLog(@"key down = %@", event.characters);
+}
+
+- (void)keyUp:(NSEvent *)event
+{
+    NSLog(@"key up = %@", event.characters);
 }
 
 @end
