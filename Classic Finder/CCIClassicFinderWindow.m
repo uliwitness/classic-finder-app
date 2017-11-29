@@ -76,17 +76,8 @@
         
         [self.contentView addSubview:self.scrollView];
         
-//        CCIClassicFolder *folderIcon = [[CCIClassicFolder alloc] initWithFrame:NSMakeRect(25.0, 15.0, 55.0, 55.0)];
-//        [self.scrollView addSubview:folderIcon];
-//        
-//        CCIClassicFolder *selectedFolderIcon = [[CCIClassicFolder alloc] initWithFrame:NSMakeRect(81.0, 15.0, 55.0, 55.0)];
-//        [selectedFolderIcon selectFolder];
-//        [self.scrollView addSubview:selectedFolderIcon];
-        
         NSUInteger iconRow = 0;
         NSUInteger iconCol = 0;
-        
-//        CCIClassicScrollContentView *scrollViewContentView = [[CCIClassicScrollContentView alloc] initWithFrame:NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height)];
         
         for (NSUInteger x = 0; x < self.fileList.count; x++) {
             NSURL *directoryItem = [self.fileList objectAtIndex:x];
@@ -119,8 +110,6 @@
                 folderIcon.folderLabel.stringValue = directoryTitle;
                 folderIcon.representingDirectory = directoryItem;
                 
-                //[scrollViewContentView addSubview:folderIcon];
-                
                 [self.scrollView.contentView addSubview:folderIcon];
             } else {
                 NSString *fileTitle = [directoryItem lastPathComponent];
@@ -145,15 +134,12 @@
                 fileIcon.representedFile = directoryItem;
                 
                 [self.scrollView.contentView addSubview:fileIcon];
-                //[scrollViewContentView addSubview:fileIcon];
             }
-            
-            
+
             iconCol += 1;
         }
         
         [self setInitialFirstResponder:self.scrollView];
-        //[self.scrollView addSubview:scrollViewContentView];
     }
     
     return self;
