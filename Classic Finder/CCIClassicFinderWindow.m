@@ -10,8 +10,8 @@
 #import "CCIClassicContentView.h"
 #import "CCITitleBar.h"
 #import "CCIClassicFinderDetailBar.h"
-#import "CCIClassicScrollView.h"
-#import "CCIClassicScrollContentView.h"
+#import "CCIScrollView.h"
+#import "CCIScrollContentView.h"
 #import "CCIClassicFolder.h"
 #import "CCIClassicFile.h"
 #import "CFRWindowManager.h"
@@ -23,7 +23,7 @@
 
 @property (nonatomic, strong) CCITitleBar *titlebar;
 @property (nonatomic, strong) CCIClassicFinderDetailBar *detailBar;
-@property (nonatomic, strong) CCIClassicScrollView *scrollView;
+@property (nonatomic, strong) CCIScrollView *scrollView;
 
 @end
 
@@ -67,12 +67,12 @@
         [self.contentView addSubview:self.detailBar];
         
         
-        NSRect scrollViewFrame = NSMakeRect(0.0,
+        NSRect scrollViewFrame = NSMakeRect(1.0,
                                             38.0,
-                                            self.frame.size.width - 1.0,
-                                            self.frame.size.height - 38.0 - 1.0);
+                                            self.frame.size.width - 3.0,
+                                            self.frame.size.height - 38.0 - 2.0);
         
-        self.scrollView = [[CCIClassicScrollView alloc] initWithFrame:scrollViewFrame];
+        self.scrollView = [[CCIScrollView alloc] initWithFrame:scrollViewFrame];
         
         [self.contentView addSubview:self.scrollView];
         
@@ -86,7 +86,7 @@
         NSUInteger iconRow = 0;
         NSUInteger iconCol = 0;
         
-        CCIClassicScrollContentView *scrollViewContentView = [[CCIClassicScrollContentView alloc] initWithFrame:NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height)];
+//        CCIClassicScrollContentView *scrollViewContentView = [[CCIClassicScrollContentView alloc] initWithFrame:NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height)];
         
         for (NSUInteger x = 0; x < self.fileList.count; x++) {
             NSURL *directoryItem = [self.fileList objectAtIndex:x];
@@ -119,7 +119,9 @@
                 folderIcon.folderLabel.stringValue = directoryTitle;
                 folderIcon.representingDirectory = directoryItem;
                 
-                [scrollViewContentView addSubview:folderIcon];
+                //[scrollViewContentView addSubview:folderIcon];
+                
+                [self.scrollView.contentView addSubview:folderIcon];
             } else {
                 NSString *fileTitle = [directoryItem lastPathComponent];
                 
@@ -142,8 +144,8 @@
                 fileIcon.fileLabel.stringValue = fileTitle;
                 fileIcon.representedFile = directoryItem;
                 
-                [scrollViewContentView addSubview:fileIcon];
-                
+                [self.scrollView.contentView addSubview:fileIcon];
+                //[scrollViewContentView addSubview:fileIcon];
             }
             
             
@@ -151,7 +153,7 @@
         }
         
         [self setInitialFirstResponder:self.scrollView];
-        [self.scrollView addSubview:scrollViewContentView];
+        //[self.scrollView addSubview:scrollViewContentView];
     }
     
     return self;

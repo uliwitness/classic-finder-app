@@ -15,7 +15,7 @@
 + (void)createNewFolderInDirectory:(NSURL *)directory
                              named:(NSString *)folderName;
 + (void)printFile:(NSURL *)file;
-+ (void)duplicatedFile:(NSURL *)file;
++ (void)duplicateFile:(NSURL *)file;
 + (void)createSymLinkOfFile:(NSURL *)file;
 + (void)searchForFilesNamedLike:(NSString *)searchText;
 + (void)emptyTrash;
