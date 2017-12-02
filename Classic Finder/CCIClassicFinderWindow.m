@@ -139,6 +139,11 @@
             iconCol += 1;
         }
         
+        NSRect contentViewSize = self.scrollView.contentView.frame;
+        CGFloat newContentHeightSize = ((iconRow * 60.0) < contentViewSize.size.height) ? contentViewSize.size.height : (iconRow * 60.0);
+        NSRect newContentViewSize = NSMakeRect(contentViewSize.origin.x, contentViewSize.origin.y, contentViewSize.size.width, newContentHeightSize);
+        [self.scrollView resizeContentView:newContentViewSize];
+        
         [self setInitialFirstResponder:self.scrollView];
     }
     

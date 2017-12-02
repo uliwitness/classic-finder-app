@@ -34,7 +34,7 @@
     
     if (self) {
         // // Create content view
-        NSRect contentViewFrame = NSMakeRect(0.0, 1.0, 400.0, 900.0);
+        NSRect contentViewFrame = NSMakeRect(0.0, 1.0, frameRect.size.width, (frameRect.size.height - 1.0));
         CCIScrollContentView *contentView = [[CCIScrollContentView alloc] initWithFrame:contentViewFrame];
         [self setContentView:contentView];
         [self addSubview:self.contentView];
@@ -119,7 +119,7 @@
         
     } else if (direction == Down) {
         CGFloat newYPosition = self.currentScrollPosition.y - 50.0;
-        newYPosition = (newYPosition > (0 - self.scrollableDistance.height)) ? newYPosition : 0 - self.scrollableDistance.height;
+        newYPosition = (newYPosition > (0.0 - self.scrollableDistance.height)) ? newYPosition : 0.0 - self.scrollableDistance.height;
         
         NSRect newFrame = NSMakeRect(self.currentScrollPosition.x, newYPosition, self.contentView.frame.size.width, self.contentView.frame.size.height);
         [self.contentView setFrame:newFrame];
@@ -161,7 +161,7 @@
         [self.horizontalScrollbar setScrollerXPosition:XPositionOfScroller];
     } else if (direction == Right) {
         CGFloat newXPosition = self.currentScrollPosition.x - 50.0;
-        newXPosition = (newXPosition > (0 - self.scrollableDistance.width)) ? newXPosition : (0 - self.scrollableDistance.width);
+        newXPosition = (newXPosition > (0 - self.scrollableDistance.width)) ? newXPosition : (0.0 - self.scrollableDistance.width);
         
         NSRect newFrame = NSMakeRect(newXPosition, self.currentScrollPosition.y, self.contentView.frame.size.width, self.contentView.frame.size.height);
         [self.contentView setFrame:newFrame];
@@ -184,14 +184,29 @@
     }
 }
 
+- (void)resizeContentView:(NSRect)newFrame
+{
+    [self.contentView setFrame:newFrame];
+    
+    CGFloat scrollableDistanceW = (newFrame.size.width > self.frame.size.width) ? (newFrame.size.width - self.frame.size.width + 14.0) : 0.0;
+    CGFloat scrollableDistanceH = (newFrame.size.height > self.frame.size.height) ? (newFrame.size.height - self.frame.size.height + 14.0) : 0.0;
+    
+    NSSize scrollableDistance = NSMakeSize(scrollableDistanceW, scrollableDistanceH);
+    [self setScrollableDistance:scrollableDistance];
+    
+    [self.verticalScrollbar updateMaxContentSize:newFrame.size.height];
+    [self.horizontalScrollbar updateMaxContentSize:newFrame.size.width];
+}
+
 #pragma mark - DRAWING METHODS
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
     NSColor *backgroundColor = [NSColor whiteColor];
     [backgroundColor setFill];
+    NSRect backgroundFrame = NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height);
     
-    NSRectFill(self.frame);
+    NSRectFill(backgroundFrame);
     
     NSColor *strokeColor = [NSColor blackColor];
     [strokeColor setStroke];

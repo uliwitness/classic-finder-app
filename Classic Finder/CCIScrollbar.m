@@ -122,6 +122,11 @@
     [[self scroller] moveScrollerBoxToPoint:newPoint];
 }
 
+- (void)updateMaxContentSize:(CGFloat)newMaxContentSize
+{
+    self.maxContentSize = newMaxContentSize;
+}
+
 #pragma mark - DRAWING METHODS
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];

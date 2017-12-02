@@ -15,5 +15,6 @@
 @property (nonatomic, strong) CCIScrollContentView *contentView;
 
 - (void)performScrollAction:(id)sender;
+- (void)resizeContentView:(NSRect)newFrame;
 
 @end

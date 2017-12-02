@@ -23,4 +23,6 @@ typedef NS_ENUM(NSUInteger, ScrollDirection) {
                               withMaxContentSize:(CGFloat)maxContentSize;
 - (void)setScrollerYPosition:(CGFloat)yPOS;
 - (void)setScrollerXPosition:(CGFloat)xPOS;
+- (void)updateMaxContentSize:(CGFloat)newMaxContentSize;
+
 @end
