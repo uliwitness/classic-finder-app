@@ -3,7 +3,7 @@
 //  Classic FinderUITests
 //
 //  Created by Ben Szymanski on 2/18/17.
-//  Copyright © 2017 Protype Software Ltd. All rights reserved.
+//  Copyright © 2017 Ben Szymanski. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>

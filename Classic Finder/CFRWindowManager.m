@@ -3,7 +3,7 @@
 //  Classic Finder
 //
 //  Created by Ben Szymanski on 3/25/17.
-//  Copyright © 2017 Protype Software Ltd. All rights reserved.
+//  Copyright © 2017 Ben Szymanski. All rights reserved.
 //
 
 #import "CFRWindowManager.h"
