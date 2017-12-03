@@ -27,6 +27,7 @@
 #import "AppDelegate.h"
 #import "CCIClassicFinderWindow.h"
 #import "CCIClassicFinderWindowController.h"
+#import "CCIApplicationStyles.h"
 
 @interface CCIClassicFolder ()
 
@@ -102,14 +103,14 @@
 
 - (void)normalFolderTitleTextColor
 {
-    self.folderLabel.backgroundColor = [NSColor whiteColor];
-    self.folderLabel.textColor = [NSColor blackColor];
+    self.folderLabel.backgroundColor = [[CCIApplicationStyles instance] whiteColor];
+    self.folderLabel.textColor = [[CCIApplicationStyles instance] blackColor];
 }
 
 - (void)reverseFolderTitleTextColor
 {
-    self.folderLabel.backgroundColor = [NSColor blackColor];
-    self.folderLabel.textColor = [NSColor whiteColor];
+    self.folderLabel.backgroundColor = [[CCIApplicationStyles instance] blackColor];
+    self.folderLabel.textColor = [[CCIApplicationStyles instance] whiteColor];
 }
 
 - (void)selectItem

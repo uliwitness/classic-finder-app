@@ -22,6 +22,7 @@
 // along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
 
 #import "CCIClassicFileIcon.h"
+#import "CCIApplicationStyles.h"
 
 @interface CCIClassicFileIcon()
 
@@ -47,8 +48,8 @@
     
     if (self.selectedState)
     {
-        [[NSColor whiteColor] setStroke];
-        [[NSColor blackColor] setFill];
+        [[[CCIApplicationStyles instance] whiteColor] setStroke];
+        [[[CCIApplicationStyles instance] blackColor] setFill];
         
         NSBezierPath *fileShape = [[NSBezierPath alloc] init];
         [fileShape moveToPoint:NSMakePoint(18.0, 0.5)];
@@ -68,8 +69,8 @@
         [pageFlapOutline stroke];
     } else
     {
-        [[NSColor blackColor] setStroke];
-        [[NSColor whiteColor] setFill];
+        [[[CCIApplicationStyles instance] blackColor] setStroke];
+        [[[CCIApplicationStyles instance] whiteColor] setFill];
         
         NSBezierPath *outlinePath = [[NSBezierPath alloc] init];
         [outlinePath moveToPoint:NSMakePoint(18.0, 0.5)];

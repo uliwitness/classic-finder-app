@@ -22,23 +22,20 @@
 // along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
 
 #import "CCIClassicScrollView.h"
+#import "CCIApplicationStyles.h"
 
 @implementation CCIClassicScrollView
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    NSColor *blackColor = [NSColor colorWithCalibratedWhite:0.0
-                                                      alpha:1.0];
-    [blackColor setFill];
+    [[[CCIApplicationStyles instance] blackColor] setFill];
     NSRectFill(NSMakeRect(0.0,
                           0.0,
                           self.frame.size.width,
                           self.frame.size.height));
     
-    NSColor *whiteColor = [NSColor colorWithCalibratedWhite:1.0
-                                                      alpha:1.0];
-    [whiteColor setFill];
+    [[[CCIApplicationStyles instance] whiteColor] setFill];
     NSRectFill(NSMakeRect(1.0,
                           0.0,
                           self.frame.size.width - 2.0,

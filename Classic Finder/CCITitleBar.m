@@ -138,7 +138,7 @@
     NSRectFill(NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height));
     
     
-    [[NSColor blackColor] setStroke];
+    [[[CCIApplicationStyles instance] blackColor] setStroke];
     
     NSBezierPath *titlebarOutline = [[NSBezierPath alloc] init];
     [titlebarOutline moveToPoint:NSMakePoint(0.5, 0.5)];
@@ -156,10 +156,7 @@
     [titlebarHighlight lineToPoint:NSMakePoint(self.frame.size.width - 1.5, 17.5)];
     [titlebarHighlight stroke];
     
-    [[NSColor colorWithCalibratedRed:0.58
-                              green:0.57
-                               blue:0.80
-                              alpha:1.0] setStroke];
+    [[[CCIApplicationStyles instance] midPurpleColor] setStroke];
     
     NSBezierPath *titlebarShadow = [[NSBezierPath alloc] init];
     [titlebarShadow moveToPoint:NSMakePoint(1.0, 1.5)];
@@ -172,13 +169,11 @@
 - (void)drawInactiveOutlines
 {
     // White Background
-    [[NSColor colorWithCalibratedWhite:1.0
-                                 alpha:1.0] setFill];
-    
+    [[[CCIApplicationStyles instance] whiteColor] setFill];
     NSRectFill(NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height));
     
     // Black Box Border
-    [[NSColor blackColor] setStroke];
+    [[[CCIApplicationStyles instance] blackColor] setStroke];
     
     NSBezierPath *titlebarOutline = [[NSBezierPath alloc] init];
     [titlebarOutline moveToPoint:NSMakePoint(0.5, 0.5)];
@@ -194,7 +189,7 @@
     CGFloat textureLineStartPos = 0.0;
     
     [NSGraphicsContext saveGraphicsState];
-    [[NSColor colorWithCalibratedWhite:0.38 alpha:1.0] setStroke];
+    [[[CCIApplicationStyles instance] darkGrayColor] setStroke];
     
     NSAffineTransform *textureTransform = [NSAffineTransform transform];
     [textureTransform translateXBy:2.5 yBy:4.5];
@@ -233,14 +228,16 @@
         [[[CCIApplicationStyles instance] lightGrayColor] setFill];
         NSRectFill(NSMakeRect(((self.frame.size.width - textWidth) / 2.0), 2.0, textWidth, 15.0));
     } else {
-        [[NSColor colorWithCalibratedWhite:1.0 alpha:1.0] setFill];
+        [[[CCIApplicationStyles instance] whiteColor] setFill];
         NSRectFill(NSMakeRect(((self.frame.size.width - textWidth) / 2.0), 2.0, textWidth, 15.0));
     }
     
-    [[NSColor blackColor] setFill];
+    [[[CCIApplicationStyles instance] blackColor] setFill];
     
-    NSAttributedString *title = [[NSAttributedString alloc] initWithString:self.titleText attributes:fontAttributes];
-    [title drawInRect:NSMakeRect(((self.frame.size.width - textWidth) / 2.0), 1.5, textWidth, 15.0)];
+    NSRect titleTextRect = NSMakeRect(((self.frame.size.width - textWidth) / 2.0), 1.5, textWidth, 15.0);
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:self.titleText
+                                                                attributes:fontAttributes];
+    [title drawInRect:titleTextRect];
     
     [NSGraphicsContext restoreGraphicsState];
 }

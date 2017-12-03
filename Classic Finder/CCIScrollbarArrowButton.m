@@ -112,9 +112,6 @@
 
 - (void)drawHighlights
 {
-    NSColor *highlightColor = [NSColor colorWithCalibratedWhite:1.0
-                                                          alpha:1.0];
-    
     NSBezierPath *leftEdgeHighlight = [[NSBezierPath alloc] init];
     [leftEdgeHighlight moveToPoint:NSMakePoint(0.5, 0.0)];
     [leftEdgeHighlight lineToPoint:NSMakePoint(0.5, self.frame.size.height)];
@@ -123,17 +120,13 @@
     [topEdgeHighlight moveToPoint:NSMakePoint(0.0, 0.5)];
     [topEdgeHighlight lineToPoint:NSMakePoint(self.frame.size.width, 0.5)];
     
-    
-    [highlightColor setStroke];
+    [[[CCIApplicationStyles instance] whiteColor] setStroke];
     [leftEdgeHighlight stroke];
     [topEdgeHighlight stroke];
 }
 
 - (void)drawShadows
 {
-    NSColor *shadowColor = [NSColor colorWithCalibratedWhite:0.38
-                                                       alpha:1.0];
-    
     NSBezierPath *rightEdgeShadow = [[NSBezierPath alloc] init];
     [rightEdgeShadow moveToPoint:NSMakePoint(self.frame.size.width - 0.5, self.frame.size.height)];
     [rightEdgeShadow lineToPoint:NSMakePoint(self.frame.size.width - 0.5, 0.0)];
@@ -142,8 +135,8 @@
     [bottomEdgeShadow moveToPoint:NSMakePoint(self.frame.size.width, self.frame.size.height - 0.5)];
     [bottomEdgeShadow lineToPoint:NSMakePoint(0.0, self.frame.size.height - 0.5)];
     
-    
-    [shadowColor setStroke];
+    // Shadow Color
+    [[[CCIApplicationStyles instance] darkGrayColor] setStroke];
     [rightEdgeShadow stroke];
     [bottomEdgeShadow stroke];
 }
@@ -172,8 +165,8 @@
     [arrowShape setLineWidth:1.0];
     
     if (self.clicking) {
-        [[NSColor blackColor] setStroke];
-        [[NSColor blackColor] setFill];
+        [[[CCIApplicationStyles instance] blackColor] setStroke];
+        [[[CCIApplicationStyles instance] blackColor] setFill];
     } else {
         // Arrow Outline Stroke Color
         [[[CCIApplicationStyles instance] darkPurpleColor] setStroke];

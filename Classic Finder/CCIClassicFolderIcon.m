@@ -47,7 +47,7 @@
     [super drawRect:dirtyRect];
     
     if (self.selectedState) {
-        [[NSColor blackColor] setStroke];
+        [[[CCIApplicationStyles instance] blackColor] setStroke];
         [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
         
         NSBezierPath *outlinePath = [[NSBezierPath alloc] init];
@@ -62,25 +62,17 @@
         [outlinePath stroke];
         [outlinePath fill];
         
-        [[NSColor colorWithCalibratedRed:0.10
-                                   green:0.07
-                                    blue:0.41
-                                   alpha:1.0] setStroke];
+
+        [[[CCIApplicationStyles instance] folderSelectedShadowColor] setStroke];
         
         NSBezierPath *shadowPath = [[NSBezierPath alloc] init];
         [shadowPath moveToPoint:NSMakePoint(29.5, 7.0)];
         [shadowPath lineToPoint:NSMakePoint(29.5, 24.0)];
         [shadowPath stroke];
         
-        [[NSColor colorWithCalibratedRed:0.41
-                                   green:0.41
-                                    blue:0.41
-                                   alpha:1.0] setStroke];
         
-        [[NSColor colorWithCalibratedRed:0.41
-                                   green:0.41
-                                    blue:0.41
-                                   alpha:1.0] setStroke];
+        [[[CCIApplicationStyles instance] folderSelectedHighlightColor] setStroke];
+        [[[CCIApplicationStyles instance] folderSelectedHighlightColor] setFill];
         
         NSBezierPath *highlightPath = [[NSBezierPath alloc] init];
         [highlightPath moveToPoint:NSMakePoint(1.0, 6.5)];
@@ -101,7 +93,7 @@
             }
         }
     } else {
-        [[NSColor blackColor] setStroke];
+        [[[CCIApplicationStyles instance] blackColor] setStroke];
         [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
         
         NSBezierPath *outlinePath = [[NSBezierPath alloc] init];
@@ -116,10 +108,8 @@
         [outlinePath stroke];
         [outlinePath fill];
         
-        [[NSColor colorWithCalibratedRed:0.53
-                                   green:0.51
-                                    blue:1.0
-                                   alpha:1.0] setStroke];
+
+        [[[CCIApplicationStyles instance] folderShadowColor] setStroke];
         
         NSBezierPath *shadowPath = [[NSBezierPath alloc] init];
         [shadowPath moveToPoint:NSMakePoint(29.5, 7.0)];
@@ -127,16 +117,14 @@
         [shadowPath stroke];
         
         
-        [[NSColor colorWithCalibratedWhite:1.0
-                                     alpha:1.0] setStroke];
+        [[[CCIApplicationStyles instance] whiteColor] setStroke];
         
         NSBezierPath *highlightPath = [[NSBezierPath alloc] init];
         [highlightPath moveToPoint:NSMakePoint(1.0, 6.5)];
         [highlightPath lineToPoint:NSMakePoint(30.0, 6.5)];
         [highlightPath stroke];
         
-        [[NSColor colorWithCalibratedWhite:1.0
-                                     alpha:1.0] setFill];
+        [[[CCIApplicationStyles instance] whiteColor] setFill];
         
         for (NSUInteger row = 7; row < 23; row++) {
             for (NSUInteger col = 1; col < 29; col++) {
@@ -161,13 +149,13 @@
 
 - (void)selectFolder
 {
-    self.selectedState = YES;
+    [self setSelectedState:YES];
     [self setNeedsDisplay:YES];
 }
 
 - (void)unselectFolder
 {
-    self.selectedState = NO;
+    [self setSelectedState:NO];
     [self setNeedsDisplay:YES];
 }
 

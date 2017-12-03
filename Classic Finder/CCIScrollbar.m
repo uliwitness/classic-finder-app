@@ -148,8 +148,7 @@
     [super drawRect:dirtyRect];
     
     if ([self inactive]) {
-        [[NSColor colorWithWhite:1.0
-                           alpha:1.0] setFill];
+        [[[CCIApplicationStyles instance] whiteColor] setFill];
         
         NSRect backgroundRect = NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height);
         NSRectFill(backgroundRect);
@@ -162,13 +161,11 @@
 
 - (void)drawTexturedBackground
 {
-    NSColor *textureColor = [NSColor colorWithCalibratedWhite:0.38
-                                                        alpha:1.0];
-    
     [[[CCIApplicationStyles instance] lightGrayColor] setFill];
     NSRectFill(NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height));
     
-    [textureColor setFill];
+    // Texture Color
+    [[[CCIApplicationStyles instance] darkGrayColor] setFill];
     
     for (NSUInteger x = 0; x <= self.frame.size.width; x++) {
         for (NSUInteger y = 0; y <= self.frame.size.height; y++) {
@@ -189,9 +186,6 @@
 
 - (void)drawDividerLine
 {
-    NSColor *dividerColor = [NSColor colorWithCalibratedWhite:0.0
-                                                        alpha:1.0];
-    
     NSBezierPath *dividerLine = [[NSBezierPath alloc] init];
     
     if (self.direction == Horizontal) {
@@ -202,15 +196,12 @@
         [dividerLine lineToPoint:NSMakePoint(0.5, self.frame.size.height)];
     }
     
-    [dividerColor setStroke];
+    [[[CCIApplicationStyles instance] blackColor] setStroke];
     [dividerLine stroke];
 }
 
 - (void)drawButtonDividerBars
 {
-    NSColor *lineColor = [NSColor colorWithCalibratedWhite:0.0
-                                                     alpha:1.0];
-    
     NSBezierPath *firstLine = [[NSBezierPath alloc] init];
     NSBezierPath *secondLine = [[NSBezierPath alloc] init];
     
@@ -232,7 +223,7 @@
         [secondLine lineToPoint:NSMakePoint(self.frame.size.width, offsetHeight)];
     }
     
-    [lineColor setStroke];
+    [[[CCIApplicationStyles instance] blackColor] setStroke];
     [firstLine stroke];
     [secondLine stroke];
 }

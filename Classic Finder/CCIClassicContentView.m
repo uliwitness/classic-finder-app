@@ -22,6 +22,7 @@
 // along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
 
 #import "CCIClassicContentView.h"
+#import "CCIApplicationStyles.h"
 
 @implementation CCIClassicContentView
 

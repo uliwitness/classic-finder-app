@@ -25,6 +25,7 @@
 #import "CCIClassicFileIcon.h"
 #import "CFRFileSystemOperations.h"
 #import "CCIClassicFinderWindowController.h"
+#import "CCIApplicationStyles.h"
 
 @interface CCIClassicFile()
 
@@ -91,14 +92,14 @@
 
 - (void)normalFileTitleTextColor
 {
-    self.fileLabel.backgroundColor = [NSColor whiteColor];
-    self.fileLabel.textColor = [NSColor blackColor];
+    self.fileLabel.backgroundColor = [[CCIApplicationStyles instance] whiteColor];
+    self.fileLabel.textColor = [[CCIApplicationStyles instance] blackColor];
 }
 
 - (void)reverseFileTitleTextColor
 {
-    self.fileLabel.backgroundColor = [NSColor blackColor];
-    self.fileLabel.textColor = [NSColor whiteColor];
+    self.fileLabel.backgroundColor = [[CCIApplicationStyles instance] blackColor];
+    self.fileLabel.textColor = [[CCIApplicationStyles instance] whiteColor];
 }
 
 - (void)selectItem

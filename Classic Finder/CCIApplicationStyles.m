@@ -25,13 +25,20 @@
 
 @interface CCIApplicationStyles()
 {
+    NSColor *whiteColor;
+    NSColor *blackColor;
     NSColor *darkPurpleColor;
+    NSColor *midPurpleColor;
     NSColor *lightPurpleColor;
+    NSColor *darkGrayColor;
     NSColor *midGrayColor;
     NSColor *lightGrayColor;
     NSColor *clickedMidGrayColor;
     NSColor *clickedDarkPurpleColor;
     NSColor *clickedLightPurpleColor;
+    NSColor *folderShadowColor;
+    NSColor *folderSelectedHighlightColor;
+    NSColor *folderSelectedShadowColor;
 }
 
 @end
@@ -65,14 +72,30 @@
 {
     self = [super init];
     
-    if (self) {
-
-    }
+    if (self) { }
     
     return self;
 }
 
 #pragma mark - GENERAL COLORS
+
+- (NSColor *)whiteColor
+{
+    if (whiteColor == nil) {
+        whiteColor = [NSColor colorWithWhite:1.0 alpha:1.0];
+    }
+    
+    return whiteColor;
+}
+
+- (NSColor *)blackColor
+{
+    if (blackColor == nil) {
+        blackColor = [NSColor colorWithWhite:0.0 alpha:1.0];
+    }
+    
+    return blackColor;
+}
 
 - (NSColor *)darkPurpleColor
 {
@@ -84,6 +107,18 @@
     }
     
     return darkPurpleColor;
+}
+
+- (NSColor *)midPurpleColor
+{
+    if (midPurpleColor == nil) {
+        midPurpleColor = [NSColor colorWithCalibratedRed:0.58
+                                                   green:0.57
+                                                    blue:0.80
+                                                   alpha:1.0];
+    }
+    
+    return midPurpleColor;
 }
 
 - (NSColor *)lightPurpleColor
@@ -98,7 +133,17 @@
     return lightPurpleColor;
 }
 
-- (NSColor *)midGrayColor;
+- (NSColor *)darkGrayColor
+{
+    if (darkGrayColor == nil) {
+        darkGrayColor = [NSColor colorWithCalibratedWhite:0.38
+                                                   alpha:1.0];
+    }
+    
+    return darkGrayColor;
+}
+
+- (NSColor *)midGrayColor
 {
     if (midGrayColor == nil) {
         midGrayColor = [NSColor colorWithCalibratedWhite:0.58
@@ -153,5 +198,44 @@
     
     return clickedLightPurpleColor;
 }
+
+#pragma mark - FOLDER ICON COLORS
+
+- (NSColor *)folderShadowColor
+{
+    if (clickedLightPurpleColor == nil) {
+        clickedLightPurpleColor = [NSColor colorWithCalibratedRed:0.70
+                                                            green:0.70
+                                                             blue:0.96
+                                                            alpha:1.0];
+    }
+    
+    return clickedLightPurpleColor;
+}
+
+- (NSColor *)folderSelectedHighlightColor
+{
+    if (folderSelectedHighlightColor == nil) {
+        folderSelectedHighlightColor = [NSColor colorWithCalibratedRed:0.41
+                                                                 green:0.41
+                                                                  blue:0.41
+                                                                 alpha:1.0];
+    }
+    
+    return folderSelectedHighlightColor;
+}
+
+- (NSColor *)folderSelectedShadowColor
+{
+    if (folderSelectedShadowColor == nil) {
+        folderSelectedShadowColor = [NSColor colorWithCalibratedRed:0.10
+                                                              green:0.07
+                                                               blue:0.41
+                                                              alpha:1.0];
+    }
+    
+    return folderSelectedShadowColor;
+}
+
 
 @end

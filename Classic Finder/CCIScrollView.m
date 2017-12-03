@@ -26,6 +26,7 @@
 #import "CCIScrollbar.h"
 #import "CCIScrollbarArrowButton.h"
 #import "CCIWindowGripButton.h"
+#import "CCIApplicationStyles.h"
 
 @interface CCIScrollView()
 
@@ -217,19 +218,17 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    NSColor *backgroundColor = [NSColor whiteColor];
-    [backgroundColor setFill];
     NSRect backgroundFrame = NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height);
     
+    // Background Color
+    [[[CCIApplicationStyles instance] whiteColor] setFill];
     NSRectFill(backgroundFrame);
-    
-    NSColor *strokeColor = [NSColor blackColor];
-    [strokeColor setStroke];
     
     NSBezierPath *topBorder = [[NSBezierPath alloc] init];
     [topBorder moveToPoint:NSMakePoint(0.0, 0.0)];
     [topBorder lineToPoint:NSMakePoint(self.frame.size.width, 0.0)];
     
+    [[[CCIApplicationStyles instance] blackColor] setStroke];
     [topBorder stroke];
 }
 

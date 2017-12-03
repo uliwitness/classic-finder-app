@@ -28,14 +28,23 @@
 
 + (instancetype)instance;
 
+- (NSColor *)whiteColor;
+- (NSColor *)blackColor;
+
 - (NSColor *)darkPurpleColor;
+- (NSColor *)midPurpleColor;
 - (NSColor *)lightPurpleColor;
 
+- (NSColor *)darkGrayColor;
 - (NSColor *)midGrayColor;
 - (NSColor *)lightGrayColor;
 
 - (NSColor *)clickedMidGrayColor;
 - (NSColor *)clickedDarkPurpleColor;
 - (NSColor *)clickedLightPurpleColor;
+
+- (NSColor *)folderShadowColor;
+- (NSColor *)folderSelectedHighlightColor;
+- (NSColor *)folderSelectedShadowColor;
 
 @end
