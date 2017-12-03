@@ -13,6 +13,7 @@
 		A805A8561FCE3A5B00274577 /* CCIScrollContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A84D1FCE3A5A00274577 /* CCIScrollContentView.m */; };
 		A805A8571FCE3A5B00274577 /* CCIWindowGripButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A8501FCE3A5B00274577 /* CCIWindowGripButton.m */; };
 		A805A8581FCE3A5B00274577 /* CCIScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A8511FCE3A5B00274577 /* CCIScrollView.m */; };
+		A805A85B1FD2912000274577 /* CCIClassicContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A85A1FD2911F00274577 /* CCIClassicContentView.m */; };
 		A885B1CE1E59457100F1AB96 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B1CD1E59457100F1AB96 /* AppDelegate.m */; };
 		A885B1D11E59457100F1AB96 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B1D01E59457100F1AB96 /* main.m */; };
 		A885B1D31E59457100F1AB96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A885B1D21E59457100F1AB96 /* Assets.xcassets */; };
@@ -24,7 +25,6 @@
 		A885B2021E594EE900F1AB96 /* CCITitleBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2011E594EE900F1AB96 /* CCITitleBar.m */; };
 		A885B2051E59741000F1AB96 /* CCIClassicFolderIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2041E59741000F1AB96 /* CCIClassicFolderIcon.m */; };
 		A885B2081E597AE300F1AB96 /* CCIClassicFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2071E597AE300F1AB96 /* CCIClassicFolder.m */; };
-		A885B20E1E59833E00F1AB96 /* CCIClassicContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B20D1E59833E00F1AB96 /* CCIClassicContentView.m */; };
 		A885B2111E59923B00F1AB96 /* CCIClassicFinderWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2101E59923B00F1AB96 /* CCIClassicFinderWindow.m */; };
 		A885B2141E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2131E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m */; };
 		A885B2171E5BEBAF00F1AB96 /* CCIClassicScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2161E5BEBAF00F1AB96 /* CCIClassicScrollView.m */; };
@@ -66,6 +66,8 @@
 		A805A8501FCE3A5B00274577 /* CCIWindowGripButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIWindowGripButton.m; sourceTree = "<group>"; };
 		A805A8511FCE3A5B00274577 /* CCIScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIScrollView.m; sourceTree = "<group>"; };
 		A805A8521FCE3A5B00274577 /* CCIScrollContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCIScrollContentView.h; sourceTree = "<group>"; };
+		A805A8591FD2911F00274577 /* CCIClassicContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCIClassicContentView.h; sourceTree = "<group>"; };
+		A805A85A1FD2911F00274577 /* CCIClassicContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIClassicContentView.m; sourceTree = "<group>"; };
 		A885B1C91E59457100F1AB96 /* Classic Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Classic Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A885B1CC1E59457100F1AB96 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A885B1CD1E59457100F1AB96 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -89,8 +91,6 @@
 		A885B2041E59741000F1AB96 /* CCIClassicFolderIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIClassicFolderIcon.m; sourceTree = "<group>"; };
 		A885B2061E597AE300F1AB96 /* CCIClassicFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCIClassicFolder.h; sourceTree = "<group>"; };
 		A885B2071E597AE300F1AB96 /* CCIClassicFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIClassicFolder.m; sourceTree = "<group>"; };
-		A885B20C1E59833E00F1AB96 /* CCIClassicContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCIClassicContentView.h; sourceTree = "<group>"; };
-		A885B20D1E59833E00F1AB96 /* CCIClassicContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIClassicContentView.m; sourceTree = "<group>"; };
 		A885B20F1E59923B00F1AB96 /* CCIClassicFinderWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCIClassicFinderWindow.h; sourceTree = "<group>"; };
 		A885B2101E59923B00F1AB96 /* CCIClassicFinderWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIClassicFinderWindow.m; sourceTree = "<group>"; };
 		A885B2121E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCIClassicFinderDetailBar.h; sourceTree = "<group>"; };
@@ -207,6 +207,8 @@
 		A885B1F91E59466700F1AB96 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				A805A8591FD2911F00274577 /* CCIClassicContentView.h */,
+				A805A85A1FD2911F00274577 /* CCIClassicContentView.m */,
 				A805A84E1FCE3A5A00274577 /* CCIScrollbar.h */,
 				A805A84C1FCE3A5A00274577 /* CCIScrollbar.m */,
 				A805A84A1FCE3A5A00274577 /* CCIScrollbarArrowButton.h */,
@@ -219,8 +221,6 @@
 				A805A8511FCE3A5B00274577 /* CCIScrollView.m */,
 				A805A8481FCE3A5900274577 /* CCIWindowGripButton.h */,
 				A805A8501FCE3A5B00274577 /* CCIWindowGripButton.m */,
-				A885B20C1E59833E00F1AB96 /* CCIClassicContentView.h */,
-				A885B20D1E59833E00F1AB96 /* CCIClassicContentView.m */,
 				A885B1FA1E59475D00F1AB96 /* CCICloseButton.h */,
 				A885B1FB1E59475D00F1AB96 /* CCICloseButton.m */,
 				A885B1FD1E594CAB00F1AB96 /* CCIMaximizeButton.h */,
@@ -381,6 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A805A8531FCE3A5B00274577 /* CCIScrollbarScroller.m in Sources */,
+				A805A85B1FD2912000274577 /* CCIClassicContentView.m in Sources */,
 				A885B2111E59923B00F1AB96 /* CCIClassicFinderWindow.m in Sources */,
 				A885B2141E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m in Sources */,
 				A8D82F671F849C3900B437F1 /* CCIClassicFileIcon.m in Sources */,
@@ -399,7 +400,6 @@
 				A885B1FF1E594CAB00F1AB96 /* CCIMaximizeButton.m in Sources */,
 				A805A8581FCE3A5B00274577 /* CCIScrollView.m in Sources */,
 				A885B1FC1E59475D00F1AB96 /* CCICloseButton.m in Sources */,
-				A885B20E1E59833E00F1AB96 /* CCIClassicContentView.m in Sources */,
 				A885B2171E5BEBAF00F1AB96 /* CCIClassicScrollView.m in Sources */,
 				A885B1CE1E59457100F1AB96 /* AppDelegate.m in Sources */,
 			);
@@ -542,7 +542,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Classic Finder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.protypesoftware.Classic-Finder";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.classicmacfinder.Classic-Finder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -554,7 +554,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Classic Finder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.protypesoftware.Classic-Finder";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.classicmacfinder.Classic-Finder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
