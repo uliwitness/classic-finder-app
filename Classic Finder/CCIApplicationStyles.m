@@ -26,9 +26,13 @@
 @interface CCIApplicationStyles()
 {
     NSColor *darkPurpleColor;
+    NSColor *lightPurpleColor;
+    NSColor *midGrayColor;
+    NSColor *lightGrayColor;
+    NSColor *clickedMidGrayColor;
+    NSColor *clickedDarkPurpleColor;
+    NSColor *clickedLightPurpleColor;
 }
-
-//@property (strong) NSColor *darkPurpleColor;
 
 @end
 
@@ -68,7 +72,7 @@
     return self;
 }
 
-#pragma mark - COLORS
+#pragma mark - GENERAL COLORS
 
 - (NSColor *)darkPurpleColor
 {
@@ -82,6 +86,72 @@
     return darkPurpleColor;
 }
 
+- (NSColor *)lightPurpleColor
+{
+    if (lightPurpleColor == nil) {
+        lightPurpleColor = [NSColor colorWithCalibratedRed:0.76
+                                                     green:0.76
+                                                      blue:1.0
+                                                     alpha:1.0];
+    }
+    
+    return lightPurpleColor;
+}
 
+- (NSColor *)midGrayColor;
+{
+    if (midGrayColor == nil) {
+        midGrayColor = [NSColor colorWithCalibratedWhite:0.58
+                                                     alpha:1.0];
+    }
+    
+    return midGrayColor;
+}
+
+- (NSColor *)lightGrayColor
+{
+    if (lightGrayColor == nil) {
+        lightGrayColor = [NSColor colorWithCalibratedWhite:0.92
+                                                     alpha:1.0];
+    }
+    
+    return lightGrayColor;
+}
+
+#pragma mark - GENERAL CLICKED COLORS
+
+- (NSColor *)clickedMidGrayColor
+{
+    if (clickedMidGrayColor == nil) {
+        clickedMidGrayColor = [NSColor colorWithCalibratedWhite:0.45
+                                                          alpha:1.0];
+    }
+    
+    return clickedMidGrayColor;
+}
+
+- (NSColor *)clickedDarkPurpleColor
+{
+    if (clickedDarkPurpleColor == nil) {
+        clickedDarkPurpleColor = [NSColor colorWithCalibratedRed:0.14
+                                                           green:0.13
+                                                            blue:0.30
+                                                           alpha:1.0];
+    }
+    
+    return clickedDarkPurpleColor;
+}
+
+- (NSColor *)clickedLightPurpleColor
+{
+    if (clickedLightPurpleColor == nil) {
+        clickedLightPurpleColor = [NSColor colorWithCalibratedRed:0.70
+                                                            green:0.70
+                                                             blue:0.96
+                                                            alpha:1.0];
+    }
+    
+    return clickedLightPurpleColor;
+}
 
 @end

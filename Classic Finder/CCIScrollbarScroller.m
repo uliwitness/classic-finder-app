@@ -22,6 +22,7 @@
 // along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
 
 #import "CCIScrollbarScroller.h"
+#import "CCIApplicationStyles.h"
 
 @interface CCIScrollbarScroller()
 
@@ -96,33 +97,24 @@
         
         [darkGrayBase setFill];
         NSRectFill(darkBaseFrame);
-        
-        
-        NSColor *darkPurpleColor = [NSColor colorWithCalibratedRed:0.15
-                                                             green:0.14
-                                                              blue:0.31
-                                                             alpha:1.0];
+
         
         NSRect darkPurpleFrame = NSMakeRect(0.0,
                                             1.0,
                                             self.frame.size.width,
                                             self.frame.size.height - 1.0);
         
-        [darkPurpleColor setFill];
+        // Set Dark Purple Frame Color
+        [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
         NSRectFill(darkPurpleFrame);
         
-        
-        NSColor *lightPurpleColor = [NSColor colorWithCalibratedRed:0.76
-                                                              green:0.76
-                                                               blue:1.0
-                                                              alpha:1.0];
         
         NSRect lightPurpleFrame = NSMakeRect(0.0,
                                              1.0,
                                              self.frame.size.width - 1.0,
                                              self.frame.size.height - 2.0);
         
-        [lightPurpleColor setFill];
+        [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
         NSRectFill(lightPurpleFrame);
         
         
@@ -146,33 +138,23 @@
         
         [darkGrayBase setFill];
         NSRectFill(darkBaseFrame);
-        
-        
-        NSColor *darkPurpleColor = [NSColor colorWithCalibratedRed:0.15
-                                                             green:0.14
-                                                              blue:0.31
-                                                             alpha:1.0];
+
 
         NSRect darkPurpleFrame = NSMakeRect(1.0,
                                             0.0,
                                             self.frame.size.width - 1.0,
                                             self.frame.size.height);
 
-        [darkPurpleColor setFill];
+        [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
         NSRectFill(darkPurpleFrame);
 
-
-        NSColor *lightPurpleColor = [NSColor colorWithCalibratedRed:0.76
-                                                              green:0.76
-                                                               blue:1.0
-                                                              alpha:1.0];
 
         NSRect lightPurpleFrame = NSMakeRect(1.0,
                                              0.0,
                                              self.frame.size.width - 2.0,
                                              self.frame.size.height - 1.0);
 
-        [lightPurpleColor setFill];
+        [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
         NSRectFill(lightPurpleFrame);
 
 
@@ -193,18 +175,13 @@
 {
     if ([self direction] == ScrollerVertical)
     {
-        NSColor *lightPurpleColor = [NSColor colorWithCalibratedRed:0.76
-                                                              green:0.76
-                                                               blue:1.0
-                                                              alpha:1.0];
-        
         NSRect lightPurpleTextureLine1 = NSMakeRect(4.0, 4.0, 6.0, 1.0);
         NSRect lightPurpleTextureLine2 = NSMakeRect(4.0, 6.0, 6.0, 1.0);
         NSRect lightPurpleTextureLine3 = NSMakeRect(4.0, 8.0, 6.0, 1.0);
         NSRect lightPurpleTextureLine4 = NSMakeRect(4.0, 10.0, 6.0, 1.0);
         NSRect lightPurpleTextureLine5 = NSMakeRect(4.0, 12.0, 6.0, 1.0);
         
-        [lightPurpleColor setFill];
+        [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
         
         NSRectFill(lightPurpleTextureLine1);
         NSRectFill(lightPurpleTextureLine2);
@@ -237,18 +214,13 @@
         NSRectFill(darkerMidPurpleTextureLine3);
         NSRectFill(darkerMidPurpleTextureLine4);
     } else if ([self direction] == ScrollerHorizontal) {
-        NSColor *lightPurpleColor = [NSColor colorWithCalibratedRed:0.76
-                                                              green:0.76
-                                                               blue:1.0
-                                                              alpha:1.0];
-        
         NSRect lightPurpleTextureLine1 = NSMakeRect(4.0, 4.0, 1.0, 6.0);
         NSRect lightPurpleTextureLine2 = NSMakeRect(6.0, 4.0, 1.0, 6.0);
         NSRect lightPurpleTextureLine3 = NSMakeRect(8.0, 4.0, 1.0, 6.0);
         NSRect lightPurpleTextureLine4 = NSMakeRect(10.0, 4.0, 1.0, 6.0);
         NSRect lightPurpleTextureLine5 = NSMakeRect(12.0, 4.0, 1.0, 6.0);
         
-        [lightPurpleColor setFill];
+        [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
         
         NSRectFill(lightPurpleTextureLine1);
         NSRectFill(lightPurpleTextureLine2);

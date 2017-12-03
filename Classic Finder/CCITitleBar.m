@@ -24,6 +24,7 @@
 #import "CCITitleBar.h"
 #import "CCICloseButton.h"
 #import "CCIMaximizeButton.h"
+#import "CCIApplicationStyles.h"
 
 @interface CCITitleBar () {
     BOOL windowIsActive;
@@ -133,9 +134,7 @@
 
 - (void)drawOutlinesAndShadows
 {
-    [[NSColor colorWithCalibratedWhite:0.92
-                                 alpha:1.0] setFill];
-    
+    [[[CCIApplicationStyles instance] lightGrayColor] setFill];
     NSRectFill(NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height));
     
     
@@ -149,10 +148,7 @@
     [titlebarOutline lineToPoint: NSMakePoint(0.5, 0.5)];
     [titlebarOutline stroke];
     
-    [[NSColor colorWithCalibratedRed:0.76
-                               green:0.76
-                                blue:1.0
-                               alpha:1.0] setStroke];
+    [[[CCIApplicationStyles instance] lightPurpleColor] setStroke];
     
     NSBezierPath *titlebarHighlight = [[NSBezierPath alloc] init];
     [titlebarHighlight moveToPoint:NSMakePoint(1.5, 1.5)];
@@ -234,7 +230,7 @@
     CGFloat textWidth = titleTextSize.width + 12.0;
     
     if (self.windowIsActive) {
-        [[NSColor colorWithCalibratedWhite:0.92 alpha:1.0] setFill];
+        [[[CCIApplicationStyles instance] lightGrayColor] setFill];
         NSRectFill(NSMakeRect(((self.frame.size.width - textWidth) / 2.0), 2.0, textWidth, 15.0));
     } else {
         [[NSColor colorWithCalibratedWhite:1.0 alpha:1.0] setFill];

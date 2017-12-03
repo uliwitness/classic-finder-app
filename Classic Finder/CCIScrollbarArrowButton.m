@@ -23,6 +23,7 @@
 
 #import "CCIScrollbarArrowButton.h"
 #import "CCIScrollbar.h"
+#import "CCIApplicationStyles.h"
 
 @interface CCIScrollbarArrowButton()
 
@@ -100,15 +101,12 @@
 
 - (void)drawBackground
 {
-    NSColor *backgroundColor = [NSColor colorWithCalibratedWhite:0.92
-                                                           alpha:1.0];
-    
     NSRect backgroundRect = NSMakeRect(0.0,
                                        0.0,
                                        self.frame.size.width,
                                        self.frame.size.height);
     
-    [backgroundColor setFill];
+    [[[CCIApplicationStyles instance] lightGrayColor] setFill];
     NSRectFill(backgroundRect);
 }
 
@@ -152,16 +150,6 @@
 
 - (void)drawArrow
 {
-    NSColor *arrowOutlineColor = [NSColor colorWithCalibratedRed:0.15
-                                                           green:0.14
-                                                            blue:0.31
-                                                           alpha:1.0];
-    
-    NSColor *arrowFillColor = [NSColor colorWithCalibratedRed:0.76
-                                                        green:0.76
-                                                         blue:1.0
-                                                        alpha:1.0];
-    
     [NSGraphicsContext saveGraphicsState];
     
     NSAffineTransform *arrowDirectionRotation = [NSAffineTransform transform];
@@ -187,8 +175,9 @@
         [[NSColor blackColor] setStroke];
         [[NSColor blackColor] setFill];
     } else {
-        [arrowOutlineColor setStroke];
-        [arrowFillColor setFill];
+        // Arrow Outline Stroke Color
+        [[[CCIApplicationStyles instance] darkPurpleColor] setStroke];
+        [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
     }
     
     [arrowShape fill];

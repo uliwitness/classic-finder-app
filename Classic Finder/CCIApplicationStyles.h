@@ -29,5 +29,13 @@
 + (instancetype)instance;
 
 - (NSColor *)darkPurpleColor;
+- (NSColor *)lightPurpleColor;
+
+- (NSColor *)midGrayColor;
+- (NSColor *)lightGrayColor;
+
+- (NSColor *)clickedMidGrayColor;
+- (NSColor *)clickedDarkPurpleColor;
+- (NSColor *)clickedLightPurpleColor;
 
 @end

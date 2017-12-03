@@ -25,6 +25,7 @@
 #import "CCIScrollView.h"
 #import "CCIScrollbarScroller.h"
 #import "CCIScrollbarArrowButton.h"
+#import "CCIApplicationStyles.h"
 
 @interface CCIScrollbar()
 
@@ -161,13 +162,10 @@
 
 - (void)drawTexturedBackground
 {
-    NSColor *backgroundColor = [NSColor colorWithCalibratedWhite:0.92
-                                                           alpha:1.0];
-    
     NSColor *textureColor = [NSColor colorWithCalibratedWhite:0.38
                                                         alpha:1.0];
     
-    [backgroundColor setFill];
+    [[[CCIApplicationStyles instance] lightGrayColor] setFill];
     NSRectFill(NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height));
     
     [textureColor setFill];

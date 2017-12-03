@@ -22,6 +22,7 @@
 // along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
 
 #import "CCIClassicFolderIcon.h"
+#import "CCIApplicationStyles.h"
 
 @interface CCIClassicFolderIcon ()
 
@@ -47,10 +48,7 @@
     
     if (self.selectedState) {
         [[NSColor blackColor] setStroke];
-        [[NSColor colorWithCalibratedRed:0.15
-                                   green:0.13
-                                    blue:0.41
-                                   alpha:1.0] setFill];
+        [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
         
         NSBezierPath *outlinePath = [[NSBezierPath alloc] init];
         [outlinePath moveToPoint:NSMakePoint(30.0, 5.0)];
@@ -104,10 +102,7 @@
         }
     } else {
         [[NSColor blackColor] setStroke];
-        [[NSColor colorWithCalibratedRed:0.76
-                                   green:0.75
-                                    blue:1.0
-                                   alpha:1.0] setFill];
+        [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
         
         NSBezierPath *outlinePath = [[NSBezierPath alloc] init];
         [outlinePath moveToPoint:NSMakePoint(30.0, 5.0)];

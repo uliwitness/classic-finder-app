@@ -22,6 +22,7 @@
 // along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
 
 #import "CCIMaximizeButton.h"
+#import "CCIApplicationStyles.h"
 
 @interface CCIMaximizeButton ()
 
@@ -35,68 +36,42 @@
 {
     [super drawRect:dirtyRect];
     
-    [[NSColor colorWithCalibratedWhite:0.92
-                                 alpha:1.0] setFill];
-    NSRectFill(NSMakeRect(0, 0, 13, 11));
+    [[[CCIApplicationStyles instance] lightGrayColor] setFill];
+    NSRectFill(NSMakeRect(0.0, 0.0, 13.0, 11.0));
     
-    [[NSColor colorWithCalibratedRed:0.15
-                               green:0.14
-                                blue:0.31
-                               alpha:1.0] setFill];
-    NSRectFill(NSMakeRect(1, 0, 11, 11));
+    [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
+    NSRectFill(NSMakeRect(1.0, 0.0, 11.0, 11.0));
     
     if (self.isClicked) {
-        [[NSColor colorWithCalibratedRed:0.70
-                                   green:0.70
-                                    blue:0.96
-                                   alpha:1.0] setFill];
-        NSRectFill(NSMakeRect(2, 0, 10, 10));
+        [[[CCIApplicationStyles instance] clickedLightPurpleColor] setFill];
+        NSRectFill(NSMakeRect(2.0, 0.0, 10.0, 10.0));
         
-        [[NSColor colorWithCalibratedRed:0.14
-                                   green:0.13
-                                    blue:0.30
-                                   alpha:1.0] setFill];
-        NSRectFill(NSMakeRect(3, 1, 8, 8));
+        [[[CCIApplicationStyles instance] clickedDarkPurpleColor] setFill];
+        NSRectFill(NSMakeRect(3.0, 1.0, 8.0, 8.0));
         
-        [[NSColor colorWithCalibratedWhite:0.45
-                                     alpha:1.0] setFill];
-        NSRectFill(NSMakeRect(3, 2, 7, 7));
+        [[[CCIApplicationStyles instance] clickedMidGrayColor] setFill];
+        NSRectFill(NSMakeRect(3.0, 2.0, 7.0, 7.0));
         
-        [[NSColor colorWithCalibratedRed:0.14
-                                   green:0.13
-                                    blue:0.30
-                                   alpha:1.0] setFill];
-        NSRectFill(NSMakeRect(3, 4, 5, 5));
+        [[[CCIApplicationStyles instance] clickedDarkPurpleColor] setFill];
+        NSRectFill(NSMakeRect(3.0, 4.0, 5.0, 5.0));
         
-        [[NSColor colorWithCalibratedWhite:0.45
-                                     alpha:1.0] setFill];
-        NSRectFill(NSMakeRect(3, 5, 4, 4));
+        [[[CCIApplicationStyles instance] clickedMidGrayColor] setFill];
+        NSRectFill(NSMakeRect(3.0, 5.0, 4.0, 4.0));
     } else {
-        [[NSColor colorWithCalibratedRed:0.76
-                                   green:0.76
-                                    blue:1.0
-                                   alpha:1.0] setFill];
-        NSRectFill(NSMakeRect(2, 0, 10, 10));
+        [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
+        NSRectFill(NSMakeRect(2.0, 0.0, 10.0, 10.0));
         
-        [[NSColor colorWithCalibratedRed:0.15
-                                   green:0.14
-                                    blue:0.31
-                                   alpha:1.0] setFill];
-        NSRectFill(NSMakeRect(3, 1, 8, 8));
+        [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
+        NSRectFill(NSMakeRect(3.0, 1.0, 8.0, 8.0));
         
-        [[NSColor colorWithCalibratedWhite:0.58
-                                     alpha:1.0] setFill];
-        NSRectFill(NSMakeRect(3, 2, 7, 7));
+        [[[CCIApplicationStyles instance] midGrayColor] setFill];
+        NSRectFill(NSMakeRect(3.0, 2.0, 7.0, 7.0));
         
-        [[NSColor colorWithCalibratedRed:0.15
-                                   green:0.14
-                                    blue:0.31
-                                   alpha:1.0] setFill];
-        NSRectFill(NSMakeRect(3, 4, 5, 5));
+        [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
+        NSRectFill(NSMakeRect(3.0, 4.0, 5.0, 5.0));
         
-        [[NSColor colorWithCalibratedWhite:0.58
-                                     alpha:1.0] setFill];
-        NSRectFill(NSMakeRect(3, 5, 4, 4));
+        [[[CCIApplicationStyles instance] midGrayColor] setFill];
+        NSRectFill(NSMakeRect(3.0, 5.0, 4.0, 4.0));
     }
 }
 

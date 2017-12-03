@@ -22,6 +22,7 @@
 // along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
 
 #import "CCIWindowGripButton.h"
+#import "CCIApplicationStyles.h"
 
 @interface CCIWindowGripButton()
 
@@ -65,45 +66,26 @@
         NSRect backgroundRect = NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height);
         NSRectFill(backgroundRect);
         
-        [[NSColor colorWithCalibratedRed:0.15
-                                   green:0.14
-                                    blue:0.31
-                                   alpha:1.0] setFill];
+        [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
         NSRectFill(NSMakeRect(3.0, 3.0, 8.0, 8.0));
         
-        [[NSColor colorWithCalibratedRed:0.76
-                                   green:0.76
-                                    blue:1.0
-                                   alpha:1.0] setFill];
+        [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
         NSRectFill(NSMakeRect(4.0, 4.0, 7.0, 7.0));
         
-        [[NSColor colorWithCalibratedRed:0.15
-                                   green:0.14
-                                    blue:0.31
-                                   alpha:1.0] setFill];
+        [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
         NSRectFill(NSMakeRect(5.0, 5.0, 6.0, 6.0));
         
-        [[NSColor colorWithCalibratedWhite:0.58
-                                     alpha:1.0] setFill];
+        [[[CCIApplicationStyles instance] midGrayColor] setFill];
         NSRectFill(NSMakeRect(5.0, 5.0, 5.0, 5.0));
         
         //small suqare
-        [[NSColor colorWithCalibratedRed:0.15
-                                   green:0.14
-                                    blue:0.31
-                                   alpha:1.0] setFill];
+        [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
         NSRectFill(NSMakeRect(2.0, 2.0, 5.0, 5.0));
         
-        [[NSColor colorWithCalibratedRed:0.76
-                                   green:0.76
-                                    blue:1.0
-                                   alpha:1.0] setFill];
+        [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
         NSRectFill(NSMakeRect(3.0, 3.0, 4.0, 4.0));
         
-        [[NSColor colorWithCalibratedRed:0.15
-                                   green:0.14
-                                    blue:0.31
-                                   alpha:1.0] setFill];
+        [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
         NSRectFill(NSMakeRect(4.0, 4.0, 3.0, 3.0));
         
         [[NSColor colorWithCalibratedRed:0.73
