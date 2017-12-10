@@ -25,11 +25,12 @@
 #import "CCIScrollbar.h"
 #import "CCIApplicationStyles.h"
 
-@interface CCIScrollbarArrowButton()
+@interface CCIScrollbarArrowButton() {
+    BOOL disabled;
+    BOOL whiteOut;
+}
 
 @property (nonatomic, strong) CCIScrollbar *scrollBar;
-
-@property (nonatomic) BOOL inactive;
 @property (nonatomic) BOOL clicking;
 
 @end
@@ -46,7 +47,6 @@
     CCIScrollbarArrowButton *button = [[CCIScrollbarArrowButton alloc] initWithFrame:defaultScrollButtonFrame];
     [button setDirection:direction];
     [button setScrollBar:scrollBar];
-    [button setInactive:NO];
     
     return button;
 }
@@ -54,40 +54,97 @@
 #pragma mark - UI EVENT METHODS
 - (void)mouseDown:(NSEvent *)event
 {
-    [super mouseDown:event];
-    
-    [self setClicking:YES];
-    [self setNeedsDisplay];
+    if (!disabled) {
+        [super mouseDown:event];
+        
+        [self setClicking:YES];
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)mouseUp:(NSEvent *)event
 {
-    [super mouseUp:event];
-    
-    [self setClicking:NO];
-    [self setNeedsDisplay];
-    
-    // https://stackoverflow.com/questions/498175/custom-nscontrol-target-action-howto#comment4171079_500032
-    [NSApp sendAction:[self action]
-                   to:[self target]
-                 from:self];
+    if (!disabled) {
+        [super mouseUp:event];
+        
+        [self setClicking:NO];
+        [self setNeedsDisplay];
+        
+        // https://stackoverflow.com/questions/498175/custom-nscontrol-target-action-howto#comment4171079_500032
+        [NSApp sendAction:[self action]
+                       to:[self target]
+                     from:self];
+    }
 }
 
 - (void)mouseExited:(NSEvent *)event
 {
-    [super mouseExited:event];
-    
-    self.clicking = NO;
-    [self setNeedsDisplay];
+    if (!disabled) {
+        [super mouseExited:event];
+        
+        self.clicking = NO;
+        [self setNeedsDisplay];
+    }
+}
+
+#pragma mark - DRAWING METHOD MODIFIER METHODS
+- (void)enableButton
+{
+    disabled = NO;
+    whiteOut = NO;
+
+    [self setNeedsDisplay:YES];
+}
+
+- (void)disableButton
+{
+    disabled = YES;
+    whiteOut = NO;
+
+    [self setNeedsDisplay:YES];
+}
+
+- (void)disableAndWhiteOutButton
+{
+    disabled = YES;
+    whiteOut = YES;
+
+    [self setNeedsDisplay:YES];
 }
 
 #pragma mark - DRAWING METHODS
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    if ([self inactive]) {
-        [[NSColor colorWithWhite:1.0
-                           alpha:1.0] setFill];
+    if (disabled && !whiteOut) {
+        [[[CCIApplicationStyles instance] lightGrayColor] setFill];
+        
+        NSRect backgroundRect = NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height);
+        NSRectFill(backgroundRect);
+        
+        [[[CCIApplicationStyles instance] midGrayColor] setStroke];
+        
+        NSBezierPath *outlinePath = [[NSBezierPath alloc] init];
+        
+        if ([self direction] == Up) {
+            [outlinePath moveToPoint:NSMakePoint(0.0, self.frame.size.height)];
+            [outlinePath lineToPoint:NSMakePoint(self.frame.size.width, self.frame.size.height)];
+        } else if ([self direction] == Down) {
+            [outlinePath moveToPoint:NSMakePoint(0.0, 0.0)];
+            [outlinePath lineToPoint:NSMakePoint(self.frame.size.width, 0.0)];
+        } else if ([self direction] == Right) {
+            [outlinePath moveToPoint:NSMakePoint(0.0, 0.0)];
+            [outlinePath lineToPoint:NSMakePoint(0.0, self.frame.size.height)];
+        } else if ([self direction] == Left) {
+            [outlinePath moveToPoint:NSMakePoint(self.frame.size.width, 0.0)];
+            [outlinePath lineToPoint:NSMakePoint(self.frame.size.width, self.frame.size.height)];
+        }
+        
+        [outlinePath stroke];
+        
+        [self drawArrow];
+    } else if (disabled && whiteOut) {
+        [[[CCIApplicationStyles instance] whiteColor] setFill];
         
         NSRect backgroundRect = NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height);
         NSRectFill(backgroundRect);
@@ -112,71 +169,116 @@
 
 - (void)drawHighlights
 {
-    NSBezierPath *leftEdgeHighlight = [[NSBezierPath alloc] init];
-    [leftEdgeHighlight moveToPoint:NSMakePoint(0.5, 0.0)];
-    [leftEdgeHighlight lineToPoint:NSMakePoint(0.5, self.frame.size.height)];
-    
-    NSBezierPath *topEdgeHighlight = [[NSBezierPath alloc] init];
-    [topEdgeHighlight moveToPoint:NSMakePoint(0.0, 0.5)];
-    [topEdgeHighlight lineToPoint:NSMakePoint(self.frame.size.width, 0.5)];
-    
-    [[[CCIApplicationStyles instance] whiteColor] setStroke];
-    [leftEdgeHighlight stroke];
-    [topEdgeHighlight stroke];
+    if (disabled && !whiteOut) {
+        // Draw no highlights
+    } else if (disabled && whiteOut) {
+        // Draw no highlights
+    } else {
+        NSBezierPath *leftEdgeHighlight = [[NSBezierPath alloc] init];
+        [leftEdgeHighlight moveToPoint:NSMakePoint(0.5, 0.0)];
+        [leftEdgeHighlight lineToPoint:NSMakePoint(0.5, self.frame.size.height)];
+        
+        NSBezierPath *topEdgeHighlight = [[NSBezierPath alloc] init];
+        [topEdgeHighlight moveToPoint:NSMakePoint(0.0, 0.5)];
+        [topEdgeHighlight lineToPoint:NSMakePoint(self.frame.size.width, 0.5)];
+        
+        [[[CCIApplicationStyles instance] whiteColor] setStroke];
+        [leftEdgeHighlight stroke];
+        [topEdgeHighlight stroke];
+    }
 }
 
 - (void)drawShadows
 {
-    NSBezierPath *rightEdgeShadow = [[NSBezierPath alloc] init];
-    [rightEdgeShadow moveToPoint:NSMakePoint(self.frame.size.width - 0.5, self.frame.size.height)];
-    [rightEdgeShadow lineToPoint:NSMakePoint(self.frame.size.width - 0.5, 0.0)];
-    
-    NSBezierPath *bottomEdgeShadow = [[NSBezierPath alloc] init];
-    [bottomEdgeShadow moveToPoint:NSMakePoint(self.frame.size.width, self.frame.size.height - 0.5)];
-    [bottomEdgeShadow lineToPoint:NSMakePoint(0.0, self.frame.size.height - 0.5)];
-    
-    // Shadow Color
-    [[[CCIApplicationStyles instance] darkGrayColor] setStroke];
-    [rightEdgeShadow stroke];
-    [bottomEdgeShadow stroke];
+    if (disabled && !whiteOut) {
+        // Draw no shadows
+    } else if (disabled && whiteOut) {
+        // Draw no shadows
+    } else {
+        NSBezierPath *rightEdgeShadow = [[NSBezierPath alloc] init];
+        [rightEdgeShadow moveToPoint:NSMakePoint(self.frame.size.width - 0.5, self.frame.size.height)];
+        [rightEdgeShadow lineToPoint:NSMakePoint(self.frame.size.width - 0.5, 0.0)];
+        
+        NSBezierPath *bottomEdgeShadow = [[NSBezierPath alloc] init];
+        [bottomEdgeShadow moveToPoint:NSMakePoint(self.frame.size.width, self.frame.size.height - 0.5)];
+        [bottomEdgeShadow lineToPoint:NSMakePoint(0.0, self.frame.size.height - 0.5)];
+        
+        // Shadow Color
+        [[[CCIApplicationStyles instance] darkGrayColor] setStroke];
+        [rightEdgeShadow stroke];
+        [bottomEdgeShadow stroke];
+    }
 }
 
 - (void)drawArrow
 {
-    [NSGraphicsContext saveGraphicsState];
-    
-    NSAffineTransform *arrowDirectionRotation = [NSAffineTransform transform];
-    [arrowDirectionRotation translateXBy:self.frame.size.width/2.0
-                                     yBy:self.frame.size.height / 2.0];
-    [arrowDirectionRotation rotateByDegrees:(90.0 * self.direction)];
-    [arrowDirectionRotation translateXBy:-(self.frame.size.width/2.0)
-                                     yBy:-(self.frame.size.height / 2.0)];
-    [arrowDirectionRotation concat];
-    
-    NSBezierPath *arrowShape = [[NSBezierPath alloc] init];
-    [arrowShape moveToPoint:NSMakePoint(1.5, 7.0)];
-    [arrowShape lineToPoint:NSMakePoint(6.5, 2.0)];
-    [arrowShape lineToPoint:NSMakePoint(11.5, 7.0)];
-    [arrowShape lineToPoint:NSMakePoint(8.5, 7.0)];
-    [arrowShape lineToPoint:NSMakePoint(8.5, 11.0)];
-    [arrowShape lineToPoint:NSMakePoint(4.5, 11.0)];
-    [arrowShape lineToPoint:NSMakePoint(4.5, 7.0)];
-    [arrowShape lineToPoint:NSMakePoint(1.5, 7.0)];
-    [arrowShape setLineWidth:1.0];
-    
-    if (self.clicking) {
-        [[[CCIApplicationStyles instance] blackColor] setStroke];
-        [[[CCIApplicationStyles instance] blackColor] setFill];
+    if (disabled && !whiteOut) {
+        [NSGraphicsContext saveGraphicsState];
+        
+        NSAffineTransform *arrowDirectionRotation = [NSAffineTransform transform];
+        [arrowDirectionRotation translateXBy:self.frame.size.width/2.0
+                                         yBy:self.frame.size.height / 2.0];
+        [arrowDirectionRotation rotateByDegrees:(90.0 * self.direction)];
+        [arrowDirectionRotation translateXBy:-(self.frame.size.width/2.0)
+                                         yBy:-(self.frame.size.height / 2.0)];
+        [arrowDirectionRotation concat];
+        
+        NSBezierPath *arrowShape = [[NSBezierPath alloc] init];
+        [arrowShape moveToPoint:NSMakePoint(1.5, 7.0)];
+        [arrowShape lineToPoint:NSMakePoint(6.5, 2.0)];
+        [arrowShape lineToPoint:NSMakePoint(11.5, 7.0)];
+        [arrowShape lineToPoint:NSMakePoint(8.5, 7.0)];
+        [arrowShape lineToPoint:NSMakePoint(8.5, 11.0)];
+        [arrowShape lineToPoint:NSMakePoint(4.5, 11.0)];
+        [arrowShape lineToPoint:NSMakePoint(4.5, 7.0)];
+        [arrowShape lineToPoint:NSMakePoint(1.5, 7.0)];
+        [arrowShape setLineWidth:1.0];
+        
+        [[[CCIApplicationStyles instance] midGrayColor] setStroke];
+        [[[CCIApplicationStyles instance] lightGrayColor] setFill];
+        
+        [arrowShape fill];
+        [arrowShape stroke];
+        
+        [NSGraphicsContext restoreGraphicsState];
+    } else if (disabled && whiteOut) {
+        // Draw no arrow
     } else {
-        // Arrow Outline Stroke Color
-        [[[CCIApplicationStyles instance] darkPurpleColor] setStroke];
-        [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
+        [NSGraphicsContext saveGraphicsState];
+        
+        NSAffineTransform *arrowDirectionRotation = [NSAffineTransform transform];
+        [arrowDirectionRotation translateXBy:self.frame.size.width/2.0
+                                         yBy:self.frame.size.height / 2.0];
+        [arrowDirectionRotation rotateByDegrees:(90.0 * self.direction)];
+        [arrowDirectionRotation translateXBy:-(self.frame.size.width/2.0)
+                                         yBy:-(self.frame.size.height / 2.0)];
+        [arrowDirectionRotation concat];
+        
+        NSBezierPath *arrowShape = [[NSBezierPath alloc] init];
+        [arrowShape moveToPoint:NSMakePoint(1.5, 7.0)];
+        [arrowShape lineToPoint:NSMakePoint(6.5, 2.0)];
+        [arrowShape lineToPoint:NSMakePoint(11.5, 7.0)];
+        [arrowShape lineToPoint:NSMakePoint(8.5, 7.0)];
+        [arrowShape lineToPoint:NSMakePoint(8.5, 11.0)];
+        [arrowShape lineToPoint:NSMakePoint(4.5, 11.0)];
+        [arrowShape lineToPoint:NSMakePoint(4.5, 7.0)];
+        [arrowShape lineToPoint:NSMakePoint(1.5, 7.0)];
+        [arrowShape setLineWidth:1.0];
+        
+        if (self.clicking) {
+            [[[CCIApplicationStyles instance] blackColor] setStroke];
+            [[[CCIApplicationStyles instance] blackColor] setFill];
+        } else {
+            // Arrow Outline Stroke Color
+            [[[CCIApplicationStyles instance] darkPurpleColor] setStroke];
+            [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
+        }
+        
+        [arrowShape fill];
+        [arrowShape stroke];
+        
+        [NSGraphicsContext restoreGraphicsState];
     }
-    
-    [arrowShape fill];
-    [arrowShape stroke];
-    
-    [NSGraphicsContext restoreGraphicsState];
 }
 
 - (BOOL)isFlipped

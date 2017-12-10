@@ -150,8 +150,8 @@
 - (void)enableScrollbar
 {
     [[self scroller] setHidden:NO];
-    [[self leftOrUpArrow] setHidden:NO];
-    [[self downOrRightArrow] setHidden:NO];
+    [[self leftOrUpArrow] enableButton];
+    [[self downOrRightArrow] enableButton];
     
     [self setDisabled:NO];
     [self setWhiteOut:NO];
@@ -161,8 +161,8 @@
 - (void)disableScrollbar
 {
     [[self scroller] setHidden:YES];
-    [[self leftOrUpArrow] setHidden:YES];
-    [[self downOrRightArrow] setHidden:YES];
+    [[self leftOrUpArrow] disableButton];
+    [[self downOrRightArrow] disableButton];
     
     [self setDisabled:YES];
     [self setWhiteOut:NO];

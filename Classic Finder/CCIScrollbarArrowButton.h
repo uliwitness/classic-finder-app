@@ -40,4 +40,8 @@ typedef NS_ENUM(NSUInteger, ButtonDirectionality) {
                                         atPoint:(NSPoint) point
                             withParentScrollbar:(CCIScrollbar *)scrollBar;
 
+- (void)enableButton;
+- (void)disableButton;
+- (void)disableAndWhiteOutButton;
+
 @end

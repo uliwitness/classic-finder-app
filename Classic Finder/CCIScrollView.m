@@ -204,7 +204,7 @@
 
 - (void)resizeContentView:(NSRect)newFrame
 {
-    [self.contentView setFrame:newFrame];
+    [[self contentView] setFrame:newFrame];
     
     CGFloat scrollableDistanceW = (newFrame.size.width > self.frame.size.width) ? (newFrame.size.width - self.frame.size.width + 14.0) : 0.0;
     CGFloat scrollableDistanceH = (newFrame.size.height > self.frame.size.height) ? (newFrame.size.height - self.frame.size.height + 14.0) : 0.0;
@@ -212,19 +212,23 @@
     NSSize scrollableDistance = NSMakeSize(scrollableDistanceW, scrollableDistanceH);
     [self setScrollableDistance:scrollableDistance];
     
-    [self.verticalScrollbar updateMaxContentSize:newFrame.size.height];
-    [self.horizontalScrollbar updateMaxContentSize:newFrame.size.width];
-    
-    if (self.contentView.frame.size.width < self.frame.size.width) {
-        [self.horizontalScrollbar setEnabled:NO];
+    [[self verticalScrollbar] updateMaxContentSize:newFrame.size.height];
+    [[self horizontalScrollbar] updateMaxContentSize:newFrame.size.width];
+
+    if (self.contentView.frame.size.width <= self.frame.size.width) {
+        [[self horizontalScrollbar] setEnabled:NO];
+        [[self horizontalScrollbar] disableScrollbar];
     } else {
-        [self.horizontalScrollbar setEnabled:YES];
+        [[self horizontalScrollbar] setEnabled:YES];
+        [[self horizontalScrollbar] enableScrollbar];
     }
     
-    if (self.contentView.frame.size.height < self.frame.size.height) {
-        [self.verticalScrollbar setEnabled:NO];
+    if (self.contentView.frame.size.height <= self.frame.size.height) {
+        [[self verticalScrollbar] setEnabled:NO];
+        [[self verticalScrollbar] disableScrollbar];
     } else {
-        [self.verticalScrollbar setEnabled:YES];
+        [[self verticalScrollbar] setEnabled:YES];
+        [[self verticalScrollbar] enableScrollbar];
     }
 }
 
