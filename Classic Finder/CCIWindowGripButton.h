@@ -25,4 +25,8 @@
 
 @interface CCIWindowGripButton : NSControl
 
+- (void)enableButton;
+- (void)disableButton;
+- (void)disableAndWhiteOutButton;
+
 @end

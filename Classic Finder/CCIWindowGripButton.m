@@ -24,10 +24,12 @@
 #import "CCIWindowGripButton.h"
 #import "CCIApplicationStyles.h"
 
-@interface CCIWindowGripButton()
+@interface CCIWindowGripButton() {
+    BOOL disabled;
+    BOOL whiteOut;
+}
 
 @property (nonatomic) BOOL isClicked;
-@property (nonatomic) BOOL inactive;
 
 @end
 
@@ -41,10 +43,33 @@
     
     if (self) {
         [self setIsClicked:NO];
-        [self setInactive:NO];
+        disabled = NO;
+        whiteOut = NO;
     }
     
     return self;
+}
+
+#pragma mark - DRAWING STATE MODIFIERS
+- (void)enableButton
+{
+    disabled = NO;
+    whiteOut = NO;
+    [self setNeedsDisplay:YES];
+}
+
+- (void)disableButton
+{
+    disabled = YES;
+    whiteOut = NO;
+    [self setNeedsDisplay:YES];
+}
+
+- (void)disableAndWhiteOutButton
+{
+    disabled = YES;
+    whiteOut = YES;
+    [self setNeedsDisplay:YES];
 }
 
 #pragma mark - DRAWING METHODS
@@ -53,46 +78,60 @@
 {
     [super drawRect:dirtyRect];
     
-    if (self.inactive) {
-        [[NSColor colorWithWhite:1.0
-                           alpha:1.0] setFill];
+    if (disabled && whiteOut) {
+        [[[CCIApplicationStyles instance] blackColor] setFill];
         
         NSRect backgroundRect = NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height);
         NSRectFill(backgroundRect);
-    } else {
-        [[NSColor colorWithWhite:0.92
-                           alpha:1.0] setFill];
         
-        NSRect backgroundRect = NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height);
+        [[[CCIApplicationStyles instance] whiteColor] setFill];
+        
+        NSRect whiteRect = NSMakeRect(1.0,
+                                      1.0,
+                                      self.frame.size.width - 1.0,
+                                      self.frame.size.height - 1.0);
+        NSRectFill(whiteRect);
+    } else {
+        [[[CCIApplicationStyles instance] blackColor] setFill];
+        
+        NSRect blackFrameRect = NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height);
+        NSRectFill(blackFrameRect);
+        
+        [[[CCIApplicationStyles instance] lightGrayColor] setFill];
+        
+        NSRect backgroundRect = NSMakeRect(1.0,
+                                           1.0,
+                                           self.frame.size.width - 1.0,
+                                           self.frame.size.height - 1.0);
         NSRectFill(backgroundRect);
         
         [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
-        NSRectFill(NSMakeRect(3.0, 3.0, 8.0, 8.0));
+        NSRectFill(NSMakeRect(4.0, 4.0, 9.0, 9.0));
         
         [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
-        NSRectFill(NSMakeRect(4.0, 4.0, 7.0, 7.0));
+        NSRectFill(NSMakeRect(5.0, 5.0, 8.0, 8.0));
         
         [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
-        NSRectFill(NSMakeRect(5.0, 5.0, 6.0, 6.0));
+        NSRectFill(NSMakeRect(6.0, 6.0, 7.0, 7.0));
         
         [[[CCIApplicationStyles instance] midGrayColor] setFill];
-        NSRectFill(NSMakeRect(5.0, 5.0, 5.0, 5.0));
+        NSRectFill(NSMakeRect(6.0, 6.0, 6.0, 6.0));
         
         //small suqare
         [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
-        NSRectFill(NSMakeRect(2.0, 2.0, 5.0, 5.0));
+        NSRectFill(NSMakeRect(3.0, 3.0, 6.0, 6.0));
         
         [[[CCIApplicationStyles instance] lightPurpleColor] setFill];
-        NSRectFill(NSMakeRect(3.0, 3.0, 4.0, 4.0));
+        NSRectFill(NSMakeRect(4.0, 4.0, 5.0, 5.0));
         
         [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
-        NSRectFill(NSMakeRect(4.0, 4.0, 3.0, 3.0));
+        NSRectFill(NSMakeRect(5.0, 5.0, 4.0, 4.0));
         
         [[NSColor colorWithCalibratedRed:0.73
                                    green:0.73
                                     blue:0.73
                                    alpha:1.00] setFill];
-        NSRectFill(NSMakeRect(4.0, 4.0, 2.0, 2.0));
+        NSRectFill(NSMakeRect(5.0, 5.0, 3.0, 3.0));
     }
 }
 

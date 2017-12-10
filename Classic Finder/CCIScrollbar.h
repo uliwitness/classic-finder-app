@@ -39,5 +39,8 @@ typedef NS_ENUM(NSUInteger, ScrollDirection) {
 - (void)setScrollerYPosition:(CGFloat)yPOS;
 - (void)setScrollerXPosition:(CGFloat)xPOS;
 - (void)updateMaxContentSize:(CGFloat)newMaxContentSize;
+- (void)enableScrollbar;
+- (void)disableScrollbar;
+- (void)disableAndWhiteOutScrollbar;
 
 @end

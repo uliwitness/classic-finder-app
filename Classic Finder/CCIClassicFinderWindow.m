@@ -169,6 +169,7 @@
 {
     windowIsActive = YES;
     
+    [self.scrollView setWindowIsActive:windowIsActive];
     [self.titlebar setWindowIsActive:windowIsActive];
 }
 
@@ -176,6 +177,7 @@
 {
     windowIsActive = NO;
     
+    [self.scrollView setWindowIsActive:windowIsActive];
     [self.titlebar setWindowIsActive:windowIsActive];
 }
 

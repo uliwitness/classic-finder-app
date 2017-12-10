@@ -31,5 +31,6 @@
 
 - (void)performScrollAction:(id)sender;
 - (void)resizeContentView:(NSRect)newFrame;
+- (void)setWindowIsActive:(BOOL)windowIsActive;
 
 @end

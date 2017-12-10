@@ -29,7 +29,8 @@
 
 @interface CCIScrollbar()
 
-@property (nonatomic) BOOL inactive;
+@property (nonatomic) BOOL disabled;
+@property (nonatomic) BOOL whiteOut;
 
 @property (nonatomic) NSSize sizeOfScrollView;
 @property (nonatomic) CGFloat maxContentSize;
@@ -62,7 +63,7 @@
     [leftButton setTarget:scrollView];
     
     CCIScrollbarArrowButton *rightButton = [CCIScrollbarArrowButton buttonWithDirectionality:Right
-                                                                                     atPoint:NSMakePoint(scrollViewFrame.size.width - 28.0, 1.0)
+                                                                                     atPoint:NSMakePoint(scrollViewFrame.size.width - 29.0, 1.0)
                                                                          withParentScrollbar:scrollbar];
     [scrollbar addSubview:rightButton];
     [rightButton setAction:@selector(performScrollAction:)];
@@ -79,7 +80,8 @@
     [scrollbar setScroller:scroller];
     [scrollbar setMaxContentSize:maxContentSize];
     [scrollbar setScrollerPosition:scrollerPosition];
-    [scrollbar setInactive:NO];
+    [scrollbar setDisabled:NO];
+    [scrollbar setWhiteOut:NO];
     
     return scrollbar;
 }
@@ -100,7 +102,7 @@
     [upButton setTarget:scrollView];
     
     CCIScrollbarArrowButton *downButton = [CCIScrollbarArrowButton buttonWithDirectionality:Down
-                                                                                    atPoint:NSMakePoint(1.0, scrollViewFrame.size.height - 29.0)
+                                                                                    atPoint:NSMakePoint(1.0, scrollViewFrame.size.height - 30.0)
                                                                         withParentScrollbar:scrollbar];
     [scrollbar addSubview:downButton];
     [downButton setAction:@selector(performScrollAction:)];
@@ -117,11 +119,13 @@
     [scrollbar setScroller:scroller];
     [scrollbar setMaxContentSize:maxContentSize];
     [scrollbar setScrollerPosition:scrollerPosition];
-    [scrollbar setInactive:NO];
+    [scrollbar setDisabled:NO];
+    [scrollbar setWhiteOut:NO];
 
     return scrollbar;
 }
 
+#pragma mark - UPDATE SCROLLBAR PROPERTY METHODS
 - (void)setScrollerYPosition:(CGFloat)yPOS
 {
     NSPoint newPoint = NSMakePoint(self.scrollerPosition.x, yPOS);
@@ -143,15 +147,57 @@
     self.maxContentSize = newMaxContentSize;
 }
 
+- (void)enableScrollbar
+{
+    [[self scroller] setHidden:NO];
+    [[self leftOrUpArrow] setHidden:NO];
+    [[self downOrRightArrow] setHidden:NO];
+    
+    [self setDisabled:NO];
+    [self setWhiteOut:NO];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)disableScrollbar
+{
+    [[self scroller] setHidden:YES];
+    [[self leftOrUpArrow] setHidden:YES];
+    [[self downOrRightArrow] setHidden:YES];
+    
+    [self setDisabled:YES];
+    [self setWhiteOut:NO];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)disableAndWhiteOutScrollbar
+{
+    [[self scroller] setHidden:YES];
+    [[self leftOrUpArrow] setHidden:YES];
+    [[self downOrRightArrow] setHidden:YES];
+    
+    [self setDisabled:YES];
+    [self setWhiteOut:YES];
+    [self setNeedsDisplay:YES];
+}
+
 #pragma mark - DRAWING METHODS
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    if ([self inactive]) {
+    if ([self disabled] && ![self whiteOut]) {
+        [[[CCIApplicationStyles instance] lightGrayColor] setFill];
+        
+        NSRect backgroundRect = NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height);
+        NSRectFill(backgroundRect);
+        
+        [self drawDividerLine];
+    } else if ([self disabled] && [self whiteOut]) {
         [[[CCIApplicationStyles instance] whiteColor] setFill];
         
         NSRect backgroundRect = NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height);
         NSRectFill(backgroundRect);
+        
+        [self drawDividerLine];
     } else {
         [self drawTexturedBackground];
         [self drawDividerLine];

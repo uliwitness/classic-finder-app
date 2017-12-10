@@ -28,7 +28,9 @@
 #import "CCIWindowGripButton.h"
 #import "CCIApplicationStyles.h"
 
-@interface CCIScrollView()
+@interface CCIScrollView() {
+    BOOL windowIsActive;
+}
 
 @property (nonatomic) NSSize scrollableDistance;
 @property (nonatomic) NSSize scrollIntervalSize;
@@ -91,7 +93,7 @@
         [self addSubview:horizontalScrollbar];
         
         // // Create Grip button
-        NSRect gripButtonFrame = NSMakeRect(self.frame.size.width - 14.0, self.frame.size.height - 14.0, 14.0, 14.0);
+        NSRect gripButtonFrame = NSMakeRect(self.frame.size.width - 15.0, self.frame.size.height - 15.0, 15.0, 15.0);
         CCIWindowGripButton *gripButton = [[CCIWindowGripButton alloc] initWithFrame:gripButtonFrame];
         [self setGripButton:gripButton];
         
@@ -212,6 +214,39 @@
     
     [self.verticalScrollbar updateMaxContentSize:newFrame.size.height];
     [self.horizontalScrollbar updateMaxContentSize:newFrame.size.width];
+    
+    if (self.contentView.frame.size.width < self.frame.size.width) {
+        [self.horizontalScrollbar setEnabled:NO];
+    } else {
+        [self.horizontalScrollbar setEnabled:YES];
+    }
+    
+    if (self.contentView.frame.size.height < self.frame.size.height) {
+        [self.verticalScrollbar setEnabled:NO];
+    } else {
+        [self.verticalScrollbar setEnabled:YES];
+    }
+}
+
+#pragma mark - WINDOW STATE METHODS
+
+- (void)setWindowIsActive:(BOOL)pWindowIsActive
+{
+    windowIsActive = pWindowIsActive;
+    
+    if (windowIsActive) {
+        [[self verticalScrollbar] enableScrollbar];
+        [[self horizontalScrollbar] enableScrollbar];
+        
+        [[self gripButton] enableButton];
+    } else {
+        [[self verticalScrollbar] disableAndWhiteOutScrollbar];
+        [[self horizontalScrollbar] disableAndWhiteOutScrollbar];
+        
+        [[self gripButton] disableAndWhiteOutButton];
+    }
+    
+    [self setNeedsDisplay:YES];
 }
 
 #pragma mark - DRAWING METHODS
