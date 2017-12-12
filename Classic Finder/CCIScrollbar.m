@@ -172,8 +172,8 @@
 - (void)disableAndWhiteOutScrollbar
 {
     [[self scroller] setHidden:YES];
-    [[self leftOrUpArrow] setHidden:YES];
-    [[self downOrRightArrow] setHidden:YES];
+    [[self leftOrUpArrow] disableAndWhiteOutButton];
+    [[self downOrRightArrow] disableAndWhiteOutButton];
     
     [self setDisabled:YES];
     [self setWhiteOut:YES];

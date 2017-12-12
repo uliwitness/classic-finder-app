@@ -30,6 +30,8 @@
 
 @interface CCIScrollView() {
     BOOL windowIsActive;
+    BOOL activateHorizontalScrollbar;
+    BOOL activateVerticleScrollbar;
 }
 
 @property (nonatomic) NSSize scrollableDistance;
@@ -218,17 +220,21 @@
     if (self.contentView.frame.size.width <= self.frame.size.width) {
         [[self horizontalScrollbar] setEnabled:NO];
         [[self horizontalScrollbar] disableScrollbar];
+        activateHorizontalScrollbar = NO;
     } else {
         [[self horizontalScrollbar] setEnabled:YES];
         [[self horizontalScrollbar] enableScrollbar];
+        activateHorizontalScrollbar = YES;
     }
     
     if (self.contentView.frame.size.height <= self.frame.size.height) {
         [[self verticalScrollbar] setEnabled:NO];
         [[self verticalScrollbar] disableScrollbar];
+        activateVerticleScrollbar = NO;
     } else {
         [[self verticalScrollbar] setEnabled:YES];
         [[self verticalScrollbar] enableScrollbar];
+        activateVerticleScrollbar = YES;
     }
 }
 
@@ -239,9 +245,18 @@
     windowIsActive = pWindowIsActive;
     
     if (windowIsActive) {
-        [[self verticalScrollbar] enableScrollbar];
-        [[self horizontalScrollbar] enableScrollbar];
+        if (activateHorizontalScrollbar) {
+            [[self horizontalScrollbar] enableScrollbar];
+        } else {
+            [[self horizontalScrollbar] disableScrollbar];
+        }
         
+        if (activateVerticleScrollbar) {
+            [[self verticalScrollbar] enableScrollbar];
+        } else {
+            [[self verticalScrollbar] disableScrollbar];
+        }
+
         [[self gripButton] enableButton];
     } else {
         [[self verticalScrollbar] disableAndWhiteOutScrollbar];
