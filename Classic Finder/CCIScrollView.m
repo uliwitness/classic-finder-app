@@ -27,6 +27,7 @@
 #import "CCIScrollbarArrowButton.h"
 #import "CCIWindowGripButton.h"
 #import "CCIApplicationStyles.h"
+#import "CCIClassicFinderWindowController.h"
 
 @interface CCIScrollView() {
     BOOL windowIsActive;
@@ -238,8 +239,13 @@
     }
 }
 
-#pragma mark - WINDOW STATE METHODS
+- (void)mouseUp:(NSEvent *)event
+{
+    CCIClassicFinderWindowController *wc = event.window.windowController;
+    [wc deselectAllItems];
+}
 
+#pragma mark - WINDOW STATE METHODS
 - (void)setWindowIsActive:(BOOL)pWindowIsActive
 {
     windowIsActive = pWindowIsActive;

@@ -98,8 +98,6 @@
 
 - (void)selectedNewFile:(CCIClassicFile *)file
 {
-    //[self.selectedFiles performSelector:@selector(deselectItem)];
-    
     for (CCIClassicFile *file in self.selectedFiles) {
         [file deselectItem];
     }
@@ -112,8 +110,6 @@
 
 - (void)selectedNewFolder:(CCIClassicFolder *)folder
 {
-    //[self.selectedFiles performSelector:@selector(deselectItem)];
-    
     for (CCIClassicFolder *folder in self.selectedFiles) {
         [folder deselectItem];
     }
@@ -122,6 +118,17 @@
     
     [folder selectItem];
     [self.selectedFiles addObject:folder];
+}
+
+- (void)deselectAllItems
+{
+    NSMutableArray *selectedFiles = [self selectedFiles];
+    
+    for (CCIClassicFile *file in selectedFiles) {
+        [file deselectItem];
+    }
+    
+    [self.selectedFiles removeAllObjects];
 }
 
 @end
