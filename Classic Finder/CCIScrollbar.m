@@ -56,7 +56,7 @@
     CCIScrollbar *scrollbar = [[CCIScrollbar alloc] initWithFrame:scrollbarFrame];
     
     CCIScrollbarArrowButton *leftButton = [CCIScrollbarArrowButton buttonWithDirectionality:Left
-                                                                                    atPoint:NSMakePoint(0.0, 0.0)
+                                                                                    atPoint:NSMakePoint(-1.0, 0.0)
                                                                         withParentScrollbar:scrollbar];
     [scrollbar addSubview:leftButton];
     [leftButton setAction:@selector(performScrollAction:)];
@@ -95,7 +95,7 @@
     CCIScrollbar *scrollbar = [[CCIScrollbar alloc] initWithFrame:scrollbarFrame];
     
     CCIScrollbarArrowButton *upButton = [CCIScrollbarArrowButton buttonWithDirectionality:Up
-                                                                                  atPoint:NSMakePoint(0.0, 0.0)
+                                                                                  atPoint:NSMakePoint(0.0, -1.0)
                                                                       withParentScrollbar:scrollbar];
     [scrollbar addSubview:upButton];
     [upButton setAction:@selector(performScrollAction:)];
