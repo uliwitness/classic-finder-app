@@ -28,7 +28,6 @@
 		A885B2081E597AE300F1AB96 /* CCIClassicFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2071E597AE300F1AB96 /* CCIClassicFolder.m */; };
 		A885B2111E59923B00F1AB96 /* CCIClassicFinderWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2101E59923B00F1AB96 /* CCIClassicFinderWindow.m */; };
 		A885B2141E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2131E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m */; };
-		A885B2171E5BEBAF00F1AB96 /* CCIClassicScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2161E5BEBAF00F1AB96 /* CCIClassicScrollView.m */; };
 		A8D82F611F80914C00B437F1 /* CFRWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D82F5F1F80914B00B437F1 /* CFRWindowManager.m */; };
 		A8D82F671F849C3900B437F1 /* CCIClassicFileIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D82F661F849C3900B437F1 /* CCIClassicFileIcon.m */; };
 		A8D82F6A1F85E4A500B437F1 /* CCIClassicFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D82F691F85E4A500B437F1 /* CCIClassicFile.m */; };
@@ -98,11 +97,8 @@
 		A885B2101E59923B00F1AB96 /* CCIClassicFinderWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIClassicFinderWindow.m; sourceTree = "<group>"; };
 		A885B2121E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCIClassicFinderDetailBar.h; sourceTree = "<group>"; };
 		A885B2131E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIClassicFinderDetailBar.m; sourceTree = "<group>"; };
-		A885B2151E5BEBAF00F1AB96 /* CCIClassicScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCIClassicScrollView.h; sourceTree = "<group>"; };
-		A885B2161E5BEBAF00F1AB96 /* CCIClassicScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIClassicScrollView.m; sourceTree = "<group>"; };
 		A8D82F5F1F80914B00B437F1 /* CFRWindowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFRWindowManager.m; sourceTree = "<group>"; };
 		A8D82F601F80914B00B437F1 /* CFRWindowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFRWindowManager.h; sourceTree = "<group>"; };
-		A8D82F621F848D9900B437F1 /* CCIClassicScrollContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCIClassicScrollContentView.h; sourceTree = "<group>"; };
 		A8D82F651F849C3900B437F1 /* CCIClassicFileIcon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCIClassicFileIcon.h; sourceTree = "<group>"; };
 		A8D82F661F849C3900B437F1 /* CCIClassicFileIcon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCIClassicFileIcon.m; sourceTree = "<group>"; };
 		A8D82F681F85E4A500B437F1 /* CCIClassicFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCIClassicFile.h; sourceTree = "<group>"; };
@@ -238,9 +234,6 @@
 				A885B2101E59923B00F1AB96 /* CCIClassicFinderWindow.m */,
 				A885B2121E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.h */,
 				A885B2131E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m */,
-				A885B2151E5BEBAF00F1AB96 /* CCIClassicScrollView.h */,
-				A885B2161E5BEBAF00F1AB96 /* CCIClassicScrollView.m */,
-				A8D82F621F848D9900B437F1 /* CCIClassicScrollContentView.h */,
 				A8D82F651F849C3900B437F1 /* CCIClassicFileIcon.h */,
 				A8D82F661F849C3900B437F1 /* CCIClassicFileIcon.m */,
 				A8D82F681F85E4A500B437F1 /* CCIClassicFile.h */,
@@ -405,7 +398,6 @@
 				A885B1FF1E594CAB00F1AB96 /* CCIMaximizeButton.m in Sources */,
 				A805A8581FCE3A5B00274577 /* CCIScrollView.m in Sources */,
 				A885B1FC1E59475D00F1AB96 /* CCICloseButton.m in Sources */,
-				A885B2171E5BEBAF00F1AB96 /* CCIClassicScrollView.m in Sources */,
 				A805A85E1FD3A37D00274577 /* CCIApplicationStyles.m in Sources */,
 				A885B1CE1E59457100F1AB96 /* AppDelegate.m in Sources */,
 			);

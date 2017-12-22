@@ -62,6 +62,8 @@
         self.windowTitle = windowTitle;
         self.fileList = fileList;
         
+        [self setBackgroundColor:[NSColor clearColor]];
+        
         self.contentView = [[CCIClassicContentView alloc] initWithFrame:self.frame];
         
         NSRect contentArea = [self.contentView contentArea];

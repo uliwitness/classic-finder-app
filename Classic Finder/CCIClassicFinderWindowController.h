@@ -35,5 +35,6 @@
 
 - (void)selectedNewFile:(CCIClassicFile *)file;
 - (void)selectedNewFolder:(CCIClassicFolder *)folder;
+- (void)deselectAllItems;
 
 @end
