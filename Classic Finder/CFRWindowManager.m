@@ -66,7 +66,7 @@
 }
 
 - (CCIClassicFinderWindowController *)createWindowForPath:(NSURL *)path
-                              atSpecifiedPoint:(NSPoint)point
+                                         atSpecifiedPoint:(NSPoint)point
 {
     CCIClassicFinderWindowController *finderWindowController;
     

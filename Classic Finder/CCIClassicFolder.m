@@ -35,6 +35,7 @@
 @property (nonatomic, strong) CCIClassicFolderIcon *iconImage;
 
 @property BOOL folderSelected;
+@property BOOL folderOpened;
 
 @end
 
@@ -45,7 +46,8 @@
     self = [super initWithFrame:frameRect];
     
     if (self) {
-        self.folderSelected = NO;
+        [self setFolderSelected:NO];
+        [self setFolderOpened:NO];
         
         NSRect folderIconFrame = NSMakeRect(14.5, 2.0, 31.0, 25.0);
         self.iconImage = [[CCIClassicFolderIcon alloc] initWithFrame:folderIconFrame];
@@ -94,10 +96,17 @@
         CGFloat yPos = windowFrame.origin.y - 30.0;
         NSPoint newWindowPosition = NSMakePoint(xPos, yPos);
         
+        [self setOpenItemState];
+        
         NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:self.representingDirectory
                                                                                atSpecifiedPoint:newWindowPosition];
         
         [finderWindow showWindow:self];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:event.window.windowController
+                                                 selector:@selector(closeOpenedFolder:)
+                                                     name:NSWindowWillCloseNotification
+                                                   object:finderWindow.window];
     }
 }
 
@@ -115,17 +124,31 @@
 
 - (void)selectItem
 {
-    self.folderSelected = YES;
+    [self setFolderSelected:YES];
     [self reverseFolderTitleTextColor];
-    [self.iconImage selectFolder];
+    [[self iconImage] selectFolder];
     [self setNeedsDisplay:YES];
 }
 
 - (void)deselectItem
 {
-    self.folderSelected = NO;
+    [self setFolderSelected:NO];
     [self normalFolderTitleTextColor];
-    [self.iconImage unselectFolder];
+    [[self iconImage] unselectFolder];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)setOpenItemState
+{
+    [self setFolderOpened:YES];
+    [[self iconImage] openFolder];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)setCloseItemState
+{
+    [self setFolderOpened:NO];
+    [[self iconImage] closeFolder];
     [self setNeedsDisplay:YES];
 }
 

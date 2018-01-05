@@ -33,8 +33,11 @@
 - (instancetype)initForDirectory:(NSURL *)directory
                          atPoint:(NSPoint)point;
 
+- (void)closeOpenedFolder:(NSNotification *)notification;
+
 - (void)selectedNewFile:(CCIClassicFile *)file;
 - (void)selectedNewFolder:(CCIClassicFolder *)folder;
 - (void)deselectAllItems;
+
 
 @end

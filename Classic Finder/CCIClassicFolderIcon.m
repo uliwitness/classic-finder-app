@@ -27,6 +27,7 @@
 @interface CCIClassicFolderIcon ()
 
 @property BOOL selectedState;
+@property BOOL openFolderState;
 
 @end
 
@@ -37,7 +38,8 @@
     self = [super initWithFrame:frameRect];
     
     if (self) {
-        self.selectedState = NO;
+        [self setSelectedState:NO];
+        [self setOpenFolderState:NO];
     }
     
     return self;
@@ -46,7 +48,87 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    if (self.selectedState) {
+    if (![self selectedState] && [self openFolderState]) {
+        [[[CCIApplicationStyles instance] blackColor] setStroke];
+        [[[CCIApplicationStyles instance] folderOpenedBackgroundColor] setFill];
+        
+        NSBezierPath *outlinePath = [[NSBezierPath alloc] init];
+        [outlinePath moveToPoint:NSMakePoint(30.0, 5.0)];
+        [outlinePath lineToPoint:NSMakePoint(30.0, 24.0)];
+        [outlinePath lineToPoint:NSMakePoint(0.5, 24.0)];
+        [outlinePath lineToPoint:NSMakePoint(0.5, 5.0)];
+        [outlinePath lineToPoint:NSMakePoint(5.0, 1.0)];
+        [outlinePath lineToPoint:NSMakePoint(11.0, 1.0)];
+        [outlinePath lineToPoint:NSMakePoint(15.0, 4.5)];
+        [outlinePath lineToPoint:NSMakePoint(29.0, 4.5)];
+        [outlinePath stroke];
+        [outlinePath fill];
+        [outlinePath addClip];
+        
+        [[[CCIApplicationStyles instance] blackColor] setFill];
+        
+        NSUInteger blackedRowCountPointer = 0;
+        
+        for (NSUInteger col = 0; col < (self.frame.size.width - 1); col += 1) {
+            if (col % 2 == 0) {
+                if (blackedRowCountPointer % 2 == 0) {
+                    for (NSUInteger row = 0; row < 24; row += 1) {
+                        if (row % 2 == 0) {
+                            NSRectFill(NSMakeRect(col, row, 1.0, 1.0));
+                        }
+                    }
+                } else  {
+                    for (NSUInteger row = 0; row < 24; row += 1) {
+                        if (row % 2 != 0) {
+                            NSRectFill(NSMakeRect(col, row, 1.0, 1.0));
+                        }
+                    }
+                }
+
+                blackedRowCountPointer += 1;
+            }
+        }
+    } else if ([self selectedState] && [self openFolderState]) {
+        [[[CCIApplicationStyles instance] blackColor] setStroke];
+        [[[CCIApplicationStyles instance] folderOpenedAndSelectedBackgroundColor] setFill];
+        
+        NSBezierPath *outlinePath = [[NSBezierPath alloc] init];
+        [outlinePath moveToPoint:NSMakePoint(30.0, 5.0)];
+        [outlinePath lineToPoint:NSMakePoint(30.0, 24.0)];
+        [outlinePath lineToPoint:NSMakePoint(0.5, 24.0)];
+        [outlinePath lineToPoint:NSMakePoint(0.5, 5.0)];
+        [outlinePath lineToPoint:NSMakePoint(5.0, 1.0)];
+        [outlinePath lineToPoint:NSMakePoint(11.0, 1.0)];
+        [outlinePath lineToPoint:NSMakePoint(15.0, 4.5)];
+        [outlinePath lineToPoint:NSMakePoint(29.0, 4.5)];
+        [outlinePath stroke];
+        [outlinePath fill];
+        [outlinePath addClip];
+        
+        [[[CCIApplicationStyles instance] blackColor] setFill];
+        
+        NSUInteger blackedRowCountPointer = 0;
+        
+        for (NSUInteger col = 0; col < (self.frame.size.width - 1); col += 1) {
+            if (col % 2 == 0) {
+                if (blackedRowCountPointer % 2 == 0) {
+                    for (NSUInteger row = 0; row < 24; row += 1) {
+                        if (row % 2 == 0) {
+                            NSRectFill(NSMakeRect(col, row, 1.0, 1.0));
+                        }
+                    }
+                } else  {
+                    for (NSUInteger row = 0; row < 24; row += 1) {
+                        if (row % 2 != 0) {
+                            NSRectFill(NSMakeRect(col, row, 1.0, 1.0));
+                        }
+                    }
+                }
+                
+                blackedRowCountPointer += 1;
+            }
+        }
+    } else if ([self selectedState] && ![self openFolderState]) {
         [[[CCIApplicationStyles instance] blackColor] setStroke];
         [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
         
@@ -156,6 +238,18 @@
 - (void)unselectFolder
 {
     [self setSelectedState:NO];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)openFolder
+{
+    [self setOpenFolderState:YES];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)closeFolder
+{
+    [self setOpenFolderState:NO];
     [self setNeedsDisplay:YES];
 }
 

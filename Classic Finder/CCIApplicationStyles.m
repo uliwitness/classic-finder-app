@@ -39,6 +39,8 @@
     NSColor *folderShadowColor;
     NSColor *folderSelectedHighlightColor;
     NSColor *folderSelectedShadowColor;
+    NSColor *folderOpenedBackgroundColor;
+    NSColor *folderOpenedAndSelectedBackgroundColor;
 }
 
 @end
@@ -235,6 +237,30 @@
     }
     
     return folderSelectedShadowColor;
+}
+
+- (NSColor *)folderOpenedBackgroundColor
+{
+    if (folderOpenedBackgroundColor == nil) {
+        folderOpenedBackgroundColor = [NSColor colorWithCalibratedRed:0.77
+                                                                green:0.77
+                                                                 blue:0.95
+                                                                alpha:1.0];
+    }
+    
+    return folderOpenedBackgroundColor;
+}
+
+- (NSColor *)folderOpenedAndSelectedBackgroundColor
+{
+    if (folderOpenedAndSelectedBackgroundColor == nil) {
+        folderOpenedAndSelectedBackgroundColor = [NSColor colorWithCalibratedRed:0.19
+                                                                           green:0.19
+                                                                            blue:0.48
+                                                                           alpha:1.00];
+    }
+    
+    return folderOpenedAndSelectedBackgroundColor;
 }
 
 

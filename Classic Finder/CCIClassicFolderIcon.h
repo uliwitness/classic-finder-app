@@ -27,5 +27,7 @@
 
 - (void)selectFolder;
 - (void)unselectFolder;
+- (void)openFolder;
+- (void)closeFolder;
 
 @end

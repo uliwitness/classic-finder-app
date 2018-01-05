@@ -46,5 +46,7 @@
 - (NSColor *)folderShadowColor;
 - (NSColor *)folderSelectedHighlightColor;
 - (NSColor *)folderSelectedShadowColor;
+- (NSColor *)folderOpenedBackgroundColor;
+- (NSColor *)folderOpenedAndSelectedBackgroundColor;
 
 @end

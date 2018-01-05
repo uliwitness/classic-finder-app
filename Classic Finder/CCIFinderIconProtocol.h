@@ -27,5 +27,7 @@
 
 - (void)selectItem;
 - (void)deselectItem;
+- (void)setOpenItemState;
+- (void)setCloseItemState;
 
 @end

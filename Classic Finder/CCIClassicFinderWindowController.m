@@ -96,6 +96,19 @@
     [finderWindow setWindowInactive];
 }
 
+- (void)closeOpenedFolder:(NSNotification *)notification
+{
+    CCIClassicFinderWindow *closingWindow = (CCIClassicFinderWindow *)[notification object];
+    CCIClassicFinderWindowController *closingWindowController = closingWindow.windowController;
+    
+    for (CCIClassicFolder *folder in self.selectedFiles) {
+        if (folder.representingDirectory == closingWindowController.representedDirectory) {
+            [folder setCloseItemState];
+            //NSLog(@"closing folder... %@", closingWindowController.representedDirectory);
+        }
+    }
+}
+
 - (void)selectedNewFile:(CCIClassicFile *)file
 {
     for (CCIClassicFile *file in self.selectedFiles) {
