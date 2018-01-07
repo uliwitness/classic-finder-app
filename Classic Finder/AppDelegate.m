@@ -46,6 +46,43 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     
+    [self openRootVolumeWindow];
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification
+{
+    CFRWindowManager *windowManager = [CFRWindowManager sharedInstance];
+    
+    if ([windowManager numberOfOpenWindows] == 0) {
+        [self openRootVolumeWindow];
+    }
+}
+
+// Inspiration for the following two methods comes from:
+// http://www.cocoabuilder.com/archive/cocoa/238362-how-to-detect-click-on-app-dock-icon-when-the-app-is-active.html
+
+- (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender
+{
+    return YES;
+}
+
+- (BOOL)applicationOpenUntitledFile:(NSApplication *)sender
+{
+    CFRWindowManager *windowManager = [CFRWindowManager sharedInstance];
+    
+    if ([windowManager numberOfOpenWindows] == 0) {
+        [self openRootVolumeWindow];
+    }
+    
+    return YES;
+}
+
+- (void)applicationWillTerminate:(NSNotification *)aNotification {
+    // Insert code here to tear down your application
+}
+
+- (void)openRootVolumeWindow
+{
     NSString *userDirectoryPathExpanded = [@"/" stringByStandardizingPath];;
     NSURL *userDirectoryPath = [NSURL URLWithString:userDirectoryPathExpanded];
     
@@ -54,11 +91,5 @@
     
     self.window = finderWindow.window;
 }
-
-
-- (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // Insert code here to tear down your application
-}
-
 
 @end

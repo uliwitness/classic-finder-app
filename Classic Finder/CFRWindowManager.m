@@ -105,4 +105,9 @@
     self.activeWindow = finderWindowController;
 }
 
+- (NSUInteger)numberOfOpenWindows
+{
+    return [[self activeWindows] count];
+}
+
 @end

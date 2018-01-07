@@ -33,4 +33,6 @@
 - (NSWindowController *)createWindowForPath:(NSURL *)path
                            atSpecifiedPoint:(NSPoint)point;
 
+- (NSUInteger)numberOfOpenWindows;
+
 @end
