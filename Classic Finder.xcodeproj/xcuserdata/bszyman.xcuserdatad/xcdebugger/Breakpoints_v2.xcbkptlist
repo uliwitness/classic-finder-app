@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classic Finder/CCIClassicFinderWindowController.m"
-            timestampString = "536823359.186219"
+            timestampString = "537171273.2204911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "-selectedNewFolder:"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classic Finder/CFRWindowManager.m"
-            timestampString = "537044758.830057"
+            timestampString = "537171273.220593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classic Finder/CCIClassicFinderWindowController.m"
-            timestampString = "536823359.186414"
+            timestampString = "537171273.221055"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "-closeOpenedFolder:"
             landmarkType = "7">
          </BreakpointContent>

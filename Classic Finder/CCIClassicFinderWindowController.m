@@ -28,6 +28,7 @@
 #import "CCIFinderIconProtocol.h"
 #import "CCIClassicFile.h"
 #import "CCIClassicFolder.h"
+#import "CFRFileSystemUtils.h"
 
 @interface CCIClassicFinderWindowController ()
 
@@ -45,8 +46,10 @@
     self = [super init];
     
     if (self) {
-        self.representedDirectory = directory;  
-        self.windowDirectoryName = [self.representedDirectory lastPathComponent];
+        NSString *directoryName = [CFRFileSystemUtils determineDirectoryNameForURL:directory];
+        
+        self.representedDirectory = directory;
+        self.windowDirectoryName = directoryName;
         self.fileList = [CFRFileSystemOperations getListingForDirectory:self.representedDirectory];
         self.selectedFiles = [[NSMutableArray alloc] initWithCapacity:50];
         

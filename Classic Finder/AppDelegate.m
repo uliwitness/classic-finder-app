@@ -83,8 +83,7 @@
 
 - (void)openRootVolumeWindow
 {
-    NSString *userDirectoryPathExpanded = [@"/" stringByStandardizingPath];;
-    NSURL *userDirectoryPath = [NSURL URLWithString:userDirectoryPathExpanded];
+    NSURL *userDirectoryPath = [NSURL URLWithString:@"file:///"];
     
     NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:userDirectoryPath];
     [finderWindow showWindow:self];
