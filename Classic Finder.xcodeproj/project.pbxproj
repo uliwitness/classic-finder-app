@@ -16,6 +16,9 @@
 		A805A85B1FD2912000274577 /* CCIClassicContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A85A1FD2911F00274577 /* CCIClassicContentView.m */; };
 		A805A85E1FD3A37D00274577 /* CCIApplicationStyles.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A85D1FD3A37D00274577 /* CCIApplicationStyles.m */; };
 		A805A863200343CC00274577 /* CFRFileSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A862200343CC00274577 /* CFRFileSystemUtils.m */; };
+		A805A868200733EA00274577 /* CFRFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A867200733EA00274577 /* CFRFileModel.m */; };
+		A805A86B200733F800274577 /* CFRDirectoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A86A200733F800274577 /* CFRDirectoryModel.m */; };
+		A805A86E2007340800274577 /* CFRAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A86D2007340800274577 /* CFRAppModel.m */; };
 		A885B1CE1E59457100F1AB96 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B1CD1E59457100F1AB96 /* AppDelegate.m */; };
 		A885B1D11E59457100F1AB96 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B1D01E59457100F1AB96 /* main.m */; };
 		A885B1D31E59457100F1AB96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A885B1D21E59457100F1AB96 /* Assets.xcassets */; };
@@ -73,6 +76,13 @@
 		A805A85D1FD3A37D00274577 /* CCIApplicationStyles.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCIApplicationStyles.m; sourceTree = "<group>"; };
 		A805A861200343CC00274577 /* CFRFileSystemUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CFRFileSystemUtils.h; sourceTree = "<group>"; };
 		A805A862200343CC00274577 /* CFRFileSystemUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CFRFileSystemUtils.m; sourceTree = "<group>"; };
+		A805A865200729EE00274577 /* CFRFileSystemObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CFRFileSystemObject.h; sourceTree = "<group>"; };
+		A805A866200733EA00274577 /* CFRFileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CFRFileModel.h; sourceTree = "<group>"; };
+		A805A867200733EA00274577 /* CFRFileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CFRFileModel.m; sourceTree = "<group>"; };
+		A805A869200733F800274577 /* CFRDirectoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CFRDirectoryModel.h; sourceTree = "<group>"; };
+		A805A86A200733F800274577 /* CFRDirectoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CFRDirectoryModel.m; sourceTree = "<group>"; };
+		A805A86C2007340800274577 /* CFRAppModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CFRAppModel.h; sourceTree = "<group>"; };
+		A805A86D2007340800274577 /* CFRAppModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CFRAppModel.m; sourceTree = "<group>"; };
 		A885B1C91E59457100F1AB96 /* Classic Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Classic Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A885B1CC1E59457100F1AB96 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A885B1CD1E59457100F1AB96 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -139,6 +149,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A805A8642007299700274577 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A805A865200729EE00274577 /* CFRFileSystemObject.h */,
+				A805A866200733EA00274577 /* CFRFileModel.h */,
+				A805A867200733EA00274577 /* CFRFileModel.m */,
+				A805A869200733F800274577 /* CFRDirectoryModel.h */,
+				A805A86A200733F800274577 /* CFRDirectoryModel.m */,
+				A805A86C2007340800274577 /* CFRAppModel.h */,
+				A805A86D2007340800274577 /* CFRAppModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		A885B1C01E59457000F1AB96 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +186,7 @@
 		A885B1CB1E59457100F1AB96 /* Classic Finder */ = {
 			isa = PBXGroup;
 			children = (
+				A805A8642007299700274577 /* Models */,
 				A8D82F601F80914B00B437F1 /* CFRWindowManager.h */,
 				A8D82F5F1F80914B00B437F1 /* CFRWindowManager.m */,
 				A885B1F91E59466700F1AB96 /* UI Components */,
@@ -388,12 +413,14 @@
 				A885B2111E59923B00F1AB96 /* CCIClassicFinderWindow.m in Sources */,
 				A885B2141E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m in Sources */,
 				A8D82F671F849C3900B437F1 /* CCIClassicFileIcon.m in Sources */,
+				A805A868200733EA00274577 /* CFRFileModel.m in Sources */,
 				A805A8551FCE3A5B00274577 /* CCIScrollbar.m in Sources */,
 				A805A8561FCE3A5B00274577 /* CCIScrollContentView.m in Sources */,
 				A805A8541FCE3A5B00274577 /* CCIScrollbarArrowButton.m in Sources */,
 				A805A8571FCE3A5B00274577 /* CCIWindowGripButton.m in Sources */,
 				A885B2021E594EE900F1AB96 /* CCITitleBar.m in Sources */,
 				A8D82F701F872D9C00B437F1 /* CFRFileSystemOperations.m in Sources */,
+				A805A86B200733F800274577 /* CFRDirectoryModel.m in Sources */,
 				A8D82F611F80914C00B437F1 /* CFRWindowManager.m in Sources */,
 				A885B2051E59741000F1AB96 /* CCIClassicFolderIcon.m in Sources */,
 				A885B2081E597AE300F1AB96 /* CCIClassicFolder.m in Sources */,
@@ -404,6 +431,7 @@
 				A805A8581FCE3A5B00274577 /* CCIScrollView.m in Sources */,
 				A805A863200343CC00274577 /* CFRFileSystemUtils.m in Sources */,
 				A885B1FC1E59475D00F1AB96 /* CCICloseButton.m in Sources */,
+				A805A86E2007340800274577 /* CFRAppModel.m in Sources */,
 				A805A85E1FD3A37D00274577 /* CCIApplicationStyles.m in Sources */,
 				A885B1CE1E59457100F1AB96 /* AppDelegate.m in Sources */,
 			);
