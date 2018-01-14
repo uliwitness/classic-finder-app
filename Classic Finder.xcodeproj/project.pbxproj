@@ -32,6 +32,7 @@
 		A885B2081E597AE300F1AB96 /* CCIClassicFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2071E597AE300F1AB96 /* CCIClassicFolder.m */; };
 		A885B2111E59923B00F1AB96 /* CCIClassicFinderWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2101E59923B00F1AB96 /* CCIClassicFinderWindow.m */; };
 		A885B2141E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2131E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m */; };
+		A897BB1F200B3E7900C2D740 /* CFRFloppyDisk.m in Sources */ = {isa = PBXBuildFile; fileRef = A897BB1E200B3E7900C2D740 /* CFRFloppyDisk.m */; };
 		A8D82F611F80914C00B437F1 /* CFRWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D82F5F1F80914B00B437F1 /* CFRWindowManager.m */; };
 		A8D82F671F849C3900B437F1 /* CCIClassicFileIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D82F661F849C3900B437F1 /* CCIClassicFileIcon.m */; };
 		A8D82F6A1F85E4A500B437F1 /* CCIClassicFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D82F691F85E4A500B437F1 /* CCIClassicFile.m */; };
@@ -83,6 +84,8 @@
 		A805A86A200733F800274577 /* CFRDirectoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CFRDirectoryModel.m; sourceTree = "<group>"; };
 		A805A86C2007340800274577 /* CFRAppModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CFRAppModel.h; sourceTree = "<group>"; };
 		A805A86D2007340800274577 /* CFRAppModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CFRAppModel.m; sourceTree = "<group>"; };
+		A805A8702009D69300274577 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		A805A8712009D69D00274577 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		A885B1C91E59457100F1AB96 /* Classic Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Classic Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A885B1CC1E59457100F1AB96 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A885B1CD1E59457100F1AB96 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -110,6 +113,8 @@
 		A885B2101E59923B00F1AB96 /* CCIClassicFinderWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIClassicFinderWindow.m; sourceTree = "<group>"; };
 		A885B2121E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCIClassicFinderDetailBar.h; sourceTree = "<group>"; };
 		A885B2131E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIClassicFinderDetailBar.m; sourceTree = "<group>"; };
+		A897BB1D200B3E7900C2D740 /* CFRFloppyDisk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CFRFloppyDisk.h; sourceTree = "<group>"; };
+		A897BB1E200B3E7900C2D740 /* CFRFloppyDisk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CFRFloppyDisk.m; sourceTree = "<group>"; };
 		A8D82F5F1F80914B00B437F1 /* CFRWindowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFRWindowManager.m; sourceTree = "<group>"; };
 		A8D82F601F80914B00B437F1 /* CFRWindowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFRWindowManager.h; sourceTree = "<group>"; };
 		A8D82F651F849C3900B437F1 /* CCIClassicFileIcon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCIClassicFileIcon.h; sourceTree = "<group>"; };
@@ -163,6 +168,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		A805A86F2009D69200274577 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A805A8712009D69D00274577 /* libsqlite3.0.tbd */,
+				A805A8702009D69300274577 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A885B1C01E59457000F1AB96 = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +184,7 @@
 				A885B1DF1E59457100F1AB96 /* Classic FinderTests */,
 				A885B1EA1E59457100F1AB96 /* Classic FinderUITests */,
 				A885B1CA1E59457100F1AB96 /* Products */,
+				A805A86F2009D69200274577 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,6 +201,7 @@
 		A885B1CB1E59457100F1AB96 /* Classic Finder */ = {
 			isa = PBXGroup;
 			children = (
+				A897BB1C200B381A00C2D740 /* Database */,
 				A805A8642007299700274577 /* Models */,
 				A8D82F601F80914B00B437F1 /* CFRWindowManager.h */,
 				A8D82F5F1F80914B00B437F1 /* CFRWindowManager.m */,
@@ -273,6 +289,15 @@
 				A805A85D1FD3A37D00274577 /* CCIApplicationStyles.m */,
 			);
 			name = "UI Components";
+			sourceTree = "<group>";
+		};
+		A897BB1C200B381A00C2D740 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				A897BB1D200B3E7900C2D740 /* CFRFloppyDisk.h */,
+				A897BB1E200B3E7900C2D740 /* CFRFloppyDisk.m */,
+			);
+			name = Database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,6 +459,7 @@
 				A805A86E2007340800274577 /* CFRAppModel.m in Sources */,
 				A805A85E1FD3A37D00274577 /* CCIApplicationStyles.m in Sources */,
 				A885B1CE1E59457100F1AB96 /* AppDelegate.m in Sources */,
+				A897BB1F200B3E7900C2D740 /* CFRFloppyDisk.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
