@@ -13,6 +13,8 @@ This application is distributed as an unsigned .app binary. All releases can be 
 under the Downloads tab to the left. A download of the most recent version is linked
 on https://classicmacfinder.com.
 
+Install as you would any other cocoa app.
+
 ### System Requirements
 
 * macOS 10.12+
@@ -26,12 +28,12 @@ on https://classicmacfinder.com.
 	* Finder windows representing the root volume now show the volume name instead of "/".
 * 1.0.1
 	* Fix scrollbar up and left button positioning.
-* 1.0
+* 1.0.0
     * Initial Release
 
 ## Meta
 
-Ben Szyamnski – [@captainflotsam](https://twitter.com/captainfloatsam)
+Ben Szymanski - [@captainflotsam](https://twitter.com/captainfloatsam)
 
 Distributed under the GPLv3 license. See ``LICENSE`` for more information.
 
