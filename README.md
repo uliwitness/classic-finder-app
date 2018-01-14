@@ -1,5 +1,5 @@
 # Classic Mac Finder
-> Everything you loved about navigating files on your Macintosh Performa, Quadra, Power Macintosh and LC.
+> Everything you loved about navigating files on your Macintosh Performa, Quadra, Power Macintosh or LC.
 
 This project aims to be a functional re-creation of the classic Mac OS Finder. 
 Now you can experience a pixel-for-pixel clone of the original Macintosh Finder 
@@ -31,7 +31,7 @@ on https://classicmacfinder.com.
 
 ## Meta
 
-Ben Szyamnski â€“ [@captainflotsam](https://twitter.com/captainfloatsam)
+Ben Szyamnski – [@captainflotsam](https://twitter.com/captainfloatsam)
 
 Distributed under the GPLv3 license. See ``LICENSE`` for more information.
 
