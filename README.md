@@ -23,7 +23,7 @@ Install as you would any other cocoa app.
 ## Release History
 
 * 1.0.2
-	* Open folders now render with the correct background texture.
+	* The icons of opened folders now render with the correct background texture.
 	* If there are no open windows, clicking on the app icon in the Dock will open a new window at root.
 	* Finder windows representing the root volume now show the volume name instead of "/".
 * 1.0.1
