@@ -19,6 +19,7 @@
 		A805A868200733EA00274577 /* CFRFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A867200733EA00274577 /* CFRFileModel.m */; };
 		A805A86B200733F800274577 /* CFRDirectoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A86A200733F800274577 /* CFRDirectoryModel.m */; };
 		A805A86E2007340800274577 /* CFRAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A86D2007340800274577 /* CFRAppModel.m */; };
+		A80A5575201E65660021B414 /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = A80A5573201E65640021B414 /* NSString+Hashes.m */; };
 		A885B1CE1E59457100F1AB96 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B1CD1E59457100F1AB96 /* AppDelegate.m */; };
 		A885B1D11E59457100F1AB96 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B1D01E59457100F1AB96 /* main.m */; };
 		A885B1D31E59457100F1AB96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A885B1D21E59457100F1AB96 /* Assets.xcassets */; };
@@ -86,6 +87,8 @@
 		A805A86D2007340800274577 /* CFRAppModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CFRAppModel.m; sourceTree = "<group>"; };
 		A805A8702009D69300274577 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		A805A8712009D69D00274577 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		A80A5573201E65640021B414 /* NSString+Hashes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hashes.m"; sourceTree = "<group>"; };
+		A80A5574201E65650021B414 /* NSString+Hashes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hashes.h"; sourceTree = "<group>"; };
 		A885B1C91E59457100F1AB96 /* Classic Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Classic Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A885B1CC1E59457100F1AB96 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A885B1CD1E59457100F1AB96 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -177,6 +180,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A80A5576201E656B0021B414 /* External Code */ = {
+			isa = PBXGroup;
+			children = (
+				A80A5574201E65650021B414 /* NSString+Hashes.h */,
+				A80A5573201E65640021B414 /* NSString+Hashes.m */,
+			);
+			name = "External Code";
+			sourceTree = "<group>";
+		};
 		A885B1C01E59457000F1AB96 = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +213,7 @@
 		A885B1CB1E59457100F1AB96 /* Classic Finder */ = {
 			isa = PBXGroup;
 			children = (
+				A80A5576201E656B0021B414 /* External Code */,
 				A897BB1C200B381A00C2D740 /* Database */,
 				A805A8642007299700274577 /* Models */,
 				A8D82F601F80914B00B437F1 /* CFRWindowManager.h */,
@@ -448,6 +461,7 @@
 				A805A86B200733F800274577 /* CFRDirectoryModel.m in Sources */,
 				A8D82F611F80914C00B437F1 /* CFRWindowManager.m in Sources */,
 				A885B2051E59741000F1AB96 /* CCIClassicFolderIcon.m in Sources */,
+				A80A5575201E65660021B414 /* NSString+Hashes.m in Sources */,
 				A885B2081E597AE300F1AB96 /* CCIClassicFolder.m in Sources */,
 				A8D82F6A1F85E4A500B437F1 /* CCIClassicFile.m in Sources */,
 				A885B1D11E59457100F1AB96 /* main.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "CFRDirectoryModel.h"
+#import "NSString+Hashes.h"
 
 @implementation CFRDirectoryModel
 
@@ -21,7 +22,10 @@
 
 - (NSString *)uniqueID
 {
-    return @"";
+    NSString *unhashedID = [NSString stringWithFormat:@"%f%@", creationDate.timeIntervalSinceReferenceDate, title];
+    NSString *hashedID = [unhashedID sha1];
+    
+    return hashedID;
 }
 
 - (NSString *)objectType
