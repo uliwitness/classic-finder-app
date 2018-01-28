@@ -29,5 +29,9 @@
 
 - (void)saveWindowPosition:(NSPoint)newPosition;
 - (void)saveIconPosition:(NSPoint)newPosition;
+- (NSPoint)findWindowPositionForDirectory:(NSString *)fsObjectID;
+- (NSSize)findWindowSizeForDirectory:(NSString *)fsObjectID;
+- (NSRect)findWindowFrameForDirectory:(NSString *)fsObjectID;
+- (NSPoint)findIconPositionForDirectory:(NSString *)fsObjectID;
 
 @end

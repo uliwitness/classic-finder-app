@@ -54,7 +54,7 @@
         
         [self addSubview:self.iconImage];
         
-        NSRect folderLabelFrame = NSMakeRect(2.0, 35.0, 54.0, 24.0);
+        NSRect folderLabelFrame = NSMakeRect(2.0, 35.0, 54.0, 50.0);
         self.folderLabel = [[NSTextField alloc] initWithFrame:folderLabelFrame];
         self.folderLabel.alignment = NSTextAlignmentCenter;
         self.folderLabel.font = [NSFont systemFontOfSize:10.0];
@@ -62,6 +62,8 @@
         self.folderLabel.selectable = NO;
         self.folderLabel.lineBreakMode = NSLineBreakByCharWrapping;
         self.folderLabel.drawsBackground = YES;
+        self.folderLabel.maximumNumberOfLines = 5;
+        self.folderLabel.usesSingleLineMode = NO;
         
         [self addSubview:self.folderLabel];
     }

@@ -30,7 +30,9 @@
 #import "CCIClassicFolder.h"
 #import "CCIClassicFile.h"
 #import "CFRWindowManager.h"
-#import "CFRFileSystemOperations.h"
+#import "CFRDirectoryModel.h"
+#import "CFRFileModel.h"
+#import "CFRAppModel.h"
 
 @interface CCIClassicFinderWindow () {
     BOOL windowIsActive;
@@ -96,17 +98,12 @@
         NSUInteger iconRow = 0;
         NSUInteger iconCol = 0;
         
-        for (NSUInteger x = 0; x < self.fileList.count; x++) {
-            NSURL *directoryItem = [self.fileList objectAtIndex:x];
+        for (NSUInteger x = 0; x < self.fileList.count; x += 1) {
+            NSObject *fileSystemItem = [self.fileList objectAtIndex:x];
             
-            NSNumber *isDirectory;
-            [directoryItem getResourceValue:&isDirectory
-                                     forKey:NSURLIsDirectoryKey
-                                      error:nil];
-            
-            if ([isDirectory boolValue])
+            if ([fileSystemItem isMemberOfClass:[CFRDirectoryModel class]])
             {
-                NSString *directoryTitle = [directoryItem lastPathComponent];
+                CFRDirectoryModel *directoryItem = (CFRDirectoryModel *)fileSystemItem;
                 
                 CGFloat iconLeftPosition = (10.0 + (iconCol * 60.0));
                 CGFloat frameWidthWithBorder = (self.frame.size.width - 55.0);
@@ -124,12 +121,12 @@
                                                 60.0);
                 
                 CCIClassicFolder *folderIcon = [[CCIClassicFolder alloc] initWithFrame:folderFrame];
-                folderIcon.folderLabel.stringValue = directoryTitle;
-                folderIcon.representingDirectory = directoryItem;
+                folderIcon.folderLabel.stringValue = [directoryItem title];
+                folderIcon.representingDirectory = [directoryItem objectPath];
                 
                 [self.scrollView.contentView addSubview:folderIcon];
-            } else {
-                NSString *fileTitle = [directoryItem lastPathComponent];
+            } else if ([fileSystemItem isMemberOfClass:[CFRFileModel class]]) {
+                CFRFileModel *fileItem = (CFRFileModel *)fileSystemItem;
                 
                 CGFloat iconLeftPosition = (10.0 + (iconCol * 60.0));
                 CGFloat frameWidthWithBorder = (self.frame.size.width - 55.0);
@@ -147,8 +144,8 @@
                                                 60.0);
                 
                 CCIClassicFile *fileIcon = [[CCIClassicFile alloc] initWithFrame:folderFrame];
-                fileIcon.fileLabel.stringValue = fileTitle;
-                fileIcon.representedFile = directoryItem;
+                fileIcon.fileLabel.stringValue = [fileItem title];
+                fileIcon.representedFile = [fileItem objectPath];
                 
                 [self.scrollView.contentView addSubview:fileIcon];
             }

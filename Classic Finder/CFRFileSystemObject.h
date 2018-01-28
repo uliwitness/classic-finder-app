@@ -14,10 +14,12 @@
 @property NSDate *creationDate;
 @property NSDate *lastModified;
 @property NSString *title;
-@property NSPoint windowPosition;
-@property NSSize windowDimensions;
+
 @property NSPoint iconPosition;
+@property NSSize windowDimensions;
+@property NSPoint windowPosition;
 
 - (NSString *)uniqueID;
+- (NSString *)objectType;
 
 @end

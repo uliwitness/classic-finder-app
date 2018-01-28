@@ -11,4 +11,6 @@
 
 @interface CFRAppModel : NSObject <CFRFileSystemObject>
 
+@property NSURL *executablePath;
+
 @end

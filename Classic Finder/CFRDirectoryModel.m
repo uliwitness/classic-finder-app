@@ -12,15 +12,21 @@
 
 @synthesize title;
 @synthesize creationDate;
-@synthesize windowDimensions;
 @synthesize lastModified;
-@synthesize windowPosition;
-@synthesize iconPosition;
 @synthesize objectPath;
+
+@synthesize iconPosition;
+@synthesize windowDimensions;
+@synthesize windowPosition;
 
 - (NSString *)uniqueID
 {
     return @"";
+}
+
+- (NSString *)objectType
+{
+    return @"directory";
 }
 
 @end

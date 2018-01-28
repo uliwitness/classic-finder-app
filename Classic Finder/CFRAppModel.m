@@ -12,15 +12,23 @@
 
 @synthesize title;
 @synthesize creationDate;
-@synthesize windowDimensions;
 @synthesize lastModified;
-@synthesize windowPosition;
-@synthesize iconPosition;
 @synthesize objectPath;
+
+@synthesize iconPosition;
+@synthesize windowPosition;
+@synthesize windowDimensions;
+
+@synthesize executablePath;
 
 - (NSString *)uniqueID
 {
     return @"";
+}
+
+- (NSString *)objectType
+{
+    return @"app";
 }
 
 @end

@@ -22,24 +22,72 @@
 // along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
 
 #import "CFRFileSystemOperations.h"
+#import "CFRFileModel.h"
+#import "CFRDirectoryModel.h"
+#import "CFRAppModel.h"
 
 @implementation CFRFileSystemOperations
 
 + (NSArray *)getListingForDirectory:(NSURL *)directory
 {
-    NSArray *fileList;
-    NSArray *keys = @[NSURLNameKey, NSURLPathKey];
+    NSMutableArray *fileList = [[NSMutableArray alloc] initWithCapacity:64];
+    NSArray *keys = @[NSURLNameKey, NSURLPathKey, NSURLAddedToDirectoryDateKey, NSURLContentModificationDateKey];
     NSError *err = nil;
     
-    fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:directory
-                                             includingPropertiesForKeys:keys
-                                                                options:(NSDirectoryEnumerationSkipsPackageDescendants |
-                                                                         NSDirectoryEnumerationSkipsHiddenFiles |
-                                                                         NSDirectoryEnumerationSkipsSubdirectoryDescendants)
-                                                                  error:&err];
+    NSArray *directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:directory
+                                                               includingPropertiesForKeys:keys
+                                                                                  options:(NSDirectoryEnumerationSkipsPackageDescendants |
+                                                                                           NSDirectoryEnumerationSkipsHiddenFiles |
+                                                                                           NSDirectoryEnumerationSkipsSubdirectoryDescendants)
+                                                                                    error:&err];
     
     if (err != nil) {
         NSLog(@"%@", err);
+    } else {
+        for (NSURL *directoryItem in directoryContents) {
+            NSNumber *isDirectory;
+            [directoryItem getResourceValue:&isDirectory
+                                     forKey:NSURLIsDirectoryKey
+                                      error:nil];
+            
+            NSString *title;
+            [directoryItem getResourceValue:&title
+                                     forKey:NSURLNameKey
+                                      error:nil];
+            
+            NSString *path;
+            [directoryItem getResourceValue:&path
+                                     forKey:NSURLPathKey
+                                      error:nil];
+            
+            NSDate *createdDate;
+            [directoryItem getResourceValue:&createdDate
+                                     forKey:NSURLAddedToDirectoryDateKey
+                                      error:nil];
+            
+            NSDate *lastModifiedDate;
+            [directoryItem getResourceValue:&lastModifiedDate
+                                     forKey:NSURLContentModificationDateKey
+                                      error:nil];
+            
+            if ([isDirectory boolValue]) {
+                CFRDirectoryModel *directoryModel = [[CFRDirectoryModel alloc] init];
+                [directoryModel setTitle:title];
+                [directoryModel setCreationDate:createdDate];
+                [directoryModel setLastModified:lastModifiedDate];
+                [directoryModel setObjectPath:directoryItem];
+                
+                [fileList addObject:directoryModel];
+            } else {
+                CFRFileModel *fileModel = [[CFRFileModel alloc] init];
+                [fileModel setTitle:title];
+                [fileModel setCreationDate:createdDate];
+                [fileModel setLastModified:lastModifiedDate];
+                [fileModel setObjectPath:directoryItem];
+                
+                [fileList addObject:fileModel];
+            }
+        }
     }
     
     return fileList;
