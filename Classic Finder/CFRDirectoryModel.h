@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CFRFileSystemObject.h"
 
-@interface CFRDirectoryModel : NSObject <CFRFileSystemObject>
+@interface CFRDirectoryModel : NSObject <CFRFileSystemObject, NSCoding>
 
 @property NSSize windowDimensions;
 @property NSPoint windowPosition;

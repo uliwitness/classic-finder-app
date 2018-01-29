@@ -33,4 +33,27 @@
     return @"directory";
 }
 
+#pragma mark - NSCODING METHODS
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (self) {
+        [self setIconPosition:[aDecoder decodePointForKey:@"iconPosition"]];
+        [self setWindowDimensions:[aDecoder decodeSizeForKey:@"windowDimensions"]];
+        [self setWindowPosition:[aDecoder decodePointForKey:@"windowPosition"]];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.uniqueID forKey:@"uniqueID"];
+    [aCoder encodePoint:self.iconPosition forKey:@"iconPosition"];
+    [aCoder encodeSize:self.windowDimensions forKey:@"windowDimensions"];
+    [aCoder encodePoint:self.windowPosition forKey:@"windowPosition"];
+}
+
 @end

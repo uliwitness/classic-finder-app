@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CFRFileSystemObject.h"
 
-@interface CFRAppModel : NSObject <CFRFileSystemObject>
+@interface CFRAppModel : NSObject <CFRFileSystemObject, NSCoding>
 
 @property NSURL *executablePath;
 

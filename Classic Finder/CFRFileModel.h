@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "CFRFileSystemObject.h"
 
-@interface CFRFileModel : NSObject <CFRFileSystemObject>
+@interface CFRFileModel : NSObject <CFRFileSystemObject, NSCoding>
 
 @end

@@ -33,4 +33,23 @@
     return @"app";
 }
 
+#pragma mark - NSCODING METHODS
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (self) {
+        [self setIconPosition:[aDecoder decodePointForKey:@"iconPosition"]];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.uniqueID forKey:@"uniqueID"];
+    [aCoder encodePoint:self.iconPosition forKey:@"iconPosition"];
+}
+
 @end
