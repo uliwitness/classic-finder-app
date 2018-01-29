@@ -17,8 +17,6 @@
 @synthesize objectPath;
 
 @synthesize iconPosition;
-@synthesize windowPosition;
-@synthesize windowDimensions;
 
 @synthesize executablePath;
 

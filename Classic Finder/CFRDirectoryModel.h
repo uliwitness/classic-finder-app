@@ -11,4 +11,7 @@
 
 @interface CFRDirectoryModel : NSObject <CFRFileSystemObject>
 
+@property NSSize windowDimensions;
+@property NSPoint windowPosition;
+
 @end

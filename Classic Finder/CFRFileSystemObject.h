@@ -16,8 +16,6 @@
 @property NSString *title;
 
 @property NSPoint iconPosition;
-@property NSSize windowDimensions;
-@property NSPoint windowPosition;
 
 - (NSString *)uniqueID;
 - (NSString *)objectType;

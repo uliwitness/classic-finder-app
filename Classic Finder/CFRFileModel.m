@@ -17,8 +17,6 @@
 @synthesize objectPath;
 
 @synthesize iconPosition;
-@synthesize windowDimensions;
-@synthesize windowPosition;
 
 - (NSString *)uniqueID
 {
