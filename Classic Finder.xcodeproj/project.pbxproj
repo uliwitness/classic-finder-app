@@ -20,6 +20,7 @@
 		A805A86B200733F800274577 /* CFRDirectoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A86A200733F800274577 /* CFRDirectoryModel.m */; };
 		A805A86E2007340800274577 /* CFRAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A86D2007340800274577 /* CFRAppModel.m */; };
 		A80A5575201E65660021B414 /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = A80A5573201E65640021B414 /* NSString+Hashes.m */; };
+		A80A5578202033ED0021B414 /* ScratchCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = A80A5577202033ED0021B414 /* ScratchCode.txt */; };
 		A885B1CE1E59457100F1AB96 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B1CD1E59457100F1AB96 /* AppDelegate.m */; };
 		A885B1D11E59457100F1AB96 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B1D01E59457100F1AB96 /* main.m */; };
 		A885B1D31E59457100F1AB96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A885B1D21E59457100F1AB96 /* Assets.xcassets */; };
@@ -89,6 +90,7 @@
 		A805A8712009D69D00274577 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		A80A5573201E65640021B414 /* NSString+Hashes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hashes.m"; sourceTree = "<group>"; };
 		A80A5574201E65650021B414 /* NSString+Hashes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hashes.h"; sourceTree = "<group>"; };
+		A80A5577202033ED0021B414 /* ScratchCode.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ScratchCode.txt; sourceTree = "<group>"; };
 		A885B1C91E59457100F1AB96 /* Classic Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Classic Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A885B1CC1E59457100F1AB96 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A885B1CD1E59457100F1AB96 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -214,7 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				A80A5576201E656B0021B414 /* External Code */,
-				A897BB1C200B381A00C2D740 /* Database */,
+				A897BB1C200B381A00C2D740 /* Persistance */,
 				A805A8642007299700274577 /* Models */,
 				A8D82F601F80914B00B437F1 /* CFRWindowManager.h */,
 				A8D82F5F1F80914B00B437F1 /* CFRWindowManager.m */,
@@ -232,6 +234,7 @@
 				A8D82F721F9D2F5B00B437F1 /* license.txt */,
 				A805A861200343CC00274577 /* CFRFileSystemUtils.h */,
 				A805A862200343CC00274577 /* CFRFileSystemUtils.m */,
+				A80A5577202033ED0021B414 /* ScratchCode.txt */,
 			);
 			path = "Classic Finder";
 			sourceTree = "<group>";
@@ -304,13 +307,13 @@
 			name = "UI Components";
 			sourceTree = "<group>";
 		};
-		A897BB1C200B381A00C2D740 /* Database */ = {
+		A897BB1C200B381A00C2D740 /* Persistance */ = {
 			isa = PBXGroup;
 			children = (
 				A897BB1D200B3E7900C2D740 /* CFRFloppyDisk.h */,
 				A897BB1E200B3E7900C2D740 /* CFRFloppyDisk.m */,
 			);
-			name = Database;
+			name = Persistance;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,6 +422,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A80A5578202033ED0021B414 /* ScratchCode.txt in Resources */,
 				A8D82F731F9D2F5B00B437F1 /* license.txt in Resources */,
 				A885B1D31E59457100F1AB96 /* Assets.xcassets in Resources */,
 				A885B1D61E59457100F1AB96 /* MainMenu.xib in Resources */,

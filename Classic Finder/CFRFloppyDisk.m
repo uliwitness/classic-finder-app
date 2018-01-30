@@ -23,539 +23,89 @@
 
 #import "CFRFloppyDisk.h"
 #import "CFRFileSystemUtils.h"
-#import <sqlite3.h>
-
-@interface CFRFloppyDisk() {
-    sqlite3 *dbConnection;
-}
-
-@end
+#import "CFRFileModel.h"
+#import "CFRDirectoryModel.h"
+#import "CFRAppModel.h"
 
 @implementation CFRFloppyDisk
 
-#pragma mark - INITIALIZATION METHODS
-- (instancetype)init
++ (void)restoreFileProperties:(CFRFileModel *)fileModel
 {
-    self = [super init];
+    NSString *archivePath = @"";
+    BOOL archiveFileExists = [[NSFileManager defaultManager] fileExistsAtPath:archivePath];
     
-    if (self) {
-        [self openDatabase];
-        [self initializeDatabaseStructure];
-    }
-    
-    return self;
-}
-
-- (void)dealloc
-{
-    [self closeDatabase];
-}
-
-- (void)initializeDatabaseStructure
-{
-    if (![self hasFinderSpatialsTable]) {
-        [self createFinderSpatialsTable];
-    }
-    
-//    if (![self hasUniqueIDField]) {
-//        [self createUniqueIDField];
-//    }
-    
-    if (![self hasObjectPathField]) {
-        [self createObjectPathField];
-    }
-    
-    if (![self hasCreationDateField]) {
-        [self createCreationDateField];
-    }
-    
-    if (![self hasLastModifiedField]) {
-        [self createLastModifiedField];
-    }
-    
-    if (![self hasTitleField]) {
-        [self createTitleField];
-    }
-    
-    if (![self hasWindowPositionXField]) {
-        [self createWindowPositionXField];
-    }
-    
-    if (![self hasWindowPositionYField]) {
-        [self createWindowPositionYField];
-    }
-    
-    if (![self hasIconPositionXField]) {
-        [self createIconPositionXField];
-    }
-    
-    if (![self hasIconPositionYField]) {
-        [self createIconPositionYField];
-    }
-    
-    if (![self hasWindowDimensionWidthField]) {
-        [self createWindowDimensionWidthField];
-    }
-    
-    if (![self hasWindowDimensionHeightField]) {
-        [self createWindowDimensionHeightField];
-    }
-}
-
-#pragma mark - SQLLITE CONNECTION METHODS
-
-- (BOOL)openDatabase
-{
-    NSString *applicationSupportDirectory = [CFRFileSystemUtils applicationSupportDirectory];
-    NSString *databasePath = [applicationSupportDirectory stringByAppendingString:@"cfdb.sqlite"];
-    
-    sqlite3_initialize();
-    
-    BOOL openDatabaseResult = sqlite3_open([databasePath UTF8String],
-                                           &dbConnection);
-    
-    return openDatabaseResult;
-}
-
-- (void)closeDatabase
-{
-    sqlite3_close(dbConnection);
-    sqlite3_shutdown();
-}
-
-#pragma mark - DATABASE STRUCTURE METHODS
-
-- (BOOL)hasFinderSpatialsTable
-{
-    return NO;
-}
-
-- (void)createFinderSpatialsTable
-{
-    NSString *sqlStatementString = @"CREATE TABLE IF NOT EXISTS finder_spatials (dirID text PRIMARY KEY)";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
+    if (archiveFileExists) {
+        id archivedObject = [NSKeyedUnarchiver unarchiveObjectWithFile:archivePath];
+        CFRFileModel *unarchivedFileModel = (CFRFileModel *)archivedObject;
         
+        [fileModel setIconPosition:[unarchivedFileModel iconPosition]];
     } else {
-        sqlite3_step(sqlStatementPrepared);
+        [fileModel setIconPosition:NSMakePoint(-1.0, -1.0)];
     }
 }
 
-//- (BOOL)hasUniqueIDField
-//{
-//    return NO;
-//}
-//
-//- (void)createUniqueIDField
-//{
-//
-//}
-
-- (BOOL)hasObjectPathField
++ (void)restoreDirectoryProperties:(CFRDirectoryModel *)directoryModel
 {
-    BOOL queryFinding = NO;
-    NSString *columnName = @"path_field";
+    NSString *archivePath = @"";
+    BOOL archiveFileExists = [[NSFileManager defaultManager] fileExistsAtPath:archivePath];
     
-    queryFinding = [self determineIfColumnExists:columnName];
-    
-    return queryFinding;
-}
-
-- (void)createObjectPathField
-{
-    NSString *sqlStatementString = @"ALTER TABLE finder_spatials ADD COLUMN path_field text";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
+    if (archiveFileExists) {
+        id archivedObject = [NSKeyedUnarchiver unarchiveObjectWithFile:archivePath];
+        CFRDirectoryModel *unarchivedDirectoryModel = (CFRDirectoryModel *)archivedObject;
         
+        [directoryModel setIconPosition:[unarchivedDirectoryModel iconPosition]];
+        [directoryModel setWindowDimensions:[unarchivedDirectoryModel windowDimensions]];
+        [directoryModel setWindowPosition:[unarchivedDirectoryModel windowPosition]];
     } else {
-        sqlite3_step(sqlStatementPrepared);
+        [directoryModel setIconPosition:NSMakePoint(-1.0, -1.0)];
+        [directoryModel setWindowDimensions:NSMakeSize(-1.0, -1.0)];
+        [directoryModel setWindowPosition:NSMakePoint(-1.0, -1.0)];
     }
 }
 
-- (BOOL)hasCreationDateField
++ (void)restoreAppDirectoryProperties:(CFRAppModel *)appDirectoryModel
 {
-    BOOL queryFinding = NO;
-    NSString *columnName = @"create_date";
+    NSString *archivePath = @"";
+    BOOL archiveFileExists = [[NSFileManager defaultManager] fileExistsAtPath:archivePath];
     
-    queryFinding = [self determineIfColumnExists:columnName];
-    
-    return queryFinding;
-}
-
-- (void)createCreationDateField
-{
-    NSString *sqlStatementString = @"ALTER TABLE finder_spatials ADD COLUMN create_date integer";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
+    if (archiveFileExists) {
+        id archivedObject = [NSKeyedUnarchiver unarchiveObjectWithFile:archivePath];
+        CFRAppModel *unarchivedAppModel = (CFRAppModel *)archivedObject;
         
+        [appDirectoryModel setIconPosition:[unarchivedAppModel iconPosition]];
     } else {
-        sqlite3_step(sqlStatementPrepared);
+        [appDirectoryModel setIconPosition:NSMakePoint(-1.0, -1.0)];
     }
 }
 
-- (BOOL)hasLastModifiedField
++ (BOOL)persistFileProperties:(CFRFileModel *)fileModel;
 {
-    BOOL queryFinding = NO;
-    NSString *columnName = @"last_update";
+    NSString *archivePath = @"";
     
-    queryFinding = [self determineIfColumnExists:columnName];
+    BOOL result = [NSKeyedArchiver archiveRootObject:fileModel
+                                              toFile:archivePath];
     
-    return queryFinding;
+    return result;
 }
 
-- (void)createLastModifiedField
++ (BOOL)persistDirectoryProperties:(CFRDirectoryModel *)directoryModel
 {
-    NSString *sqlStatementString = @"ALTER TABLE finder_spatials ADD COLUMN last_update integer";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
+    NSString *archivePath = @"";
     
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
+    BOOL result = [NSKeyedArchiver archiveRootObject:directoryModel
+                                              toFile:archivePath];
     
-    if (result != SQLITE_OK) {
-        
-    } else {
-        sqlite3_step(sqlStatementPrepared);
-    }
+    return result;
 }
 
-- (BOOL)hasTitleField
++ (BOOL)persistAppDirectoryProperties:(CFRAppModel *)appDirectoryModel
 {
-    BOOL queryFinding = NO;
-    NSString *columnName = @"title";
+    NSString *archivePath = @"";
     
-    queryFinding = [self determineIfColumnExists:columnName];
+    BOOL result = [NSKeyedArchiver archiveRootObject:appDirectoryModel
+                                              toFile:archivePath];
     
-    return queryFinding;
-}
-
-- (void)createTitleField
-{
-    NSString *sqlStatementString = @"ALTER TABLE finder_spatials ADD COLUMN title text";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
-        
-    } else {
-        sqlite3_step(sqlStatementPrepared);
-    }
-}
-
-- (BOOL)hasWindowPositionXField
-{
-    BOOL queryFinding = NO;
-    NSString *columnName = @"window_pos_x";
-    
-    queryFinding = [self determineIfColumnExists:columnName];
-    
-    return queryFinding;
-}
-
-- (void)createWindowPositionXField
-{
-    NSString *sqlStatementString = @"ALTER TABLE finder_spatials ADD COLUMN window_pos_x integer";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
-        
-    } else {
-        sqlite3_step(sqlStatementPrepared);
-    }
-}
-
-- (BOOL)hasWindowPositionYField
-{
-    BOOL queryFinding = NO;
-    NSString *columnName = @"window_pos_y";
-    
-    queryFinding = [self determineIfColumnExists:columnName];
-    
-    return queryFinding;
-}
-
-- (void)createWindowPositionYField
-{
-    NSString *sqlStatementString = @"ALTER TABLE finder_spatials ADD COLUMN window_pos_y integer";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
-        
-    } else {
-        sqlite3_step(sqlStatementPrepared);
-    }
-}
-
-- (BOOL)hasWindowDimensionWidthField
-{
-    BOOL queryFinding = NO;
-    NSString *columnName = @"window_w";
-    
-    queryFinding = [self determineIfColumnExists:columnName];
-    
-    return queryFinding;
-}
-
-- (void)createWindowDimensionWidthField
-{
-    NSString *sqlStatementString = @"ALTER TABLE finder_spatials ADD COLUMN window_w integer";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
-        
-    } else {
-        sqlite3_step(sqlStatementPrepared);
-    }
-}
-
-- (BOOL)hasWindowDimensionHeightField
-{
-    BOOL queryFinding = NO;
-    NSString *columnName = @"window_h";
-    
-    queryFinding = [self determineIfColumnExists:columnName];
-    
-    return queryFinding;
-}
-
-- (void)createWindowDimensionHeightField
-{
-    NSString *sqlStatementString = @"ALTER TABLE finder_spatials ADD COLUMN window_h integer";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
-        
-    } else {
-        sqlite3_step(sqlStatementPrepared);
-    }
-}
-
-- (BOOL)hasIconPositionXField
-{
-    BOOL queryFinding = NO;
-    NSString *columnName = @"icon_pos_x";
-    
-    queryFinding = [self determineIfColumnExists:columnName];
-    
-    return queryFinding;
-}
-
-- (void)createIconPositionXField
-{
-    NSString *sqlStatementString = @"ALTER TABLE finder_spatials ADD COLUMN icon_pos_x integer";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
-        
-    } else {
-        sqlite3_step(sqlStatementPrepared);
-    }
-}
-
-- (BOOL)hasIconPositionYField
-{
-    BOOL queryFinding = NO;
-    NSString *columnName = @"icon_pos_y";
-    
-    queryFinding = [self determineIfColumnExists:columnName];
-    
-    return queryFinding;
-}
-
-- (void)createIconPositionYField
-{
-    NSString *sqlStatementString = @"ALTER TABLE finder_spatials ADD COLUMN icon_pos_y integer";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
-        
-    } else {
-        sqlite3_step(sqlStatementPrepared);
-    }
-}
-
-- (BOOL)determineIfColumnExists:(NSString *)columnTitle
-{
-    BOOL queryFinding = NO;
-    
-    NSString *sqlStatementString = @"PRAGMA table_info(finder_spatials)";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
-        queryFinding = NO;
-    } else {
-        const char *columnTitleConverted = [columnTitle cStringUsingEncoding:NSUTF8StringEncoding];
-        
-        while (sqlite3_step(sqlStatementPrepared) == SQLITE_ROW) {
-            const unsigned char *columnTitleAsUnsigned = sqlite3_column_text(sqlStatementPrepared, 1);
-            char *columnTitleTest = (char *)columnTitleAsUnsigned;
-            
-            if (strcmp(columnTitleConverted, columnTitleTest)) {
-                queryFinding = YES;
-                break;
-            } else {
-                queryFinding = NO;
-            }
-        }
-    }
-    
-    return queryFinding;
-}
-
-#pragma mark - DATA OPERATION METHODS
-
-- (void)saveWindowPosition:(NSPoint)newPosition
-{
-   
-}
-
-- (void)saveIconPosition:(NSPoint)newPosition
-{
-    
-}
-
-- (NSPoint)findWindowPositionForDirectory:(NSString *)fsObjectID
-{
-    NSPoint position = NSMakePoint(0.0, 0.0);
-    
-    NSString *sqlStatementString = @"SELECT window_pos_x, window_pos_y FROM finder_spatials WHERE";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
-        
-    } else {
-        if (sqlite3_step(sqlStatementPrepared)) {
-            double windowPosX = sqlite3_column_double(sqlStatementPrepared, 0);
-            double windowPosY = sqlite3_column_double(sqlStatementPrepared, 1);
-            
-            position = NSMakePoint(windowPosX, windowPosY);
-        }
-    }
-    
-    return position;
-}
-
-- (NSSize)findWindowSizeForDirectory:(NSString *)fsObjectID
-{
-    NSSize windowSize = NSMakeSize(0.0, 0.0);
-    
-    NSString *sqlStatementString = @"SELECT window_w, window_h FROM finder_spatials WHERE dirID = ?";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
-        
-    } else {
-        const char *fsObjectIDAsCString = [fsObjectID cStringUsingEncoding:NSUTF8StringEncoding];
-        int fsObjectIDByteLength = (int)[fsObjectID lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-        sqlite3_bind_text(sqlStatementPrepared, 1, fsObjectIDAsCString, fsObjectIDByteLength, SQLITE_STATIC);
-        
-        if (sqlite3_step(sqlStatementPrepared)) {
-            double windowWidth = sqlite3_column_double(sqlStatementPrepared, 0);
-            double windowHeight = sqlite3_column_double(sqlStatementPrepared, 1);
-            
-            windowSize = NSMakeSize(windowWidth, windowHeight);
-        }
-    }
-    
-    return windowSize;
-}
-
-- (NSRect)findWindowFrameForDirectory:(NSString *)fsObjectID
-{
-    NSRect windowFrame = NSMakeRect(0.0, 0.0, 0.0, 0.0);
-    
-    NSString *sqlStatementString = @"SELECT window_w, window_h, window_pos_x, window_pos_y FROM finder_spatials WHERE dirID = ?";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
-        
-    } else {
-        const char *fsObjectIDAsCString = [fsObjectID cStringUsingEncoding:NSUTF8StringEncoding];
-        int fsObjectIDByteLength = (int)[fsObjectID lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-        sqlite3_bind_text(sqlStatementPrepared, 1, fsObjectIDAsCString, fsObjectIDByteLength, SQLITE_STATIC);
-        
-        if (sqlite3_step(sqlStatementPrepared)) {
-            double windowWidth = sqlite3_column_double(sqlStatementPrepared, 0);
-            double windowHeight = sqlite3_column_double(sqlStatementPrepared, 1);
-            double windowPosX = sqlite3_column_double(sqlStatementPrepared, 2);
-            double windowPosY = sqlite3_column_double(sqlStatementPrepared, 3);
-            
-            windowFrame = NSMakeRect(windowPosX, windowPosY, windowWidth, windowHeight);
-        }
-    }
-    
-    return windowFrame;
-}
-
-- (NSPoint)findIconPositionForDirectory:(NSString *)fsObjectID
-{
-    NSPoint position = NSMakePoint(0.0, 0.0);
-    
-    NSString *sqlStatementString = @"SELECT icon_pos_x, icon_pos_y FROM finder_spatials WHERE dirID = ?";
-    const char *sqlStatement = [sqlStatementString cStringUsingEncoding:NSUTF8StringEncoding];
-    sqlite3_stmt *sqlStatementPrepared;
-    
-    int result = sqlite3_prepare(dbConnection, sqlStatement, -1, &sqlStatementPrepared, 0);
-    
-    if (result != SQLITE_OK) {
-        
-    } else {
-        const char *fsObjectIDAsCString = [fsObjectID cStringUsingEncoding:NSUTF8StringEncoding];
-        int fsObjectIDByteLength = (int)[fsObjectID lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-        sqlite3_bind_text(sqlStatementPrepared, 1, fsObjectIDAsCString, fsObjectIDByteLength, SQLITE_STATIC);
-        
-        if (sqlite3_step(sqlStatementPrepared)) {
-            double windowPosX = sqlite3_column_double(sqlStatementPrepared, 0);
-            double windowPosY = sqlite3_column_double(sqlStatementPrepared, 1);
-            
-            position = NSMakePoint(windowPosX, windowPosY);
-        }
-    }
-    
-    return position;
+    return result;
 }
 
 @end

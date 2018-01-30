@@ -23,15 +23,18 @@
 
 #import <Foundation/Foundation.h>
 
+@class CFRFileModel;
+@class CFRDirectoryModel;
+@class CFRAppModel;
+
 @interface CFRFloppyDisk : NSObject
 
-- (instancetype)init;
++ (void)restoreFileProperties:(CFRFileModel *)fileModel;
++ (void)restoreDirectoryProperties:(CFRDirectoryModel *)directoryModel;
++ (void)restoreAppDirectoryProperties:(CFRAppModel *)appDirectoryModel;
 
-- (void)saveWindowPosition:(NSPoint)newPosition;
-- (void)saveIconPosition:(NSPoint)newPosition;
-- (NSPoint)findWindowPositionForDirectory:(NSString *)fsObjectID;
-- (NSSize)findWindowSizeForDirectory:(NSString *)fsObjectID;
-- (NSRect)findWindowFrameForDirectory:(NSString *)fsObjectID;
-- (NSPoint)findIconPositionForDirectory:(NSString *)fsObjectID;
++ (BOOL)persistFileProperties:(CFRFileModel *)fileModel;
++ (BOOL)persistDirectoryProperties:(CFRDirectoryModel *)directoryModel;
++ (BOOL)persistAppDirectoryProperties:(CFRAppModel *)appDirectoryModel;
 
 @end
