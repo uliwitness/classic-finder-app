@@ -24,6 +24,7 @@
 #import <Cocoa/Cocoa.h>
 
 @class CCIClassicFinderWindow;
+@class CFRDirectoryModel;
 
 @interface CFRWindowManager : NSObject <NSWindowDelegate>
 
@@ -32,6 +33,7 @@
 - (NSWindowController *)createWindowForPath:(NSURL *)path;
 - (NSWindowController *)createWindowForPath:(NSURL *)path
                            atSpecifiedPoint:(NSPoint)point;
+- (NSWindowController *)createWindowForDirectory:(CFRDirectoryModel *)directoryModel;
 
 - (NSUInteger)numberOfOpenWindows;
 

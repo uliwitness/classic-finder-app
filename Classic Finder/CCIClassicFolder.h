@@ -24,9 +24,11 @@
 #import <Cocoa/Cocoa.h>
 #import "CCIFinderIconProtocol.h"
 
+@class CFRDirectoryModel;
+
 @interface CCIClassicFolder : NSControl <CCIFinderIconProtocol>
 
-@property (nonatomic, copy) NSURL *representingDirectory;
+@property (nonatomic, strong) CFRDirectoryModel *directoryModel;
 @property (nonatomic, strong) NSTextField *folderLabel;
 
 - (void)selectItem;

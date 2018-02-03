@@ -122,7 +122,7 @@
                 
                 CCIClassicFolder *folderIcon = [[CCIClassicFolder alloc] initWithFrame:folderFrame];
                 folderIcon.folderLabel.stringValue = [directoryItem title];
-                folderIcon.representingDirectory = [directoryItem objectPath];
+                [folderIcon setDirectoryModel:directoryItem];
                 
                 [self.scrollView.contentView addSubview:folderIcon];
             } else if ([fileSystemItem isMemberOfClass:[CFRFileModel class]]) {

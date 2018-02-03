@@ -28,6 +28,8 @@
 #import "CCIClassicFinderWindow.h"
 #import "CCIClassicFinderWindowController.h"
 #import "CCIApplicationStyles.h"
+#import "CFRFloppyDisk.h"
+#import "CFRDirectoryModel.h"
 
 @interface CCIClassicFolder ()
 
@@ -93,15 +95,28 @@
 {
     if (event.clickCount == 2)
     {
-        NSRect windowFrame = event.window.frame;
-        CGFloat xPos = windowFrame.origin.x + 30.0;
-        CGFloat yPos = windowFrame.origin.y - 30.0;
-        NSPoint newWindowPosition = NSMakePoint(xPos, yPos);
+        [CFRFloppyDisk restoreDirectoryProperties:[self directoryModel]];
+        NSPoint persistedWindowPosition = [[self directoryModel] windowPosition];
+        
+        if ((persistedWindowPosition.x == -1.0) &&
+            (persistedWindowPosition.y == -1.0))
+        {
+            // We assume the window position hasn't been
+            // previously set if windowPosition = (-1, -1).
+            // We will just do a generic offset of 30 px
+            // from the parent/calling window...
+            
+            NSRect windowFrame = event.window.frame;
+            CGFloat xPos = windowFrame.origin.x + 30.0;
+            CGFloat yPos = windowFrame.origin.y - 30.0;
+            
+            NSPoint newWindowPosition = NSMakePoint(xPos, yPos);
+            [[self directoryModel] setWindowPosition:newWindowPosition];
+        }
         
         [self setOpenItemState];
         
-        NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:self.representingDirectory
-                                                                               atSpecifiedPoint:newWindowPosition];
+        NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForDirectory:[self directoryModel]];
         
         [finderWindow showWindow:self];
         

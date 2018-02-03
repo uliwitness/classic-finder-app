@@ -24,6 +24,8 @@
 #import "AppDelegate.h"
 #import "CCIClassicFinderWindow.h"
 #import "CFRWindowManager.h"
+#import "CFRDirectoryModel.h"
+#import "CFRFloppyDisk.h"
 
 @interface AppDelegate ()
 
@@ -85,7 +87,29 @@
 {
     NSURL *userDirectoryPath = [NSURL URLWithString:@"file:///"];
     
-    NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:userDirectoryPath];
+    CFRDirectoryModel *rootDirectoryModel = [[CFRDirectoryModel alloc] init];
+    [rootDirectoryModel setObjectPath:userDirectoryPath];
+    
+    [CFRFloppyDisk restoreDirectoryProperties:rootDirectoryModel];
+    NSPoint persistedWindowPosition = [rootDirectoryModel windowPosition];
+    
+    if ((persistedWindowPosition.x == -1.0) &&
+        (persistedWindowPosition.y == -1.0))
+    {
+        // We assume the window position hasn't been
+        // previously set if windowPosition = (-1, -1).
+        // We will just do a generic offset of 30 px
+        // from the parent/calling window...
+        
+        NSRect screenSize = [[NSScreen mainScreen] frame];
+        CGFloat xPos = (screenSize.size.width / 2.0) - 250.0;
+        CGFloat yPos = (screenSize.size.height / 2.0) - 150.0;
+        
+        NSPoint newWindowPosition = NSMakePoint(xPos, yPos);
+        [rootDirectoryModel setWindowPosition:newWindowPosition];
+    }
+    
+    NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForDirectory:rootDirectoryModel];
     [finderWindow showWindow:self];
     
     self.window = finderWindow.window;

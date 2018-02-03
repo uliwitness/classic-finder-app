@@ -25,6 +25,7 @@
 #import "CCIClassicFinderWindow.h"
 #import "AppDelegate.h"
 #import "CCIClassicFinderWindowController.h"
+#import "CFRDirectoryModel.h"
 
 @interface CFRWindowManager ()
 
@@ -86,6 +87,14 @@
     }
 
     return finderWindowController;
+}
+
+- (NSWindowController *)createWindowForDirectory:(CFRDirectoryModel *)directoryModel
+{
+    NSWindowController *newFinderWindow = [self createWindowForPath:directoryModel.objectPath
+                                                   atSpecifiedPoint:directoryModel.windowPosition];
+    
+    return newFinderWindow;
 }
 
 - (void)windowWillClose:(NSNotification *)notification

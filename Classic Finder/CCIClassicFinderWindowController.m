@@ -29,6 +29,7 @@
 #import "CCIClassicFile.h"
 #import "CCIClassicFolder.h"
 #import "CFRFileSystemUtils.h"
+#import "CFRDirectoryModel.h"
 
 @interface CCIClassicFinderWindowController ()
 
@@ -105,7 +106,7 @@
     CCIClassicFinderWindowController *closingWindowController = closingWindow.windowController;
     
     for (CCIClassicFolder *folder in self.selectedFiles) {
-        if (folder.representingDirectory == closingWindowController.representedDirectory) {
+        if (folder.directoryModel.objectPath == closingWindowController.representedDirectory) {
             [folder setCloseItemState];
             //NSLog(@"closing folder... %@", closingWindowController.representedDirectory);
         }
