@@ -98,8 +98,8 @@
     {
         // We assume the window position hasn't been
         // previously set if windowPosition = (-1, -1).
-        // We will just do a generic offset of 30 px
-        // from the parent/calling window...
+        // We will just position at the midpoint of
+        // the user's main screen
         
         NSRect screenSize = [[NSScreen mainScreen] frame];
         CGFloat xPos = (screenSize.size.width / 2.0) - 250.0;
