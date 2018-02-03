@@ -20,6 +20,22 @@
 
 @synthesize executablePath;
 
+- (instancetype)init
+{
+    self = [super init];
+    
+    if (self) {
+        [self setTitle:@""];
+        [self setCreationDate:[NSDate date]];
+        [self setLastModified:[NSDate date]];
+        [self setObjectPath:[NSURL URLWithString:@"file:///"]];
+        [self setIconPosition:NSMakePoint(-1.0, -1.0)];
+        [self setExecutablePath:[NSURL URLWithString:@"file:///"]];
+    }
+    
+    return self;
+}
+
 - (NSString *)uniqueID
 {
     NSString *unhashedID = [NSString stringWithFormat:@"%f%@", creationDate.timeIntervalSinceReferenceDate, title];
