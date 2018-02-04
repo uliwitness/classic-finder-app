@@ -23,6 +23,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class CCIClassicFinderWindowController;
+
 @interface CCIClassicFinderWindow : NSWindow
 
 @property (nonatomic, copy) NSString* windowTitle;
@@ -33,7 +35,8 @@
                             backing:(NSBackingStoreType)bufferingType
                               defer:(BOOL)flag
                     withWindowTitle:(NSString *)windowTitle
-                        andFileList:(NSArray *)fileList;
+                           fileList:(NSArray *)fileList
+                      andController:(CCIClassicFinderWindowController *)wc;
 - (void)setWindowActive;
 - (void)setWindowInactive;
 

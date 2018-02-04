@@ -91,6 +91,7 @@
 		A80A5573201E65640021B414 /* NSString+Hashes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hashes.m"; sourceTree = "<group>"; };
 		A80A5574201E65650021B414 /* NSString+Hashes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hashes.h"; sourceTree = "<group>"; };
 		A80A5577202033ED0021B414 /* ScratchCode.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ScratchCode.txt; sourceTree = "<group>"; };
+		A80A55962026CD400021B414 /* CCIClassicTitlebarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCIClassicTitlebarDelegate.h; sourceTree = "<group>"; };
 		A885B1C91E59457100F1AB96 /* Classic Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Classic Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A885B1CC1E59457100F1AB96 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A885B1CD1E59457100F1AB96 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -235,6 +236,7 @@
 				A805A861200343CC00274577 /* CFRFileSystemUtils.h */,
 				A805A862200343CC00274577 /* CFRFileSystemUtils.m */,
 				A80A5577202033ED0021B414 /* ScratchCode.txt */,
+				A80A55962026CD400021B414 /* CCIClassicTitlebarDelegate.h */,
 			);
 			path = "Classic Finder";
 			sourceTree = "<group>";

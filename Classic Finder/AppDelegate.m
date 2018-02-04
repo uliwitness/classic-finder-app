@@ -23,6 +23,7 @@
 
 #import "AppDelegate.h"
 #import "CCIClassicFinderWindow.h"
+#import "CCIClassicFinderWindowController.h"
 #import "CFRWindowManager.h"
 #import "CFRDirectoryModel.h"
 #import "CFRFloppyDisk.h"
@@ -109,7 +110,7 @@
         [rootDirectoryModel setWindowPosition:newWindowPosition];
     }
     
-    NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForDirectory:rootDirectoryModel];
+    CCIClassicFinderWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForDirectory:rootDirectoryModel];
     [finderWindow showWindow:self];
     
     self.window = finderWindow.window;

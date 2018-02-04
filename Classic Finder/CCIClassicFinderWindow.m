@@ -33,6 +33,7 @@
 #import "CFRDirectoryModel.h"
 #import "CFRFileModel.h"
 #import "CFRAppModel.h"
+#import "CCIClassicFinderWindowController.h"
 
 @interface CCIClassicFinderWindow () {
     BOOL windowIsActive;
@@ -51,7 +52,8 @@
                             backing:(NSBackingStoreType)bufferingType
                               defer:(BOOL)flag
                     withWindowTitle:(NSString *)windowTitle
-                        andFileList:(NSArray *)fileList
+                           fileList:(NSArray *)fileList
+                      andController:(CCIClassicFinderWindowController *)wc
 {
     self = [super initWithContentRect:contentRect
                             styleMask:style
@@ -61,8 +63,9 @@
     if (self)
     {
         windowIsActive = YES;
-        self.windowTitle = windowTitle;
-        self.fileList = fileList;
+        [self setWindowTitle:windowTitle];
+        [self setFileList:fileList];
+        [self setWindowController:wc];
         
         [self setBackgroundColor:[NSColor clearColor]];
         
@@ -77,6 +80,11 @@
         self.titlebar = [[CCITitleBar alloc] initWithFrame:titlebarFrame];
         self.titlebar.titleText = self.windowTitle;
         self.titlebar.windowIsActive = YES;
+        [[self titlebar] setDelegate:self.windowController];
+        
+        if (self.windowController == nil) {
+            NSLog(@"window controller is nil");
+        }
         
         [self.contentView addSubview:self.titlebar];
         

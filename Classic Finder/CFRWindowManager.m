@@ -54,54 +54,33 @@
     return sharedInstance;
 }
 
-- (NSWindowController *)createWindowForPath:(NSURL *)path
-{
-    NSRect screenSize = [[NSScreen mainScreen] frame];
-    CGFloat xPos = (screenSize.size.width / 2.0) - 250.0;
-    CGFloat yPos = (screenSize.size.height / 2.0) - 150.0;
-    
-    NSWindowController *newFinderWindow = [self createWindowForPath:path
-                                                   atSpecifiedPoint:NSMakePoint(xPos, yPos)];
-    
-    return newFinderWindow;
-}
-
-- (CCIClassicFinderWindowController *)createWindowForPath:(NSURL *)path
-                                         atSpecifiedPoint:(NSPoint)point
+- (CCIClassicFinderWindowController *)createWindowForDirectory:(CFRDirectoryModel *)directoryModel
 {
     CCIClassicFinderWindowController *finderWindowController;
     
-    if ([self.activeWindows objectForKey:path.absoluteString] != nil)
+    if ([self.activeWindows objectForKey:directoryModel.objectPath.absoluteString] != nil)
     {
-        finderWindowController = [self.activeWindows objectForKey:path.absoluteString];
+        finderWindowController = [self.activeWindows objectForKey:directoryModel.objectPath.absoluteString];
     } else
     {
-        CCIClassicFinderWindowController *wc = [[CCIClassicFinderWindowController alloc] initForDirectory:path
-                                                                                              atPoint:point];
+        CCIClassicFinderWindowController *wc = [[CCIClassicFinderWindowController alloc] initForDirectory:directoryModel];
+        
         [wc.window makeKeyAndOrderFront:self];
-
+        
         finderWindowController = wc;
         
         [self.activeWindows setObject:wc
-                               forKey:path.absoluteString];
+                               forKey:directoryModel.objectPath.absoluteString];
     }
-
-    return finderWindowController;
-}
-
-- (NSWindowController *)createWindowForDirectory:(CFRDirectoryModel *)directoryModel
-{
-    NSWindowController *newFinderWindow = [self createWindowForPath:directoryModel.objectPath
-                                                   atSpecifiedPoint:directoryModel.windowPosition];
     
-    return newFinderWindow;
+    return finderWindowController;
 }
 
 - (void)windowWillClose:(NSNotification *)notification
 {
     CCIClassicFinderWindow *finderWindow = notification.object;
     CCIClassicFinderWindowController *finderWindowController = finderWindow.windowController;
-    NSString *pathString = finderWindowController.representedDirectory.absoluteString;
+    NSString *pathString = finderWindowController.directoryModel.objectPath.absoluteString;
     
     [self.activeWindows removeObjectForKey:pathString];
 }

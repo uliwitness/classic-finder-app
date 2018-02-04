@@ -29,6 +29,9 @@
 @property BOOL showCloseButton;
 @property BOOL showMaximizeButton;
 
+- (id)delegate;
+- (void)setDelegate:(id)newDelegate;
+
 - (void)setWindowIsActive:(BOOL)windowIsActive;
 
 @end

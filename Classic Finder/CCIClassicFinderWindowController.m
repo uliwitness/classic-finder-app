@@ -30,6 +30,7 @@
 #import "CCIClassicFolder.h"
 #import "CFRFileSystemUtils.h"
 #import "CFRDirectoryModel.h"
+#import "CFRFloppyDisk.h"
 
 @interface CCIClassicFinderWindowController ()
 
@@ -41,30 +42,33 @@
 
 @implementation CCIClassicFinderWindowController
 
-- (instancetype)initForDirectory:(NSURL *)directory
-                         atPoint:(NSPoint)point
+- (instancetype)initForDirectory:(CFRDirectoryModel *)directoryModel
 {
     self = [super init];
     
     if (self) {
-        NSString *directoryName = [CFRFileSystemUtils determineDirectoryNameForURL:directory];
+        NSString *directoryName = [CFRFileSystemUtils determineDirectoryNameForURL:directoryModel.objectPath];
         
-        self.representedDirectory = directory;
+        self.directoryModel = directoryModel;
         self.windowDirectoryName = directoryName;
-        self.fileList = [CFRFileSystemOperations getListingForDirectory:self.representedDirectory];
+        self.fileList = [CFRFileSystemOperations getListingForDirectory:self.directoryModel.objectPath];
         self.selectedFiles = [[NSMutableArray alloc] initWithCapacity:50];
         
         NSUInteger windowStyleMask = NSWindowStyleMaskBorderless;
-        NSRect initalContentRect = NSMakeRect(point.x, point.y, 500.0, 300.0);
+        NSRect initalContentRect = NSMakeRect(self.directoryModel.windowPosition.x, self.directoryModel.windowPosition.y, 500.0, 300.0);
         
         // https://stackoverflow.com/a/33229421/5096725
         CCIClassicFinderWindow *finderWindow = [[CCIClassicFinderWindow alloc] initWithContentRect:initalContentRect
                                                                                          styleMask:windowStyleMask
                                                                                            backing:NSBackingStoreBuffered
                                                                                              defer:YES
-                                                                                   withWindowTitle:self.windowDirectoryName andFileList:self.fileList];
-        finderWindow.delegate = [CFRWindowManager sharedInstance];
-        self.window = finderWindow;
+                                                                                   withWindowTitle:self.windowDirectoryName
+                                                                                          fileList:self.fileList
+                                                                                     andController:self];
+
+        [finderWindow setDelegate:[CFRWindowManager sharedInstance]];
+        [finderWindow setWindowController:self];
+        [self setWindow:finderWindow];
         
         [finderWindow makeKeyAndOrderFront:self];
         
@@ -106,7 +110,7 @@
     CCIClassicFinderWindowController *closingWindowController = closingWindow.windowController;
     
     for (CCIClassicFolder *folder in self.selectedFiles) {
-        if (folder.directoryModel.objectPath == closingWindowController.representedDirectory) {
+        if (folder.directoryModel.objectPath == closingWindowController.directoryModel.objectPath) {
             [folder setCloseItemState];
             //NSLog(@"closing folder... %@", closingWindowController.representedDirectory);
         }
@@ -146,6 +150,16 @@
     }
     
     [self.selectedFiles removeAllObjects];
+}
+
+#pragma mark - TITLEBAR DELEGATE METHODS
+
+- (void)titlebarDidFinishDetectingWindowPositionChange:(CCITitleBar *)sender
+{
+    NSPoint currentPosition = self.window.frame.origin;
+    
+    [[self directoryModel] setWindowPosition:currentPosition];
+    [CFRFloppyDisk persistDirectoryProperties:[self directoryModel]];
 }
 
 @end

@@ -25,15 +25,14 @@
 
 @class CCIClassicFinderWindow;
 @class CFRDirectoryModel;
+@class CCIClassicFinderWindowController;
 
 @interface CFRWindowManager : NSObject <NSWindowDelegate>
 
 +(CFRWindowManager *)sharedInstance;
 
-- (NSWindowController *)createWindowForPath:(NSURL *)path;
-- (NSWindowController *)createWindowForPath:(NSURL *)path
-                           atSpecifiedPoint:(NSPoint)point;
-- (NSWindowController *)createWindowForDirectory:(CFRDirectoryModel *)directoryModel;
+
+- (CCIClassicFinderWindowController *)createWindowForDirectory:(CFRDirectoryModel *)directoryModel;
 
 - (NSUInteger)numberOfOpenWindows;
 

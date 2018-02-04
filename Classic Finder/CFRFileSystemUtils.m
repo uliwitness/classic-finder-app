@@ -71,7 +71,8 @@
     }
     
     NSString *resolvedPath = [paths objectAtIndex:0];
-    NSString *pathAndExecutableCombination = [resolvedPath stringByAppendingString:appName];
+    NSString *resolvedPathWithEndingSlash = [NSString stringWithFormat:@"%@/", resolvedPath];
+    NSString *pathAndExecutableCombination = [resolvedPathWithEndingSlash stringByAppendingString:appName];
     NSFileManager *defaultManager = [NSFileManager defaultManager];
     NSError *creationError = nil;
     

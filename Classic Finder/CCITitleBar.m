@@ -25,8 +25,10 @@
 #import "CCICloseButton.h"
 #import "CCIMaximizeButton.h"
 #import "CCIApplicationStyles.h"
+#import "CCIClassicTitlebarDelegate.h"
 
 @interface CCITitleBar () {
+    id delegate;
     BOOL windowIsActive;
 }
 
@@ -58,6 +60,16 @@
 - (BOOL)windowIsActive
 {
     return windowIsActive;
+}
+
+- (id)delegate
+{
+    return delegate;
+}
+
+- (void)setDelegate:(id)newDelegate
+{
+    delegate = newDelegate;
 }
 
 - (void)setWindowIsActive:(BOOL)pWindowIsActive
@@ -111,6 +123,13 @@
 - (void)mouseDown:(NSEvent *)event
 {
     self.originalMouseCoordinates = event.locationInWindow;
+}
+
+- (void)mouseUp:(NSEvent *)event
+{
+    if ([[self delegate] respondsToSelector:@selector(titlebarDidFinishDetectingWindowPositionChange:)]) {
+        [[self delegate] titlebarDidFinishDetectingWindowPositionChange:self];
+    }
 }
 
 - (void)mouseDragged:(NSEvent *)event

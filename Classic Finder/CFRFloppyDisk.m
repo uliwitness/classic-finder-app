@@ -32,7 +32,7 @@
 + (void)restoreFileProperties:(CFRFileModel *)fileModel
 {
     NSString *applicationSupportDirectory = [CFRFileSystemUtils applicationSupportDirectory];
-    NSString *archivePath = [applicationSupportDirectory stringByAppendingString:[fileModel uniqueID]];
+    NSString *archivePath = [NSString stringWithFormat:@"%@/%@.plist", applicationSupportDirectory, fileModel.uniqueID];
 
     BOOL archiveFileExists = [[NSFileManager defaultManager] fileExistsAtPath:archivePath];
     
@@ -49,7 +49,7 @@
 + (void)restoreDirectoryProperties:(CFRDirectoryModel *)directoryModel
 {
     NSString *applicationSupportDirectory = [CFRFileSystemUtils applicationSupportDirectory];
-    NSString *archivePath = [applicationSupportDirectory stringByAppendingString:[directoryModel uniqueID]];
+    NSString *archivePath = [NSString stringWithFormat:@"%@/%@.plist", applicationSupportDirectory, directoryModel.uniqueID];
     
     BOOL archiveFileExists = [[NSFileManager defaultManager] fileExistsAtPath:archivePath];
     
@@ -70,7 +70,7 @@
 + (void)restoreAppDirectoryProperties:(CFRAppModel *)appDirectoryModel
 {
     NSString *applicationSupportDirectory = [CFRFileSystemUtils applicationSupportDirectory];
-    NSString *archivePath = [applicationSupportDirectory stringByAppendingString:[appDirectoryModel uniqueID]];
+    NSString *archivePath = [NSString stringWithFormat:@"%@/%@.plist", applicationSupportDirectory, appDirectoryModel.uniqueID];
     
     BOOL archiveFileExists = [[NSFileManager defaultManager] fileExistsAtPath:archivePath];
     
@@ -87,7 +87,7 @@
 + (BOOL)persistFileProperties:(CFRFileModel *)fileModel;
 {
     NSString *applicationSupportDirectory = [CFRFileSystemUtils applicationSupportDirectory];
-    NSString *archivePath = [applicationSupportDirectory stringByAppendingString:[fileModel uniqueID]];
+    NSString *archivePath = [NSString stringWithFormat:@"%@/%@.plist", applicationSupportDirectory, fileModel.uniqueID];
     
     BOOL result = [NSKeyedArchiver archiveRootObject:fileModel
                                               toFile:archivePath];
@@ -98,7 +98,7 @@
 + (BOOL)persistDirectoryProperties:(CFRDirectoryModel *)directoryModel
 {
     NSString *applicationSupportDirectory = [CFRFileSystemUtils applicationSupportDirectory];
-    NSString *archivePath = [applicationSupportDirectory stringByAppendingString:[directoryModel uniqueID]];
+    NSString *archivePath = [NSString stringWithFormat:@"%@/%@.plist", applicationSupportDirectory, directoryModel.uniqueID];
     
     BOOL result = [NSKeyedArchiver archiveRootObject:directoryModel
                                               toFile:archivePath];
@@ -109,7 +109,7 @@
 + (BOOL)persistAppDirectoryProperties:(CFRAppModel *)appDirectoryModel
 {
     NSString *applicationSupportDirectory = [CFRFileSystemUtils applicationSupportDirectory];
-    NSString *archivePath = [applicationSupportDirectory stringByAppendingString:[appDirectoryModel uniqueID]];
+    NSString *archivePath = [NSString stringWithFormat:@"%@/%@.plist", applicationSupportDirectory, appDirectoryModel.uniqueID];
     
     BOOL result = [NSKeyedArchiver archiveRootObject:appDirectoryModel
                                               toFile:archivePath];

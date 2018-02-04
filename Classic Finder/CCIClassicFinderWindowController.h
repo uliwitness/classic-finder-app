@@ -22,16 +22,17 @@
 // along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
 
 #import <Cocoa/Cocoa.h>
+#import "CCIClassicTitlebarDelegate.h"
 
 @class CCIClassicFile;
 @class CCIClassicFolder;
+@class CFRDirectoryModel;
 
-@interface CCIClassicFinderWindowController : NSWindowController
+@interface CCIClassicFinderWindowController : NSWindowController <CCIClassicTitlebarDelegate>
 
-@property (nonatomic, copy) NSURL *representedDirectory;
+@property (nonatomic, strong) CFRDirectoryModel *directoryModel;
 
-- (instancetype)initForDirectory:(NSURL *)directory
-                         atPoint:(NSPoint)point;
+- (instancetype)initForDirectory:(CFRDirectoryModel *)directoryModel;
 
 - (void)closeOpenedFolder:(NSNotification *)notification;
 
