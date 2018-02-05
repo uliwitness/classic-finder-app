@@ -5,7 +5,7 @@ This project aims to be a functional re-creation of the classic Mac OS Finder.
 Now you can experience a pixel-for-pixel clone of the original Macintosh Finder 
 on your modern Mac. This application is written in Objective-C and Cocoa.
 
-![image of classic finder showing a few open windows](header.jpg)
+![image of classic finder showing a few open windows](header.png)
 
 ## Installation
 
