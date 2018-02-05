@@ -108,12 +108,46 @@
             
             NSPoint newWindowPosition = NSMakePoint(xPos, yPos);
             [[self directoryModel] setWindowPosition:newWindowPosition];
+        } else {
+            // Handle overflow
+            // if the last-recorded position of the window is somewhere off-screen,
+            // reposition it so that it is visible on screen
+            // handy for cases when switching between a large desktop monitor and
+            // a smaller built-in laptop screen
+            NSRect mainScreenFrame = [[NSScreen mainScreen] frame];
+            
+            // window horizontal position is out of right-side of screen
+            if (persistedWindowPosition.x > (mainScreenFrame.size.width) - 30.0) {
+                NSPoint currentWindowPosition = [[self directoryModel] windowPosition];
+                NSPoint newWindowPosition = NSMakePoint(mainScreenFrame.size.width - 500.0, currentWindowPosition.y);
+                [[self directoryModel] setWindowPosition:newWindowPosition];
+            }
+            
+            // window vertical position is below bottom of screen
+            if (persistedWindowPosition.y > (mainScreenFrame.size.height) - 30.0) {
+                NSPoint currentWindowPosition = [[self directoryModel] windowPosition];
+                NSPoint newWindowPosition = NSMakePoint(currentWindowPosition.x, mainScreenFrame.size.height - 300.0);
+                [[self directoryModel] setWindowPosition:newWindowPosition];
+            }
+            
+            // window horizontal position is out of left-side of screen
+            if (persistedWindowPosition.x < 0.0) {
+                NSPoint currentWindowPosition = [[self directoryModel] windowPosition];
+                NSPoint newWindowPosition = NSMakePoint(30.0, currentWindowPosition.y);
+                [[self directoryModel] setWindowPosition:newWindowPosition];
+            }
+            
+            // window vertical position is above top of screen
+            if (persistedWindowPosition.y < 0.0) {
+                NSPoint currentWindowPosition = [[self directoryModel] windowPosition];
+                NSPoint newWindowPosition = NSMakePoint(currentWindowPosition.x, 30.0);
+                [[self directoryModel] setWindowPosition:newWindowPosition];
+            }
         }
-        
+
         [self setOpenItemState];
         
         NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForDirectory:[self directoryModel]];
-        
         [finderWindow showWindow:self];
         
         [[NSNotificationCenter defaultCenter] addObserver:event.window.windowController
