@@ -1,9 +1,9 @@
 //
-//  CCIScrollView.h
-//  Classic Scrolling2
+//  CFRFileSystemObject.h
+//  Classic Finder
 //
-//  Created by Ben Szymanski on 11/12/17.
-//  Copyright © 2017 Ben Szymanski. All rights reserved.
+//  Created by Ben Szymanski on 1/11/18.
+//  Copyright © 2018 Ben Szymanski. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,16 +17,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
-@class CCIScrollContentView;
+@protocol CFRFileSystemObject <NSObject>
 
-@interface CCIScrollView : NSView
+@property NSURL *objectPath;
+@property NSDate *creationDate;
+@property NSDate *lastModified;
+@property NSString *title;
 
-@property (nonatomic, strong) CCIScrollContentView *contentView;
+@property NSPoint iconPosition;
 
-- (void)performScrollAction:(id)sender;
-- (void)resizeContentView:(NSRect)newFrame;
-- (void)setWindowIsActive:(BOOL)windowIsActive;
+- (NSString *)uniqueID;
+- (NSString *)objectType;
 
 @end

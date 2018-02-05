@@ -5,21 +5,17 @@
 //  Created by Ben Szymanski on 2/19/17.
 //  Copyright © 2017 Ben Szymanski. All rights reserved.
 //
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-// This file is part of Classic Finder.
+// http://www.apache.org/licenses/LICENSE-2.0
 //
-// Classic Finder is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Classic Finder is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 #import "CCIClassicFolderIcon.h"
 #import "CCIApplicationStyles.h"
@@ -27,6 +23,7 @@
 @interface CCIClassicFolderIcon ()
 
 @property BOOL selectedState;
+@property BOOL openFolderState;
 
 @end
 
@@ -37,7 +34,8 @@
     self = [super initWithFrame:frameRect];
     
     if (self) {
-        self.selectedState = NO;
+        [self setSelectedState:NO];
+        [self setOpenFolderState:NO];
     }
     
     return self;
@@ -46,7 +44,87 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    if (self.selectedState) {
+    if (![self selectedState] && [self openFolderState]) {
+        [[[CCIApplicationStyles instance] blackColor] setStroke];
+        [[[CCIApplicationStyles instance] folderOpenedBackgroundColor] setFill];
+        
+        NSBezierPath *outlinePath = [[NSBezierPath alloc] init];
+        [outlinePath moveToPoint:NSMakePoint(30.0, 5.0)];
+        [outlinePath lineToPoint:NSMakePoint(30.0, 24.0)];
+        [outlinePath lineToPoint:NSMakePoint(0.5, 24.0)];
+        [outlinePath lineToPoint:NSMakePoint(0.5, 5.0)];
+        [outlinePath lineToPoint:NSMakePoint(5.0, 1.0)];
+        [outlinePath lineToPoint:NSMakePoint(11.0, 1.0)];
+        [outlinePath lineToPoint:NSMakePoint(15.0, 4.5)];
+        [outlinePath lineToPoint:NSMakePoint(29.0, 4.5)];
+        [outlinePath stroke];
+        [outlinePath fill];
+        [outlinePath addClip];
+        
+        [[[CCIApplicationStyles instance] blackColor] setFill];
+        
+        NSUInteger blackedRowCountPointer = 0;
+        
+        for (NSUInteger col = 0; col < (self.frame.size.width - 1); col += 1) {
+            if (col % 2 == 0) {
+                if (blackedRowCountPointer % 2 == 0) {
+                    for (NSUInteger row = 0; row < 24; row += 1) {
+                        if (row % 2 == 0) {
+                            NSRectFill(NSMakeRect(col, row, 1.0, 1.0));
+                        }
+                    }
+                } else  {
+                    for (NSUInteger row = 0; row < 24; row += 1) {
+                        if (row % 2 != 0) {
+                            NSRectFill(NSMakeRect(col, row, 1.0, 1.0));
+                        }
+                    }
+                }
+
+                blackedRowCountPointer += 1;
+            }
+        }
+    } else if ([self selectedState] && [self openFolderState]) {
+        [[[CCIApplicationStyles instance] blackColor] setStroke];
+        [[[CCIApplicationStyles instance] folderOpenedAndSelectedBackgroundColor] setFill];
+        
+        NSBezierPath *outlinePath = [[NSBezierPath alloc] init];
+        [outlinePath moveToPoint:NSMakePoint(30.0, 5.0)];
+        [outlinePath lineToPoint:NSMakePoint(30.0, 24.0)];
+        [outlinePath lineToPoint:NSMakePoint(0.5, 24.0)];
+        [outlinePath lineToPoint:NSMakePoint(0.5, 5.0)];
+        [outlinePath lineToPoint:NSMakePoint(5.0, 1.0)];
+        [outlinePath lineToPoint:NSMakePoint(11.0, 1.0)];
+        [outlinePath lineToPoint:NSMakePoint(15.0, 4.5)];
+        [outlinePath lineToPoint:NSMakePoint(29.0, 4.5)];
+        [outlinePath stroke];
+        [outlinePath fill];
+        [outlinePath addClip];
+        
+        [[[CCIApplicationStyles instance] blackColor] setFill];
+        
+        NSUInteger blackedRowCountPointer = 0;
+        
+        for (NSUInteger col = 0; col < (self.frame.size.width - 1); col += 1) {
+            if (col % 2 == 0) {
+                if (blackedRowCountPointer % 2 == 0) {
+                    for (NSUInteger row = 0; row < 24; row += 1) {
+                        if (row % 2 == 0) {
+                            NSRectFill(NSMakeRect(col, row, 1.0, 1.0));
+                        }
+                    }
+                } else  {
+                    for (NSUInteger row = 0; row < 24; row += 1) {
+                        if (row % 2 != 0) {
+                            NSRectFill(NSMakeRect(col, row, 1.0, 1.0));
+                        }
+                    }
+                }
+                
+                blackedRowCountPointer += 1;
+            }
+        }
+    } else if ([self selectedState] && ![self openFolderState]) {
         [[[CCIApplicationStyles instance] blackColor] setStroke];
         [[[CCIApplicationStyles instance] darkPurpleColor] setFill];
         
@@ -156,6 +234,18 @@
 - (void)unselectFolder
 {
     [self setSelectedState:NO];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)openFolder
+{
+    [self setOpenFolderState:YES];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)closeFolder
+{
+    [self setOpenFolderState:NO];
     [self setNeedsDisplay:YES];
 }
 

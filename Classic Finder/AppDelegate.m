@@ -5,25 +5,24 @@
 //  Created by Ben Szymanski on 2/18/17.
 //  Copyright © 2017 Ben Szymanski. All rights reserved.
 //
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-// This file is part of Classic Finder.
+// http://www.apache.org/licenses/LICENSE-2.0
 //
-// Classic Finder is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Classic Finder is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 #import "AppDelegate.h"
 #import "CCIClassicFinderWindow.h"
+#import "CCIClassicFinderWindowController.h"
 #import "CFRWindowManager.h"
+#import "CFRDirectoryModel.h"
+#import "CFRFloppyDisk.h"
 
 @interface AppDelegate ()
 
@@ -46,19 +45,106 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     
-    NSString *userDirectoryPathExpanded = [@"/" stringByStandardizingPath];;
-    NSURL *userDirectoryPath = [NSURL URLWithString:userDirectoryPathExpanded];
-    
-    NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:userDirectoryPath];
-    [finderWindow showWindow:self];
-    
-    self.window = finderWindow.window;
+    [self openRootVolumeWindow];
 }
 
+- (void)applicationDidBecomeActive:(NSNotification *)notification
+{
+    CFRWindowManager *windowManager = [CFRWindowManager sharedInstance];
+    
+    if ([windowManager numberOfOpenWindows] == 0) {
+        [self openRootVolumeWindow];
+    }
+}
+
+// Inspiration for the following two methods comes from:
+// http://www.cocoabuilder.com/archive/cocoa/238362-how-to-detect-click-on-app-dock-icon-when-the-app-is-active.html
+
+- (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender
+{
+    return YES;
+}
+
+- (BOOL)applicationOpenUntitledFile:(NSApplication *)sender
+{
+    CFRWindowManager *windowManager = [CFRWindowManager sharedInstance];
+    
+    if ([windowManager numberOfOpenWindows] == 0) {
+        [self openRootVolumeWindow];
+    }
+    
+    return YES;
+}
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
 }
 
+- (void)openRootVolumeWindow
+{
+    NSURL *userDirectoryPath = [NSURL URLWithString:@"file:///"];
+    
+    CFRDirectoryModel *rootDirectoryModel = [[CFRDirectoryModel alloc] init];
+    [rootDirectoryModel setObjectPath:userDirectoryPath];
+    
+    [CFRFloppyDisk restoreDirectoryProperties:rootDirectoryModel];
+    NSPoint persistedWindowPosition = [rootDirectoryModel windowPosition];
+    
+    if ((persistedWindowPosition.x == -1.0) &&
+        (persistedWindowPosition.y == -1.0))
+    {
+        // We assume the window position hasn't been
+        // previously set if windowPosition = (-1, -1).
+        // We will just position at the midpoint of
+        // the user's main screen
+        
+        NSRect screenSize = [[NSScreen mainScreen] frame];
+        CGFloat xPos = (screenSize.size.width / 2.0) - 250.0;
+        CGFloat yPos = (screenSize.size.height / 2.0) - 150.0;
+        
+        NSPoint newWindowPosition = NSMakePoint(xPos, yPos);
+        [rootDirectoryModel setWindowPosition:newWindowPosition];
+    } else {
+        // Handle overflow
+        // if the last-recorded position of the window is somewhere off-screen,
+        // reposition it so that it is visible on screen
+        // handy for cases when switching between a large desktop monitor and
+        // a smaller built-in laptop screen
+        NSRect mainScreenFrame = [[NSScreen mainScreen] frame];
+        
+        // window horizontal position is out of right-side of screen
+        if (persistedWindowPosition.x > (mainScreenFrame.size.width) - 30.0) {
+            NSPoint currentWindowPosition = [rootDirectoryModel windowPosition];
+            NSPoint newWindowPosition = NSMakePoint(mainScreenFrame.size.width - 500.0, currentWindowPosition.y);
+            [rootDirectoryModel setWindowPosition:newWindowPosition];
+        }
+        
+        // window vertical position is below bottom of screen
+        if (persistedWindowPosition.y > (mainScreenFrame.size.height) - 30.0) {
+            NSPoint currentWindowPosition = [rootDirectoryModel windowPosition];
+            NSPoint newWindowPosition = NSMakePoint(currentWindowPosition.x, mainScreenFrame.size.height - 300.0);
+            [rootDirectoryModel setWindowPosition:newWindowPosition];
+        }
+        
+        // window horizontal position is out of left-side of screen
+        if (persistedWindowPosition.x < 0.0) {
+            NSPoint currentWindowPosition = [rootDirectoryModel windowPosition];
+            NSPoint newWindowPosition = NSMakePoint(30.0, currentWindowPosition.y);
+            [rootDirectoryModel setWindowPosition:newWindowPosition];
+        }
+        
+        // window vertical position is above top of screen
+        if (persistedWindowPosition.y < 0.0) {
+            NSPoint currentWindowPosition = [rootDirectoryModel windowPosition];
+            NSPoint newWindowPosition = NSMakePoint(currentWindowPosition.x, 30.0);
+            [rootDirectoryModel setWindowPosition:newWindowPosition];
+        }
+    }
+    
+    CCIClassicFinderWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForDirectory:rootDirectoryModel];
+    [finderWindow showWindow:self];
+    
+    self.window = finderWindow.window;
+}
 
 @end

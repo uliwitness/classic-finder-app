@@ -1,9 +1,9 @@
 //
-//  CFRWindowManager.h
+//  CFRFloppyDisk.h
 //  Classic Finder
 //
-//  Created by Ben Szymanski on 3/25/17.
-//  Copyright © 2017 Ben Szymanski. All rights reserved.
+//  Created by Ben Szymanski on 1/14/18.
+//  Copyright © 2018 Ben Szymanski. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,19 +18,19 @@
 // limitations under the License.
 
 #import <Foundation/Foundation.h>
-#import <Cocoa/Cocoa.h>
 
-@class CCIClassicFinderWindow;
+@class CFRFileModel;
 @class CFRDirectoryModel;
-@class CCIClassicFinderWindowController;
+@class CFRAppModel;
 
-@interface CFRWindowManager : NSObject <NSWindowDelegate>
+@interface CFRFloppyDisk : NSObject
 
-+(CFRWindowManager *)sharedInstance;
++ (void)restoreFileProperties:(CFRFileModel *)fileModel;
++ (void)restoreDirectoryProperties:(CFRDirectoryModel *)directoryModel;
++ (void)restoreAppDirectoryProperties:(CFRAppModel *)appDirectoryModel;
 
-
-- (CCIClassicFinderWindowController *)createWindowForDirectory:(CFRDirectoryModel *)directoryModel;
-
-- (NSUInteger)numberOfOpenWindows;
++ (BOOL)persistFileProperties:(CFRFileModel *)fileModel;
++ (BOOL)persistDirectoryProperties:(CFRDirectoryModel *)directoryModel;
++ (BOOL)persistAppDirectoryProperties:(CFRAppModel *)appDirectoryModel;
 
 @end
