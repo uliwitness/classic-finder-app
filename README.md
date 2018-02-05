@@ -22,6 +22,9 @@ Install as you would any other cocoa app.
 
 ## Release History
 
+* 1.1
+	* Spatial window behavior! Finder windows now remember where you last placed them! :)
+	* Relicensed the entire project under Apache v2.
 * 1.0.2
 	* The icons of opened folders now render with the correct background texture.
 	* If there are no open windows, clicking on the app icon in the Dock will open a new window at root.
@@ -35,6 +38,6 @@ Install as you would any other cocoa app.
 
 Ben Szymanski - [@captainflotsam](https://twitter.com/captainfloatsam)
 
-Distributed under the GPLv3 license. See ``LICENSE`` for more information.
+Distributed under the Apache v2 license. See ``LICENSE`` for more information.
 
 [https://bitbucket.org/bszyman/](https://bitbucket.org/bszyman/)
