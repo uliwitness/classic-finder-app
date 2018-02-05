@@ -5,21 +5,17 @@
 //  Created by Ben Szymanski on 2/19/17.
 //  Copyright © 2017 Ben Szymanski. All rights reserved.
 //
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-// This file is part of Classic Finder.
+// http://www.apache.org/licenses/LICENSE-2.0
 //
-// Classic Finder is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Classic Finder is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 #import "CCIClassicFinderWindow.h"
 #import "CCIClassicContentView.h"
@@ -30,7 +26,10 @@
 #import "CCIClassicFolder.h"
 #import "CCIClassicFile.h"
 #import "CFRWindowManager.h"
-#import "CFRFileSystemOperations.h"
+#import "CFRDirectoryModel.h"
+#import "CFRFileModel.h"
+#import "CFRAppModel.h"
+#import "CCIClassicFinderWindowController.h"
 
 @interface CCIClassicFinderWindow () {
     BOOL windowIsActive;
@@ -49,7 +48,8 @@
                             backing:(NSBackingStoreType)bufferingType
                               defer:(BOOL)flag
                     withWindowTitle:(NSString *)windowTitle
-                        andFileList:(NSArray *)fileList
+                           fileList:(NSArray *)fileList
+                      andController:(CCIClassicFinderWindowController *)wc
 {
     self = [super initWithContentRect:contentRect
                             styleMask:style
@@ -59,8 +59,9 @@
     if (self)
     {
         windowIsActive = YES;
-        self.windowTitle = windowTitle;
-        self.fileList = fileList;
+        [self setWindowTitle:windowTitle];
+        [self setFileList:fileList];
+        [self setWindowController:wc];
         
         [self setBackgroundColor:[NSColor clearColor]];
         
@@ -75,6 +76,11 @@
         self.titlebar = [[CCITitleBar alloc] initWithFrame:titlebarFrame];
         self.titlebar.titleText = self.windowTitle;
         self.titlebar.windowIsActive = YES;
+        [[self titlebar] setDelegate:self.windowController];
+        
+        if (self.windowController == nil) {
+            NSLog(@"window controller is nil");
+        }
         
         [self.contentView addSubview:self.titlebar];
         
@@ -96,17 +102,12 @@
         NSUInteger iconRow = 0;
         NSUInteger iconCol = 0;
         
-        for (NSUInteger x = 0; x < self.fileList.count; x++) {
-            NSURL *directoryItem = [self.fileList objectAtIndex:x];
+        for (NSUInteger x = 0; x < self.fileList.count; x += 1) {
+            NSObject *fileSystemItem = [self.fileList objectAtIndex:x];
             
-            NSNumber *isDirectory;
-            [directoryItem getResourceValue:&isDirectory
-                                     forKey:NSURLIsDirectoryKey
-                                      error:nil];
-            
-            if ([isDirectory boolValue])
+            if ([fileSystemItem isMemberOfClass:[CFRDirectoryModel class]])
             {
-                NSString *directoryTitle = [directoryItem lastPathComponent];
+                CFRDirectoryModel *directoryItem = (CFRDirectoryModel *)fileSystemItem;
                 
                 CGFloat iconLeftPosition = (10.0 + (iconCol * 60.0));
                 CGFloat frameWidthWithBorder = (self.frame.size.width - 55.0);
@@ -124,12 +125,12 @@
                                                 60.0);
                 
                 CCIClassicFolder *folderIcon = [[CCIClassicFolder alloc] initWithFrame:folderFrame];
-                folderIcon.folderLabel.stringValue = directoryTitle;
-                folderIcon.representingDirectory = directoryItem;
+                folderIcon.folderLabel.stringValue = [directoryItem title];
+                [folderIcon setDirectoryModel:directoryItem];
                 
                 [self.scrollView.contentView addSubview:folderIcon];
-            } else {
-                NSString *fileTitle = [directoryItem lastPathComponent];
+            } else if ([fileSystemItem isMemberOfClass:[CFRFileModel class]]) {
+                CFRFileModel *fileItem = (CFRFileModel *)fileSystemItem;
                 
                 CGFloat iconLeftPosition = (10.0 + (iconCol * 60.0));
                 CGFloat frameWidthWithBorder = (self.frame.size.width - 55.0);
@@ -147,8 +148,8 @@
                                                 60.0);
                 
                 CCIClassicFile *fileIcon = [[CCIClassicFile alloc] initWithFrame:folderFrame];
-                fileIcon.fileLabel.stringValue = fileTitle;
-                fileIcon.representedFile = directoryItem;
+                fileIcon.fileLabel.stringValue = [fileItem title];
+                fileIcon.representedFile = [fileItem objectPath];
                 
                 [self.scrollView.contentView addSubview:fileIcon];
             }

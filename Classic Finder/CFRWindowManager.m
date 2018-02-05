@@ -5,26 +5,23 @@
 //  Created by Ben Szymanski on 3/25/17.
 //  Copyright © 2017 Ben Szymanski. All rights reserved.
 //
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-// This file is part of Classic Finder.
+// http://www.apache.org/licenses/LICENSE-2.0
 //
-// Classic Finder is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Classic Finder is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 #import "CFRWindowManager.h"
 #import "CCIClassicFinderWindow.h"
 #import "AppDelegate.h"
 #import "CCIClassicFinderWindowController.h"
+#import "CFRDirectoryModel.h"
 
 @interface CFRWindowManager ()
 
@@ -53,38 +50,25 @@
     return sharedInstance;
 }
 
-- (NSWindowController *)createWindowForPath:(NSURL *)path
-{
-    NSRect screenSize = [[NSScreen mainScreen] frame];
-    CGFloat xPos = (screenSize.size.width / 2.0) - 250.0;
-    CGFloat yPos = (screenSize.size.height / 2.0) - 150.0;
-    
-    NSWindowController *newFinderWindow = [self createWindowForPath:path
-                                                   atSpecifiedPoint:NSMakePoint(xPos, yPos)];
-    
-    return newFinderWindow;
-}
-
-- (CCIClassicFinderWindowController *)createWindowForPath:(NSURL *)path
-                                         atSpecifiedPoint:(NSPoint)point
+- (CCIClassicFinderWindowController *)createWindowForDirectory:(CFRDirectoryModel *)directoryModel
 {
     CCIClassicFinderWindowController *finderWindowController;
     
-    if ([self.activeWindows objectForKey:path.absoluteString] != nil)
+    if ([self.activeWindows objectForKey:directoryModel.objectPath.absoluteString] != nil)
     {
-        finderWindowController = [self.activeWindows objectForKey:path.absoluteString];
+        finderWindowController = [self.activeWindows objectForKey:directoryModel.objectPath.absoluteString];
     } else
     {
-        CCIClassicFinderWindowController *wc = [[CCIClassicFinderWindowController alloc] initForDirectory:path
-                                                                                              atPoint:point];
+        CCIClassicFinderWindowController *wc = [[CCIClassicFinderWindowController alloc] initForDirectory:directoryModel];
+        
         [wc.window makeKeyAndOrderFront:self];
-
+        
         finderWindowController = wc;
         
         [self.activeWindows setObject:wc
-                               forKey:path.absoluteString];
+                               forKey:directoryModel.objectPath.absoluteString];
     }
-
+    
     return finderWindowController;
 }
 
@@ -92,7 +76,7 @@
 {
     CCIClassicFinderWindow *finderWindow = notification.object;
     CCIClassicFinderWindowController *finderWindowController = finderWindow.windowController;
-    NSString *pathString = finderWindowController.representedDirectory.absoluteString;
+    NSString *pathString = finderWindowController.directoryModel.objectPath.absoluteString;
     
     [self.activeWindows removeObjectForKey:pathString];
 }

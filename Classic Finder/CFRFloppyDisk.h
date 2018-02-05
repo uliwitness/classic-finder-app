@@ -1,8 +1,8 @@
 //
-//  CFRFileSystemUtils.h
+//  CFRFloppyDisk.h
 //  Classic Finder
 //
-//  Created by Ben Szymanski on 1/8/18.
+//  Created by Ben Szymanski on 1/14/18.
 //  Copyright © 2018 Ben Szymanski. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,9 +19,18 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CFRFileSystemUtils : NSObject
+@class CFRFileModel;
+@class CFRDirectoryModel;
+@class CFRAppModel;
 
-+ (NSString *)determineDirectoryNameForURL:(NSURL *)url;
-+ (NSString *)applicationSupportDirectory;
+@interface CFRFloppyDisk : NSObject
+
++ (void)restoreFileProperties:(CFRFileModel *)fileModel;
++ (void)restoreDirectoryProperties:(CFRDirectoryModel *)directoryModel;
++ (void)restoreAppDirectoryProperties:(CFRAppModel *)appDirectoryModel;
+
++ (BOOL)persistFileProperties:(CFRFileModel *)fileModel;
++ (BOOL)persistDirectoryProperties:(CFRDirectoryModel *)directoryModel;
++ (BOOL)persistAppDirectoryProperties:(CFRAppModel *)appDirectoryModel;
 
 @end

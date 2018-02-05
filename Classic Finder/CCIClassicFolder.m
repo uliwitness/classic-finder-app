@@ -5,21 +5,17 @@
 //  Created by Ben Szymanski on 2/19/17.
 //  Copyright © 2017 Ben Szymanski. All rights reserved.
 //
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-// This file is part of Classic Finder.
+// http://www.apache.org/licenses/LICENSE-2.0
 //
-// Classic Finder is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Classic Finder is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 #import "CCIClassicFolder.h"
 #import "CCIClassicFolderIcon.h"
@@ -28,6 +24,8 @@
 #import "CCIClassicFinderWindow.h"
 #import "CCIClassicFinderWindowController.h"
 #import "CCIApplicationStyles.h"
+#import "CFRFloppyDisk.h"
+#import "CFRDirectoryModel.h"
 
 @interface CCIClassicFolder ()
 
@@ -54,7 +52,7 @@
         
         [self addSubview:self.iconImage];
         
-        NSRect folderLabelFrame = NSMakeRect(2.0, 35.0, 54.0, 24.0);
+        NSRect folderLabelFrame = NSMakeRect(2.0, 35.0, 54.0, 50.0);
         self.folderLabel = [[NSTextField alloc] initWithFrame:folderLabelFrame];
         self.folderLabel.alignment = NSTextAlignmentCenter;
         self.folderLabel.font = [NSFont systemFontOfSize:10.0];
@@ -62,6 +60,8 @@
         self.folderLabel.selectable = NO;
         self.folderLabel.lineBreakMode = NSLineBreakByCharWrapping;
         self.folderLabel.drawsBackground = YES;
+        self.folderLabel.maximumNumberOfLines = 5;
+        self.folderLabel.usesSingleLineMode = NO;
         
         [self addSubview:self.folderLabel];
     }
@@ -91,16 +91,63 @@
 {
     if (event.clickCount == 2)
     {
-        NSRect windowFrame = event.window.frame;
-        CGFloat xPos = windowFrame.origin.x + 30.0;
-        CGFloat yPos = windowFrame.origin.y - 30.0;
-        NSPoint newWindowPosition = NSMakePoint(xPos, yPos);
+        [CFRFloppyDisk restoreDirectoryProperties:[self directoryModel]];
+        NSPoint persistedWindowPosition = [[self directoryModel] windowPosition];
         
+        if ((persistedWindowPosition.x == -1.0) &&
+            (persistedWindowPosition.y == -1.0))
+        {
+            // We assume the window position hasn't been
+            // previously set if windowPosition = (-1, -1).
+            // We will just do a generic offset of 30 px
+            // from the parent/calling window...
+            
+            NSRect windowFrame = event.window.frame;
+            CGFloat xPos = windowFrame.origin.x + 30.0;
+            CGFloat yPos = windowFrame.origin.y - 30.0;
+            
+            NSPoint newWindowPosition = NSMakePoint(xPos, yPos);
+            [[self directoryModel] setWindowPosition:newWindowPosition];
+        } else {
+            // Handle overflow
+            // if the last-recorded position of the window is somewhere off-screen,
+            // reposition it so that it is visible on screen
+            // handy for cases when switching between a large desktop monitor and
+            // a smaller built-in laptop screen
+            NSRect mainScreenFrame = [[NSScreen mainScreen] frame];
+            
+            // window horizontal position is out of right-side of screen
+            if (persistedWindowPosition.x > (mainScreenFrame.size.width) - 30.0) {
+                NSPoint currentWindowPosition = [[self directoryModel] windowPosition];
+                NSPoint newWindowPosition = NSMakePoint(mainScreenFrame.size.width - 500.0, currentWindowPosition.y);
+                [[self directoryModel] setWindowPosition:newWindowPosition];
+            }
+            
+            // window vertical position is below bottom of screen
+            if (persistedWindowPosition.y > (mainScreenFrame.size.height) - 30.0) {
+                NSPoint currentWindowPosition = [[self directoryModel] windowPosition];
+                NSPoint newWindowPosition = NSMakePoint(currentWindowPosition.x, mainScreenFrame.size.height - 300.0);
+                [[self directoryModel] setWindowPosition:newWindowPosition];
+            }
+            
+            // window horizontal position is out of left-side of screen
+            if (persistedWindowPosition.x < 0.0) {
+                NSPoint currentWindowPosition = [[self directoryModel] windowPosition];
+                NSPoint newWindowPosition = NSMakePoint(30.0, currentWindowPosition.y);
+                [[self directoryModel] setWindowPosition:newWindowPosition];
+            }
+            
+            // window vertical position is above top of screen
+            if (persistedWindowPosition.y < 0.0) {
+                NSPoint currentWindowPosition = [[self directoryModel] windowPosition];
+                NSPoint newWindowPosition = NSMakePoint(currentWindowPosition.x, 30.0);
+                [[self directoryModel] setWindowPosition:newWindowPosition];
+            }
+        }
+
         [self setOpenItemState];
         
-        NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForPath:self.representingDirectory
-                                                                               atSpecifiedPoint:newWindowPosition];
-        
+        NSWindowController *finderWindow = [CFRWindowManager.sharedInstance createWindowForDirectory:[self directoryModel]];
         [finderWindow showWindow:self];
         
         [[NSNotificationCenter defaultCenter] addObserver:event.window.windowController

@@ -5,41 +5,85 @@
 //  Created by Ben Szymanski on 10/5/17.
 //  Copyright © 2017 Ben Szymanski. All rights reserved.
 //
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-// This file is part of Classic Finder.
+// http://www.apache.org/licenses/LICENSE-2.0
 //
-// Classic Finder is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Classic Finder is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Classic Finder.  If not, see <http://www.gnu.org/licenses/>.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 #import "CFRFileSystemOperations.h"
+#import "CFRFileModel.h"
+#import "CFRDirectoryModel.h"
+#import "CFRAppModel.h"
 
 @implementation CFRFileSystemOperations
 
 + (NSArray *)getListingForDirectory:(NSURL *)directory
 {
-    NSArray *fileList;
-    NSArray *keys = @[NSURLNameKey, NSURLPathKey];
+    NSMutableArray *fileList = [[NSMutableArray alloc] initWithCapacity:64];
+    NSArray *keys = @[NSURLNameKey, NSURLPathKey, NSURLAddedToDirectoryDateKey, NSURLContentModificationDateKey];
     NSError *err = nil;
     
-    fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:directory
-                                             includingPropertiesForKeys:keys
-                                                                options:(NSDirectoryEnumerationSkipsPackageDescendants |
-                                                                         NSDirectoryEnumerationSkipsHiddenFiles |
-                                                                         NSDirectoryEnumerationSkipsSubdirectoryDescendants)
-                                                                  error:&err];
+    NSArray *directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:directory
+                                                               includingPropertiesForKeys:keys
+                                                                                  options:(NSDirectoryEnumerationSkipsPackageDescendants |
+                                                                                           NSDirectoryEnumerationSkipsHiddenFiles |
+                                                                                           NSDirectoryEnumerationSkipsSubdirectoryDescendants)
+                                                                                    error:&err];
     
     if (err != nil) {
         NSLog(@"%@", err);
+    } else {
+        for (NSURL *directoryItem in directoryContents) {
+            NSNumber *isDirectory;
+            [directoryItem getResourceValue:&isDirectory
+                                     forKey:NSURLIsDirectoryKey
+                                      error:nil];
+            
+            NSString *title;
+            [directoryItem getResourceValue:&title
+                                     forKey:NSURLNameKey
+                                      error:nil];
+            
+            NSString *path;
+            [directoryItem getResourceValue:&path
+                                     forKey:NSURLPathKey
+                                      error:nil];
+            
+            NSDate *createdDate;
+            [directoryItem getResourceValue:&createdDate
+                                     forKey:NSURLAddedToDirectoryDateKey
+                                      error:nil];
+            
+            NSDate *lastModifiedDate;
+            [directoryItem getResourceValue:&lastModifiedDate
+                                     forKey:NSURLContentModificationDateKey
+                                      error:nil];
+            
+            if ([isDirectory boolValue]) {
+                CFRDirectoryModel *directoryModel = [[CFRDirectoryModel alloc] init];
+                [directoryModel setTitle:title];
+                [directoryModel setCreationDate:createdDate];
+                [directoryModel setLastModified:lastModifiedDate];
+                [directoryModel setObjectPath:directoryItem];
+                
+                [fileList addObject:directoryModel];
+            } else {
+                CFRFileModel *fileModel = [[CFRFileModel alloc] init];
+                [fileModel setTitle:title];
+                [fileModel setCreationDate:createdDate];
+                [fileModel setLastModified:lastModifiedDate];
+                [fileModel setObjectPath:directoryItem];
+                
+                [fileList addObject:fileModel];
+            }
+        }
     }
     
     return fileList;
