@@ -21,6 +21,7 @@
 		A805A86E2007340800274577 /* CFRAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A86D2007340800274577 /* CFRAppModel.m */; };
 		A80A5575201E65660021B414 /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = A80A5573201E65640021B414 /* NSString+Hashes.m */; };
 		A80A5578202033ED0021B414 /* ScratchCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = A80A5577202033ED0021B414 /* ScratchCode.txt */; };
+		A80A5599202AC0F70021B414 /* CCIScrollContentContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A80A5598202AC0F70021B414 /* CCIScrollContentContainer.m */; };
 		A885B1CE1E59457100F1AB96 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B1CD1E59457100F1AB96 /* AppDelegate.m */; };
 		A885B1D11E59457100F1AB96 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B1D01E59457100F1AB96 /* main.m */; };
 		A885B1D31E59457100F1AB96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A885B1D21E59457100F1AB96 /* Assets.xcassets */; };
@@ -92,6 +93,8 @@
 		A80A5574201E65650021B414 /* NSString+Hashes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hashes.h"; sourceTree = "<group>"; };
 		A80A5577202033ED0021B414 /* ScratchCode.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ScratchCode.txt; sourceTree = "<group>"; };
 		A80A55962026CD400021B414 /* CCIClassicTitlebarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCIClassicTitlebarDelegate.h; sourceTree = "<group>"; };
+		A80A5597202AC0F70021B414 /* CCIScrollContentContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCIScrollContentContainer.h; sourceTree = "<group>"; };
+		A80A5598202AC0F70021B414 /* CCIScrollContentContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCIScrollContentContainer.m; sourceTree = "<group>"; };
 		A885B1C91E59457100F1AB96 /* Classic Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Classic Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A885B1CC1E59457100F1AB96 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A885B1CD1E59457100F1AB96 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -305,6 +308,8 @@
 				A8D82F711F88A4E800B437F1 /* CCIFinderIconProtocol.h */,
 				A805A85C1FD3A37D00274577 /* CCIApplicationStyles.h */,
 				A805A85D1FD3A37D00274577 /* CCIApplicationStyles.m */,
+				A80A5597202AC0F70021B414 /* CCIScrollContentContainer.h */,
+				A80A5598202AC0F70021B414 /* CCIScrollContentContainer.m */,
 			);
 			name = "UI Components";
 			sourceTree = "<group>";
@@ -470,6 +475,7 @@
 				A80A5575201E65660021B414 /* NSString+Hashes.m in Sources */,
 				A885B2081E597AE300F1AB96 /* CCIClassicFolder.m in Sources */,
 				A8D82F6A1F85E4A500B437F1 /* CCIClassicFile.m in Sources */,
+				A80A5599202AC0F70021B414 /* CCIScrollContentContainer.m in Sources */,
 				A885B1D11E59457100F1AB96 /* main.m in Sources */,
 				A8D82F6D1F872C9700B437F1 /* CCIClassicFinderWindowController.m in Sources */,
 				A885B1FF1E594CAB00F1AB96 /* CCIMaximizeButton.m in Sources */,

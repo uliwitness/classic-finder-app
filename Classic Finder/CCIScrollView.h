@@ -19,11 +19,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class CCIScrollContentContainer;
 @class CCIScrollContentView;
 
 @interface CCIScrollView : NSView
 
 @property (nonatomic, strong) CCIScrollContentView *contentView;
+@property (nonatomic, strong) CCIScrollContentContainer *contentViewContainer;
 
 - (void)performScrollAction:(id)sender;
 - (void)resizeContentView:(NSRect)newFrame;

@@ -18,6 +18,7 @@
 // limitations under the License.
 
 #import "CCIScrollView.h"
+#import "CCIScrollContentContainer.h"
 #import "CCIScrollContentView.h"
 #import "CCIScrollbar.h"
 #import "CCIScrollbarArrowButton.h"
@@ -50,11 +51,25 @@
     self = [super initWithFrame:frameRect];
     
     if (self) {
+        // Create content view container
+        // this view is a container for the actual content view
+        // we are wrapping the actual content view in this thing
+        // to set the visible bounds of the content area. The actual
+        // content view can be any super large size, but it needs
+        // a parent view to clip that and set the bounds.
+        // Without this, the white of the file icon erases/overlaps over
+        // the black line at the top of the scroll view. Looks strange. No good!
+        NSRect contentViewContainerFrame = NSMakeRect(0.0, 1.0, frameRect.size.width, (frameRect.size.height - 1.0));
+         CCIScrollContentContainer *contentViewContainer = [[CCIScrollContentContainer alloc] initWithFrame:contentViewContainerFrame];
+        [self setContentViewContainer:contentViewContainer];
+        [self addSubview:self.contentViewContainer];
+        
         // // Create content view
         NSRect contentViewFrame = NSMakeRect(0.0, 1.0, frameRect.size.width, (frameRect.size.height - 1.0));
         CCIScrollContentView *contentView = [[CCIScrollContentView alloc] initWithFrame:contentViewFrame];
         [self setContentView:contentView];
-        [self addSubview:self.contentView];
+        //[self addSubview:self.contentView];
+        [[self contentViewContainer] addSubview:contentView];
         
         // // Calculate scroll travel distances
         CGFloat scrollableDistanceW = (contentViewFrame.size.width > frameRect.size.width) ? (contentViewFrame.size.width - frameRect.size.width + 16.0) : 0.0;
