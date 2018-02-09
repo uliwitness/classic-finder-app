@@ -99,11 +99,14 @@ typedef NS_ENUM(NSUInteger, FileSizeMetrics) {
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
+    [[[CCIApplicationStyles instance] whiteColor] setFill];
+    NSRectFill(NSMakeRect(1.0, 0.0, self.frame.size.width - 2.0, self.frame.size.height));
+    
     [[[CCIApplicationStyles instance] blackColor] setFill];
-    NSRectFill(NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height));
+    NSRectFill(NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height - 1.0));
     
     [[[CCIApplicationStyles instance] whiteColor] setFill];
-    NSRectFill(NSMakeRect(1.0, 0.0, self.frame.size.width - 2.0, self.frame.size.height - 1.0));
+    NSRectFill(NSMakeRect(1.0, 0.0, self.frame.size.width - 2.0, self.frame.size.height - 2.0));
 }
 
 - (BOOL)isFlipped

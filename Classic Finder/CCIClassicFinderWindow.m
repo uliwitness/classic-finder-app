@@ -84,16 +84,16 @@
         
         [self.contentView addSubview:self.titlebar];
         
-        NSRect detailFrame = NSMakeRect(0.0, 19.0, contentArea.size.width, 24.0);
+        NSRect detailFrame = NSMakeRect(0.0, 19.0, contentArea.size.width, 25.0);
         self.detailBar = [[CCIClassicFinderDetailBar alloc] initWithFrame:detailFrame];
         [self.detailBar setNumberOfFileItemsText:self.fileList.count];
         [self.contentView addSubview:self.detailBar];
         
         
         NSRect scrollViewFrame = NSMakeRect(1.0,
-                                            38.0,
+                                            44.0,
                                             self.frame.size.width - 3.0,
-                                            self.frame.size.height - 38.0 - 2.0);
+                                            self.frame.size.height - 44.0 - 2.0);
         
         self.scrollView = [[CCIScrollView alloc] initWithFrame:scrollViewFrame];
         

@@ -289,18 +289,22 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-    NSRect backgroundFrame = NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height);
+    NSRect blackBackgroundFrame = NSMakeRect(0.0, 0.0, self.frame.size.width, self.frame.size.height);
+    [[[CCIApplicationStyles instance] blackColor] setFill];
+    NSRectFill(blackBackgroundFrame);
+    
+    NSRect backgroundFrame = NSMakeRect(0.0, 1.0, self.frame.size.width, (self.frame.size.height - 1.0));
     
     // Background Color
     [[[CCIApplicationStyles instance] whiteColor] setFill];
     NSRectFill(backgroundFrame);
     
-    NSBezierPath *topBorder = [[NSBezierPath alloc] init];
-    [topBorder moveToPoint:NSMakePoint(0.0, 0.0)];
-    [topBorder lineToPoint:NSMakePoint(self.frame.size.width, 0.0)];
-    
-    [[[CCIApplicationStyles instance] blackColor] setStroke];
-    [topBorder stroke];
+//    NSBezierPath *topBorder = [[NSBezierPath alloc] init];
+//    [topBorder moveToPoint:NSMakePoint(0.0, 0.0)];
+//    [topBorder lineToPoint:NSMakePoint(self.frame.size.width, 0.0)];
+//    
+//    [[[CCIApplicationStyles instance] blackColor] setStroke];
+//    [topBorder stroke];
 }
 
 - (BOOL)isFlipped
