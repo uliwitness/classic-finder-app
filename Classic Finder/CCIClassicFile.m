@@ -114,4 +114,15 @@
     [self setNeedsDisplay:YES];
 }
 
+
+- (void)setOpenItemState
+{
+    // this method is not used on this icon
+}
+
+- (void)setCloseItemState
+{
+    // this method is not used on this icon
+}
+
 @end
