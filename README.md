@@ -1,5 +1,5 @@
 # Classic Mac Finder
-> Everything you loved about navigating files on your Macintosh Performa, Quadra, Power Macintosh or LC.
+> Everything you loved about navigating files on your Macintosh Performa, Quadra, LC or Power Macintosh.
 
 This project aims to be a functional re-creation of the classic Mac OS Finder. 
 Now you can experience a pixel-for-pixel clone of the original Macintosh Finder 
@@ -11,7 +11,7 @@ on your modern Mac. This application is written in Objective-C and Cocoa.
 
 This application is distributed as an unsigned .app binary. All releases can be found
 under the Downloads tab to the left. A download of the most recent version is linked
-on https://classicmacfinder.com.
+on [https://classicmacfinder.com](https://classicmacfinder.com).
 
 Install as you would any other cocoa app.
 
@@ -22,6 +22,9 @@ Install as you would any other cocoa app.
 
 ## Release History
 
+* 1.1.1
+	* Added the 1px white spacer between the detail bar and the scroll view.
+	* Now distributing both code-signed and unsigned binaries. 
 * 1.1
 	* Spatial window behavior! Finder windows now remember where you last placed them! :)
 	* Relicensed the entire project under Apache v2.
