@@ -17,7 +17,7 @@ Install as you would any other cocoa app.
 
 ### System Requirements
 
-* macOS 10.12+
+* macOS 10.11+
 * ~250 kb of free disk space
 
 ## Release History
@@ -25,6 +25,7 @@ Install as you would any other cocoa app.
 * 1.1.1
 	* Added the 1px white spacer between the detail bar and the scroll view.
 	* Now distributing both code-signed and unsigned binaries. 
+	* Minimum system requirement is now macOS 10.11.
 * 1.1
 	* Spatial window behavior! Finder windows now remember where you last placed them! :)
 	* Relicensed the entire project under Apache v2.
