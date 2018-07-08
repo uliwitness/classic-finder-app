@@ -21,6 +21,7 @@
 		A805A86E2007340800274577 /* CFRAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A805A86D2007340800274577 /* CFRAppModel.m */; };
 		A80A5575201E65660021B414 /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = A80A5573201E65640021B414 /* NSString+Hashes.m */; };
 		A80A5578202033ED0021B414 /* ScratchCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = A80A5577202033ED0021B414 /* ScratchCode.txt */; };
+		A80A5599202AC0F70021B414 /* CCIScrollContentContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A80A5598202AC0F70021B414 /* CCIScrollContentContainer.m */; };
 		A885B1CE1E59457100F1AB96 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B1CD1E59457100F1AB96 /* AppDelegate.m */; };
 		A885B1D11E59457100F1AB96 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B1D01E59457100F1AB96 /* main.m */; };
 		A885B1D31E59457100F1AB96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A885B1D21E59457100F1AB96 /* Assets.xcassets */; };
@@ -34,6 +35,8 @@
 		A885B2081E597AE300F1AB96 /* CCIClassicFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2071E597AE300F1AB96 /* CCIClassicFolder.m */; };
 		A885B2111E59923B00F1AB96 /* CCIClassicFinderWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2101E59923B00F1AB96 /* CCIClassicFinderWindow.m */; };
 		A885B2141E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A885B2131E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m */; };
+		A88F63F020F1A4C900CC434B /* Chicago in Resources */ = {isa = PBXBuildFile; fileRef = A88F63EF20F1A4C900CC434B /* Chicago */; };
+		A88F63F220F1A95000CC434B /* Geneva in Resources */ = {isa = PBXBuildFile; fileRef = A88F63F120F1A95000CC434B /* Geneva */; };
 		A897BB1F200B3E7900C2D740 /* CFRFloppyDisk.m in Sources */ = {isa = PBXBuildFile; fileRef = A897BB1E200B3E7900C2D740 /* CFRFloppyDisk.m */; };
 		A8D82F611F80914C00B437F1 /* CFRWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D82F5F1F80914B00B437F1 /* CFRWindowManager.m */; };
 		A8D82F671F849C3900B437F1 /* CCIClassicFileIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D82F661F849C3900B437F1 /* CCIClassicFileIcon.m */; };
@@ -41,6 +44,7 @@
 		A8D82F6D1F872C9700B437F1 /* CCIClassicFinderWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D82F6C1F872C9700B437F1 /* CCIClassicFinderWindowController.m */; };
 		A8D82F701F872D9C00B437F1 /* CFRFileSystemOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D82F6F1F872D9C00B437F1 /* CFRFileSystemOperations.m */; };
 		A8D82F731F9D2F5B00B437F1 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = A8D82F721F9D2F5B00B437F1 /* license.txt */; };
+		A8E46E7320F1B1EC00B5A829 /* chicagobold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8E46E7220F1B1EC00B5A829 /* chicagobold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +96,8 @@
 		A80A5574201E65650021B414 /* NSString+Hashes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hashes.h"; sourceTree = "<group>"; };
 		A80A5577202033ED0021B414 /* ScratchCode.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ScratchCode.txt; sourceTree = "<group>"; };
 		A80A55962026CD400021B414 /* CCIClassicTitlebarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCIClassicTitlebarDelegate.h; sourceTree = "<group>"; };
+		A80A5597202AC0F70021B414 /* CCIScrollContentContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCIScrollContentContainer.h; sourceTree = "<group>"; };
+		A80A5598202AC0F70021B414 /* CCIScrollContentContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCIScrollContentContainer.m; sourceTree = "<group>"; };
 		A885B1C91E59457100F1AB96 /* Classic Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Classic Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A885B1CC1E59457100F1AB96 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A885B1CD1E59457100F1AB96 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -119,6 +125,8 @@
 		A885B2101E59923B00F1AB96 /* CCIClassicFinderWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIClassicFinderWindow.m; sourceTree = "<group>"; };
 		A885B2121E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCIClassicFinderDetailBar.h; sourceTree = "<group>"; };
 		A885B2131E5AA6A900F1AB96 /* CCIClassicFinderDetailBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCIClassicFinderDetailBar.m; sourceTree = "<group>"; };
+		A88F63EF20F1A4C900CC434B /* Chicago */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Chicago; sourceTree = "<group>"; };
+		A88F63F120F1A95000CC434B /* Geneva */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Geneva; sourceTree = "<group>"; };
 		A897BB1D200B3E7900C2D740 /* CFRFloppyDisk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CFRFloppyDisk.h; sourceTree = "<group>"; };
 		A897BB1E200B3E7900C2D740 /* CFRFloppyDisk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CFRFloppyDisk.m; sourceTree = "<group>"; };
 		A8D82F5F1F80914B00B437F1 /* CFRWindowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFRWindowManager.m; sourceTree = "<group>"; };
@@ -133,6 +141,7 @@
 		A8D82F6F1F872D9C00B437F1 /* CFRFileSystemOperations.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CFRFileSystemOperations.m; sourceTree = "<group>"; };
 		A8D82F711F88A4E800B437F1 /* CCIFinderIconProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCIFinderIconProtocol.h; sourceTree = "<group>"; };
 		A8D82F721F9D2F5B00B437F1 /* license.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
+		A8E46E7220F1B1EC00B5A829 /* chicagobold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chicagobold.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +253,7 @@
 		A885B1CF1E59457100F1AB96 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A88F63EE20F1A4A500CC434B /* Fonts */,
 				A885B1D01E59457100F1AB96 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -305,8 +315,20 @@
 				A8D82F711F88A4E800B437F1 /* CCIFinderIconProtocol.h */,
 				A805A85C1FD3A37D00274577 /* CCIApplicationStyles.h */,
 				A805A85D1FD3A37D00274577 /* CCIApplicationStyles.m */,
+				A80A5597202AC0F70021B414 /* CCIScrollContentContainer.h */,
+				A80A5598202AC0F70021B414 /* CCIScrollContentContainer.m */,
 			);
 			name = "UI Components";
+			sourceTree = "<group>";
+		};
+		A88F63EE20F1A4A500CC434B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A8E46E7220F1B1EC00B5A829 /* chicagobold.ttf */,
+				A88F63F120F1A95000CC434B /* Geneva */,
+				A88F63EF20F1A4C900CC434B /* Chicago */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		A897BB1C200B381A00C2D740 /* Persistance */ = {
@@ -380,11 +402,12 @@
 		A885B1C11E59457000F1AB96 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Protype Software Ltd.";
 				TargetAttributes = {
 					A885B1C81E59457100F1AB96 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 275598G98S;
 						ProvisioningStyle = Automatic;
 					};
 					A885B1DB1E59457100F1AB96 = {
@@ -424,8 +447,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A88F63F220F1A95000CC434B /* Geneva in Resources */,
 				A80A5578202033ED0021B414 /* ScratchCode.txt in Resources */,
 				A8D82F731F9D2F5B00B437F1 /* license.txt in Resources */,
+				A8E46E7320F1B1EC00B5A829 /* chicagobold.ttf in Resources */,
+				A88F63F020F1A4C900CC434B /* Chicago in Resources */,
 				A885B1D31E59457100F1AB96 /* Assets.xcassets in Resources */,
 				A885B1D61E59457100F1AB96 /* MainMenu.xib in Resources */,
 			);
@@ -470,6 +496,7 @@
 				A80A5575201E65660021B414 /* NSString+Hashes.m in Sources */,
 				A885B2081E597AE300F1AB96 /* CCIClassicFolder.m in Sources */,
 				A8D82F6A1F85E4A500B437F1 /* CCIClassicFile.m in Sources */,
+				A80A5599202AC0F70021B414 /* CCIScrollContentContainer.m in Sources */,
 				A885B1D11E59457100F1AB96 /* main.m in Sources */,
 				A8D82F6D1F872C9700B437F1 /* CCIClassicFinderWindowController.m in Sources */,
 				A885B1FF1E594CAB00F1AB96 /* CCIMaximizeButton.m in Sources */,
@@ -535,7 +562,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -543,7 +572,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -582,7 +615,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -590,7 +625,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -617,11 +656,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 275598G98S;
 				INFOPLIST_FILE = "Classic Finder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.classicmacfinder.Classic-Finder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -629,11 +673,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 275598G98S;
 				INFOPLIST_FILE = "Classic Finder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.classicmacfinder.Classic-Finder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

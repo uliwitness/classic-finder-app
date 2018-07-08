@@ -233,7 +233,10 @@
     NSMutableParagraphStyle *titleStyle = [[NSMutableParagraphStyle alloc] init];
     [titleStyle setAlignment:NSTextAlignmentCenter];
     
-    NSDictionary *fontAttributes = @{NSFontAttributeName: [NSFont boldSystemFontOfSize:11.0],
+    NSFont *chicagoFont = [NSFont fontWithName:@"Chicago"
+                                          size:11.0];
+    
+    NSDictionary *fontAttributes = @{NSFontAttributeName: chicagoFont,
                                      NSParagraphStyleAttributeName: titleStyle};
     
     NSSize titleTextSize = [self.titleText sizeWithAttributes:fontAttributes];
@@ -249,7 +252,7 @@
     
     [[[CCIApplicationStyles instance] blackColor] setFill];
     
-    NSRect titleTextRect = NSMakeRect(((self.frame.size.width - textWidth) / 2.0), 1.5, textWidth, 15.0);
+    NSRect titleTextRect = NSMakeRect(((self.frame.size.width - textWidth) / 2.0), 2.0, textWidth, 15.0);
     NSAttributedString *title = [[NSAttributedString alloc] initWithString:self.titleText
                                                                 attributes:fontAttributes];
     [title drawInRect:titleTextRect];

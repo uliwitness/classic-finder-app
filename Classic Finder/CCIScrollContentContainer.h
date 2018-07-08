@@ -1,9 +1,9 @@
 //
-//  CCIScrollView.h
-//  Classic Scrolling2
+//  CCIScrollContentContainer.h
+//  Classic Finder
 //
-//  Created by Ben Szymanski on 11/12/17.
-//  Copyright © 2017 Ben Szymanski. All rights reserved.
+//  Created by Ben Szymanski on 2/7/18.
+//  Copyright © 2018 Ben Szymanski. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,16 +19,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class CCIScrollContentContainer;
-@class CCIScrollContentView;
-
-@interface CCIScrollView : NSView
-
-@property (nonatomic, strong) CCIScrollContentView *contentView;
-@property (nonatomic, strong) CCIScrollContentContainer *contentViewContainer;
-
-- (void)performScrollAction:(id)sender;
-- (void)resizeContentView:(NSRect)newFrame;
-- (void)setWindowIsActive:(BOOL)windowIsActive;
+@interface CCIScrollContentContainer : NSView
 
 @end
