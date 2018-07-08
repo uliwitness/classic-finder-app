@@ -44,6 +44,7 @@
 		A8D82F6D1F872C9700B437F1 /* CCIClassicFinderWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D82F6C1F872C9700B437F1 /* CCIClassicFinderWindowController.m */; };
 		A8D82F701F872D9C00B437F1 /* CFRFileSystemOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D82F6F1F872D9C00B437F1 /* CFRFileSystemOperations.m */; };
 		A8D82F731F9D2F5B00B437F1 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = A8D82F721F9D2F5B00B437F1 /* license.txt */; };
+		A8E46E7320F1B1EC00B5A829 /* chicagobold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8E46E7220F1B1EC00B5A829 /* chicagobold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,7 @@
 		A8D82F6F1F872D9C00B437F1 /* CFRFileSystemOperations.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CFRFileSystemOperations.m; sourceTree = "<group>"; };
 		A8D82F711F88A4E800B437F1 /* CCIFinderIconProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCIFinderIconProtocol.h; sourceTree = "<group>"; };
 		A8D82F721F9D2F5B00B437F1 /* license.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
+		A8E46E7220F1B1EC00B5A829 /* chicagobold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chicagobold.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +324,7 @@
 		A88F63EE20F1A4A500CC434B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				A8E46E7220F1B1EC00B5A829 /* chicagobold.ttf */,
 				A88F63F120F1A95000CC434B /* Geneva */,
 				A88F63EF20F1A4C900CC434B /* Chicago */,
 			);
@@ -447,6 +450,7 @@
 				A88F63F220F1A95000CC434B /* Geneva in Resources */,
 				A80A5578202033ED0021B414 /* ScratchCode.txt in Resources */,
 				A8D82F731F9D2F5B00B437F1 /* license.txt in Resources */,
+				A8E46E7320F1B1EC00B5A829 /* chicagobold.ttf in Resources */,
 				A88F63F020F1A4C900CC434B /* Chicago in Resources */,
 				A885B1D31E59457100F1AB96 /* Assets.xcassets in Resources */,
 				A885B1D61E59457100F1AB96 /* MainMenu.xib in Resources */,
