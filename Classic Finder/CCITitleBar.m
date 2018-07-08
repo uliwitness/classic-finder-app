@@ -252,7 +252,7 @@
     
     [[[CCIApplicationStyles instance] blackColor] setFill];
     
-    NSRect titleTextRect = NSMakeRect(((self.frame.size.width - textWidth) / 2.0), 2.5, textWidth, 15.0);
+    NSRect titleTextRect = NSMakeRect(((self.frame.size.width - textWidth) / 2.0), 2.0, textWidth, 15.0);
     NSAttributedString *title = [[NSAttributedString alloc] initWithString:self.titleText
                                                                 attributes:fontAttributes];
     [title drawInRect:titleTextRect];
