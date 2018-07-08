@@ -118,34 +118,9 @@
 
 - (void)mouseDown:(NSEvent *)event
 {
-    self.originalMouseCoordinates = event.locationInWindow;
+	[self.window performWindowDragWithEvent:event];
 }
 
-- (void)mouseUp:(NSEvent *)event
-{
-    if ([[self delegate] respondsToSelector:@selector(titlebarDidFinishDetectingWindowPositionChange:)]) {
-        [[self delegate] titlebarDidFinishDetectingWindowPositionChange:self];
-    }
-}
-
-- (void)mouseDragged:(NSEvent *)event
-{
-    NSPoint newCoordinates = event.locationInWindow;
-    
-    CGFloat deltaX = newCoordinates.x - self.originalMouseCoordinates.x;
-    CGFloat deltaY = newCoordinates.y - self.originalMouseCoordinates.y;
-    
-    if (event.window != nil) {
-        NSRect activeWindowFrame = event.window.frame;
-        
-        activeWindowFrame.origin.x += deltaX;
-        activeWindowFrame.origin.y += deltaY;
-        
-        [event.window setFrame:activeWindowFrame
-                       display:YES
-                       animate:NO];
-    }
-}
 
 - (void)drawOutlinesAndShadows
 {

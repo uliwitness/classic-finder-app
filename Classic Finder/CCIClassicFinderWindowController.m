@@ -79,7 +79,12 @@
                selector:@selector(windowDidBecomeMain:)
                    name:NSWindowDidBecomeMainNotification
                  object:finderWindow];
-    }
+
+		[dc addObserver:self
+			   selector:@selector(windowDidMove:)
+				   name:NSWindowDidMoveNotification
+				 object:finderWindow];
+}
     
     return self;
 }
@@ -148,9 +153,9 @@
     [self.selectedFiles removeAllObjects];
 }
 
-#pragma mark - TITLEBAR DELEGATE METHODS
+#pragma mark - Window delegate methods
 
-- (void)titlebarDidFinishDetectingWindowPositionChange:(CCITitleBar *)sender
+- (void)windowDidMove:(NSNotification *)notification;
 {
     NSPoint currentPosition = self.window.frame.origin;
     
